@@ -7,7 +7,7 @@
         class="flex flex-row h-full justify-center space-x-10"
       >
       <Previewimage :invalidProdImage="invalidProdImage" :changeImage="changeImage" :filename="filename" @preview-img="previewFile"/>
-      <Groupinput :invalidProdName="invalidProdName" :invalidProdBrand="invalidProdBrand" :invalidProdPrice="invalidProdPrice" :invalidProdDes="invalidProdDes" :invalidDate="invalidProdDate" :invalidProdColor="invalidProdColors"
+      <Groupinput @add-valit="addValit" :invalidProdName="invalidProdName" :invalidProdBrand="invalidProdBrand" :invalidProdPrice="invalidProdPrice" :invalidProdDes="invalidProdDes" :invalidDate="invalidProdDate" :invalidProdColor="invalidProdColors"
       :colors="colors" :brands="brands"/>
         <!-- <div id="component-preview-img">
           <div id="preview-img">
@@ -163,6 +163,7 @@ export default {
   components: {Previewimage,Groupinput},
   data() {
     return {
+      valit:[],
       colors: [
         { id: "1", name: "white", value: "#FFFFFF", checked: false },
         { id: "2", name: "black", value: "#000000", checked: false },
@@ -191,23 +192,23 @@ export default {
   },
   methods: {
     submitForm() {
-      // console.log(typeof this.validate.price)
+      // console.log(typeof valit.price)
       let i = 0;
       for (i = 0; i < this.products.length; i++) {
         this.invalidProdName =
-          this.validate.name === this.products[i].name ? true : false;
+          this.valit.name === this.products[i].name ? true : false;
       }
-      this.invalidProdName = this.validate.name === "" ? true : false;
-      this.invalidProdBrand = this.validate.brand === "" ? true : false;
+      this.invalidProdName = this.valit.name === "" ? true : false;
+      this.invalidProdBrand = this.valit.brand === "" ? true : false;
       this.invalidProdPrice =
-        this.validate.price <= 0
+        this.valit.price <= 0
           ? true
-          : typeof this.validate.price === "string"
+          : typeof this.valit.price === "string"
           ? true
           : false;
-      this.invalidProdDes = this.validate.description === "" ? true : false;
-      this.invalidProdDate = this.validate.date === "" ? true : false;
-      this.invalidProdColors = !this.validate.colors.length ? true : false;
+      this.invalidProdDes = this.valit.description === "" ? true : false;
+      this.invalidProdDate = this.valit.date === "" ? true : false;
+      this.invalidProdColors = !this.valit.colors.length ? true : false;
       this.invalidProdImage = !this.changeImage === false ? true : false;
       if (
         this.invalidProdName ||
@@ -231,11 +232,16 @@ export default {
       }
     },
     previewFile(event) {
+      console.log(event)
       let data = event.target.files[0];
       this.filename = data.name;
       this.changeImage = false;
       this.invalidProdImage = false;
     },
+    addValit(valit){
+      this.valit = valit
+      console.log(this.valit)
+    }
   },
 };
 </script>
