@@ -2,7 +2,7 @@
   <div id="container-input" class="flex flex-col w-80 h-1/6 space-y-2 mt-10">
     <label for="name" class="font-semibold">Name</label>
     <input
-      :value ="validate.name"
+      v-model="validate.name"
       type="text"
       name="name"
       id="name"
@@ -13,7 +13,7 @@
     </div>
     <label for="brand" class="font-semibold">Brand</label>
     <select
-      :value="validate.brand"
+      v-model="validate.brand"
       name="brand"
       id="brand"
       class="border-gray-400 border"
@@ -33,7 +33,7 @@
     <label for="price" class="font-semibold">Price</label>
     <div id="container-price">
       <input
-        :value="validate.price"
+        v-model.number="validate.price"
         type="text"
         name="price"
         id="price"
@@ -46,7 +46,7 @@
     </div>
     <label for="date" class="font-semibold">Date</label>
     <input
-      :value="validate.date"
+      v-model="validate.date"
       type="date"
       name="date"
       id="date"
@@ -62,7 +62,7 @@
       cols="50"
       rows="4"
       class="border-gray-400 border"
-      :value="validate.description"
+      v-model="validate.description"
     >
     </textarea>
     <div class="text-red-500 text-lg font-base" v-if="invalidProdDes">
@@ -81,7 +81,7 @@
           </i>
         </label>
         <input
-          :value1="validate.colors"
+          v-model="validate.colors"
           type="checkbox"
           :id="color.name"
           :value="color.value"
@@ -96,9 +96,14 @@
     <div class="submit-button">
       <button
         class="transition delay-75 hover:text-white hover:bg-gray-700 hover:tr py-1 px-6 rounded-full focus:outline-none border-gray-400 border-2 text-base font-medium"
-      @click="dataSubmit">
+        @click="dataSubmit"
+      >
         Submit
       </button>
+      
+    </div>
+    <div class="text-green-400 text-lg font-base" v-if="isSubmit">
+      Product Added!
     </div>
   </div>
 </template>
@@ -107,77 +112,69 @@
 export default {
   name: "Groupinput",
   props: {
-      invalidProdName:{
-            type: Boolean,
-            require: true
-        },
-        invalidProdBrand:{
-            type: Boolean,
-            require: true
-        },
-        invalidProdPrice:{
-            type: Boolean,
-            require: true
-        },
-        invalidProdDes:{
-            type: Boolean,
-            require: true
-        },
-        invalidProdDate:{
-            type: Boolean,
-            require: true
-        },
-        invalidProdColors:{
-            type: Boolean,
-            require: true
-        },
-         colors:{
-          type: Array,
-          require: true
-        },
-        brands:{
-          type: Array,
-          require: true
-        }
-  },
-  data(){
-      return{
-    validate: {
-        type: Object,
-        require: true
+    invalidProdName: {
+      type: Boolean,
+      require: true,
+    },
+    invalidProdBrand: {
+      type: Boolean,
+      require: true,
+    },
+    invalidProdPrice: {
+      type: Boolean,
+      require: true,
+    },
+    invalidProdDes: {
+      type: Boolean,
+      require: true,
+    },
+    invalidProdDate: {
+      type: Boolean,
+      require: true,
+    },
+    invalidProdColors: {
+      type: Boolean,
+      require: true,
+    },
+    isSubmit:{
+      type:Boolean,
+      require: true
+    },
+    colors: {
+      type: Array,
+      require: true,
+    },
+    brands: {
+      type: Array,
+      require: true,
     },
   },
   data() {
-    // return {
-    //   validate: {
-    //     productid: "",
-    //     name: "",
-    //     price: 0.0,
-    //     description: "",
-    //     date: "",
-    //     colors: [],
-    //     brand: "",
-    //   },
-    // };
+    return {
+      validate: {
+        productid: "",
+        name: "",
+        price: 0.0,
+        description: "",
+        date: "",
+        colors: [],
+        brand: "",
+      },
+    };
   },
   methods: {
-    // previewFile(event) {
-    //   this.$emit('preview-img',event)
-    // },
-    dataSubmit(){
+    dataSubmit() {
       const data = {
-        productid : this.validate.productid,
-        name : this.validate.name,
-        price : this.validate.price,
-        description : this.validate.description,
-        date : this.validate.date,
-        colors : this.validate.colors,
-        brand : this.validate.brand
-      }
-      this.$emit('add-valit', data)
-      console.log(data.colors)
-    }
+        productid: this.validate.productid,
+        name: this.validate.name,
+        price: this.validate.price,
+        description: this.validate.description,
+        date: this.validate.date,
+        colors: this.validate.colors,
+        brand: this.validate.brand,
+      };
+      this.$emit("pass-validate", data);
+    },
   },
 };
 </script>
-

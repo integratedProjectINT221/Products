@@ -55,8 +55,7 @@ export default {
 
   },
   methods:{
-    previewFile() {
-      console.log(event)
+    previewFile(event) {
       this.$emit('preview-img',event)
     },
   },

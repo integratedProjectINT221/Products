@@ -7,8 +7,8 @@
         class="flex flex-row h-full justify-center space-x-10"
       >
       <Previewimage :invalidProdImage="invalidProdImage" :changeImage="changeImage" :filename="filename" @preview-img="previewFile"/>
-      <Groupinput @add-valit="addValit" :invalidProdName="invalidProdName" :invalidProdBrand="invalidProdBrand" :invalidProdPrice="invalidProdPrice" :invalidProdDes="invalidProdDes" :invalidDate="invalidProdDate" :invalidProdColor="invalidProdColors"
-      :colors="colors" :brands="brands"/>
+      <Groupinput @pass-validate="passValidate" :invalidProdName="invalidProdName" :invalidProdBrand="invalidProdBrand" :invalidProdPrice="invalidProdPrice" :invalidProdDes="invalidProdDes" :invalidProdDate="invalidProdDate" :invalidProdColor="invalidProdColors"
+      :colors="colors" :brands="brands" :isSubmit="isSubmit"/>
         <!-- <div id="component-preview-img">
           <div id="preview-img">
             <p class="font-semibold text-xl">Preview</p>
@@ -163,7 +163,7 @@ export default {
   components: {Previewimage,Groupinput},
   data() {
     return {
-      valit:[],
+      validate:{},
       colors: [
         { id: "1", name: "white", value: "#FFFFFF", checked: false },
         { id: "2", name: "black", value: "#000000", checked: false },
@@ -186,29 +186,30 @@ export default {
       invalidProdDate: false,
       invalidProdColors: false,
       invalidProdImage: false,
+      isSubmit: false,
       changeImage: true,
       filename: ""
     };
   },
   methods: {
     submitForm() {
-      // console.log(typeof valit.price)
+      // console.log(typeof validate.price)
       let i = 0;
       for (i = 0; i < this.products.length; i++) {
         this.invalidProdName =
-          this.valit.name === this.products[i].name ? true : false;
+          this.validate.name === this.products[i].name ? true : false;
       }
-      this.invalidProdName = this.valit.name === "" ? true : false;
-      this.invalidProdBrand = this.valit.brand === "" ? true : false;
+      this.invalidProdName = this.validate.name === "" ? true : false;
+      this.invalidProdBrand = this.validate.brand === "" ? true : false;
       this.invalidProdPrice =
-        this.valit.price <= 0
+        this.validate.price <= 0
           ? true
-          : typeof this.valit.price === "string"
+          : typeof this.validate.price === "string"
           ? true
           : false;
-      this.invalidProdDes = this.valit.description === "" ? true : false;
-      this.invalidProdDate = this.valit.date === "" ? true : false;
-      this.invalidProdColors = !this.valit.colors.length ? true : false;
+      this.invalidProdDes = this.validate.description === "" ? true : false;
+      this.invalidProdDate = this.validate.date === "" ? true : false;
+      this.invalidProdColors = !this.validate.colors.length ? true : false;
       this.invalidProdImage = !this.changeImage === false ? true : false;
       if (
         this.invalidProdName ||
@@ -238,9 +239,9 @@ export default {
       this.changeImage = false;
       this.invalidProdImage = false;
     },
-    addValit(valit){
-      this.valit = valit
-      console.log(this.valit)
+    passValidate(validate){
+      this.validate = validate
+      console.log(this.validate)
     }
   },
 };
