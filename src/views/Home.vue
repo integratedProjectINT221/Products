@@ -17,12 +17,12 @@
                 ref="Product Image"
               />
             </div>
+            <div class="text-red-500 text-lg font-base" v-if="invalidProdPrice">
+              Please select your product image!
+            </div>
           </div>
           <div id="upload-file" class="w-80 h-8 mt-4 space-x-4 flex-row flex">
-            <button
-              class="py-1 px-4 rounded-md text-white bg-green-400 flex-none focus:outline-none hover:bg-green-300 transition delay-75"
-            >
-              <label class="custom-file-upload cursor-pointer">
+              <label for="img" class="custom-file-upload cursor-pointer py-1 px-4 rounded-md text-white bg-green-400 flex-none focus:outline-none hover:bg-green-300 transition delay-75">
                 <input
                   class="hidden"
                   type="file"
@@ -33,7 +33,6 @@
                 />
                 Choose file
               </label>
-            </button>
             <span class="text-gray-500" v-if="changeImage">No file chosen</span>
             <p class="break-all text-gray-500">{{ this.filename }}</p>
           </div>
@@ -59,13 +58,16 @@
             name="brand"
             id="brand"
             class="border-gray-400 border"
-          ></select>
+          >
+            <option v-for="(brand) in brands" :key="brand.id" id="loopbrand" :value="brand.name">{{brand.name}}</option>
+          </select>
           <div class="text-red-500 text-lg font-base" v-if="invalidProdBrand">
             Invalid product brand!
           </div>
           <label for="price" class="font-semibold">Price</label>
           <div id="container-price">
             <input
+              v-model="validate.price"
               type="text"
               name="price"
               id="price"
@@ -101,7 +103,7 @@
             Invalid product description!
           </div>
           <label for="color" class="font-semibold">Color</label>
-          <div id="container-colors" class="w-80 h-10 grid grid-cols-11">
+          <div id="container-colors" class="w-80 h-12 grid grid-cols-11">
             <div v-for="(color) in colors" :key="color.id" id="loopcolor">
               <label
                 :for="color.name"
@@ -123,7 +125,7 @@
           <div class="text-red-500 text-lg font-base" v-if="invalidProdColors">
             Invalid product colors!
           </div>
-          <div class="submit-button pt-5">
+          <div class="submit-button">
             <button
               class="transition delay-75 hover:text-white hover:bg-gray-700 hover:tr py-1 px-6 rounded-full focus:outline-none border-gray-400 border-2 text-base font-medium"
             >
@@ -149,7 +151,7 @@ export default {
         { id: "1", name: "white", value: "#FFFFFF",checked:false},
         { id: "2", name: "black", value: "#000000",checked:false},
       ],
-      brand: [
+      brands: [
         { id: "1", name: "test1" },
         { id: "2", name: "test2" },
       ],
@@ -196,7 +198,6 @@ export default {
         this.invalidProdColors === true
       ) {
         this.isSubmit = false;
-        console.log(this.colors);
         return;
       } else {
         this.isSubmit = true;
