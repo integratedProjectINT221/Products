@@ -96,7 +96,7 @@
     <div class="submit-button">
       <button
         class="transition delay-75 hover:text-white hover:bg-gray-700 hover:tr py-1 px-6 rounded-full focus:outline-none border-gray-400 border-2 text-base font-medium"
-      >
+      @click="dataSubmit">
         Submit
       </button>
     </div>
@@ -107,38 +107,41 @@
 export default {
   name: "Groupinput",
   props: {
-    invalidProdName: {
-      type: Boolean,
-      require: true,
-    },
-    invalidProdBrand: {
-      type: Boolean,
-      require: true,
-    },
-    invalidProdprice: {
-      type: Boolean,
-      require: true,
-    },
-    invalidProdDes: {
-      type: Boolean,
-      require: true,
-    },
-    invalidProdDate: {
-      type: Boolean,
-      require: true,
-    },
-    invalidProdColors: {
-      type: Boolean,
-      require: true,
-    },
-    colors: {
-      type: Array,
-      require: true,
-    },
-    brand: {
-      type: Array,
-      require: true,
-    },
+      invalidProdName:{
+            type: Boolean,
+            require: true
+        },
+        invalidProdBrand:{
+            type: Boolean,
+            require: true
+        },
+        invalidProdPrice:{
+            type: Boolean,
+            require: true
+        },
+        invalidProdDes:{
+            type: Boolean,
+            require: true
+        },
+        invalidProdDate:{
+            type: Boolean,
+            require: true
+        },
+        invalidProdColors:{
+            type: Boolean,
+            require: true
+        },
+         colors:{
+          type: Array,
+          require: true
+        },
+        brands:{
+          type: Array,
+          require: true
+        }
+  },
+  data(){
+      return{
     validate: {
         type: Object,
         require: true
@@ -161,6 +164,19 @@ export default {
     // previewFile(event) {
     //   this.$emit('preview-img',event)
     // },
+    dataSubmit(){
+      const data = {
+        productid : this.validate.productid,
+        name : this.validate.name,
+        price : this.validate.price,
+        description : this.validate.description,
+        date : this.validate.date,
+        colors : this.validate.colors,
+        brand : this.validate.brand
+      }
+      this.$emit('add-valit', data)
+      console.log(data.colors)
+    }
   },
 };
 </script>
