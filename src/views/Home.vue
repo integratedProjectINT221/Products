@@ -7,7 +7,8 @@
         class="flex flex-row h-full justify-center space-x-10"
       >
       <Previewimage :invalidProdImage="invalidProdImage" :changeImage="changeImage" :filename="filename" @preview-img="previewFile"/>
-      <Groupinput :invalidProdName="invalidProdName" :invalidProdBrand="invalidProdBrand" :invalidProdPrice="invalidProdPrice" :invalidProdDes="invalidProdDes" :invalidDate="invalidProdDate" :invalidProdColor="invalidProdColors"/>
+      <Groupinput :invalidProdName="invalidProdName" :invalidProdBrand="invalidProdBrand" :invalidProdPrice="invalidProdPrice" :invalidProdDes="invalidProdDes" :invalidDate="invalidProdDate" :invalidProdColor="invalidProdColors"
+      :colors="colors" :brands="brands"/>
         <!-- <div id="component-preview-img">
           <div id="preview-img">
             <p class="font-semibold text-xl">Preview</p>

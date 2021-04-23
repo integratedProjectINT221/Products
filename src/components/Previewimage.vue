@@ -51,7 +51,7 @@ export default {
         filename:{
           type: String,
           require: true
-        }
+        },
 
   },
   methods:{

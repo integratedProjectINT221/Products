@@ -132,6 +132,14 @@ export default {
             type: Boolean,
             require: true
         },
+         colors:{
+          type: Array,
+          require: true
+        },
+        brand:{
+          type: Array,
+          require: true
+        }
   },
   data(){
       return{
