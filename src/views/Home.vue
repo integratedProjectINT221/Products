@@ -190,7 +190,7 @@ export default {
       }
       this.invalidProdName = this.validate.name === "" ? true : false;
       this.invalidProdBrand = this.validate.brand === "" ? true : false;
-      this.invalidProdPrice = this.validate.price === null ? true : this.validate.price < 0 ? true : this.validate.price !== "" ? true : false;
+      this.invalidProdPrice = this.validate.price === null ? true : this.validate.price < 0 ? true : this.validate.price === "" ? true : false;
       this.invalidProdDes = this.validate.description === "" ? true : false;
       this.invalidProdDate = this.validate.date === "" ? true : false;
       this.invalidProdColors = !this.validate.colors.length ? true : false;
@@ -221,7 +221,7 @@ export default {
       let data = event.target.files[0];
       this.filename = data.name;
       this.changeImage = false;
-      console.log(data.mozFullPath)
+      console.log(URL.createObjectURL(data))
     },
 
   },
