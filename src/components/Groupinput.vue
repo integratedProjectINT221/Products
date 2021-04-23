@@ -2,8 +2,7 @@
   <div id="container-input" class="flex flex-col w-80 h-1/6 space-y-2 mt-10">
     <label for="name" class="font-semibold">Name</label>
     <input
-
-      v-model="validate.name"
+      :value ="validate.name"
       type="text"
       name="name"
       id="name"
@@ -14,7 +13,7 @@
     </div>
     <label for="brand" class="font-semibold">Brand</label>
     <select
-      v-model="validate.brand"
+      :value="validate.brand"
       name="brand"
       id="brand"
       class="border-gray-400 border"
@@ -34,7 +33,7 @@
     <label for="price" class="font-semibold">Price</label>
     <div id="container-price">
       <input
-        v-model.number="validate.price"
+        :value="validate.price"
         type="text"
         name="price"
         id="price"
@@ -47,7 +46,7 @@
     </div>
     <label for="date" class="font-semibold">Date</label>
     <input
-      v-model="validate.date"
+      :value="validate.date"
       type="date"
       name="date"
       id="date"
@@ -63,7 +62,7 @@
       cols="50"
       rows="4"
       class="border-gray-400 border"
-      v-model="validate.description"
+      :value="validate.description"
     >
     </textarea>
     <div class="text-red-500 text-lg font-base" v-if="invalidProdDes">
@@ -82,7 +81,7 @@
           </i>
         </label>
         <input
-          v-model="validate.colors"
+          :value1="validate.colors"
           type="checkbox"
           :id="color.name"
           :value="color.value"
@@ -108,51 +107,55 @@
 export default {
   name: "Groupinput",
   props: {
-      invalidProdName:{
-            type: Boolean,
-            require: true
-        },
-        invalidProdBrand:{
-            type: Boolean,
-            require: true
-        },
-        invalidProdprice:{
-            type: Boolean,
-            require: true
-        },
-        invalidProdDes:{
-            type: Boolean,
-            require: true
-        },
-        invalidProdDate:{
-            type: Boolean,
-            require: true
-        },
-        invalidProdColors:{
-            type: Boolean,
-            require: true
-        },
-         colors:{
-          type: Array,
-          require: true
-        },
-        brand:{
-          type: Array,
-          require: true
-        }
-  },
-  data(){
-      return{
+    invalidProdName: {
+      type: Boolean,
+      require: true,
+    },
+    invalidProdBrand: {
+      type: Boolean,
+      require: true,
+    },
+    invalidProdprice: {
+      type: Boolean,
+      require: true,
+    },
+    invalidProdDes: {
+      type: Boolean,
+      require: true,
+    },
+    invalidProdDate: {
+      type: Boolean,
+      require: true,
+    },
+    invalidProdColors: {
+      type: Boolean,
+      require: true,
+    },
+    colors: {
+      type: Array,
+      require: true,
+    },
+    brand: {
+      type: Array,
+      require: true,
+    },
     validate: {
-        productid: "",
-        name: "",
-        price: 0.0,
-        description: "",
-        date: "",
-        colors: [],
-        brand: "",
-      },
-      }
+        type: Object,
+        require: true
+    },
+  },
+  data() {
+    // return {
+    //   validate: {
+    //     productid: "",
+    //     name: "",
+    //     price: 0.0,
+    //     description: "",
+    //     date: "",
+    //     colors: [],
+    //     brand: "",
+    //   },
+    // };
   },
   methods: {
     // previewFile(event) {
