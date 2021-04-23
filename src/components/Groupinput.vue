@@ -100,7 +100,6 @@
       >
         Submit
       </button>
-      
     </div>
     <div class="text-green-400 text-lg font-base" v-if="isSubmit">
       Product Added!
@@ -136,9 +135,9 @@ export default {
       type: Boolean,
       require: true,
     },
-    isSubmit:{
-      type:Boolean,
-      require: true
+    isSubmit: {
+      type: Boolean,
+      require: true,
     },
     colors: {
       type: Array,
