@@ -220,7 +220,8 @@ export default {
         this.invalidProdPrice ||
         this.invalidProdDes ||
         this.invalidProdDate ||
-        this.invalidProdColors === true
+        this.invalidProdColors ||
+        this.invalidProdImage === true
       ) {
         this.isSubmit = false;
         return;

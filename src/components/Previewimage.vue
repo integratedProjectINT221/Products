@@ -52,6 +52,7 @@ export default {
   data(){
     return{
       filename:"",
+      changeImage: true
     }
   },
   methods:{
@@ -59,6 +60,7 @@ export default {
       let data = event.target.files[0];
       this.filename = data.name;
       this.changeImage = false;
+      return this.changeImage
     },
     // submitForm(changeimage){
     //         this.$emit('submit-form',changeimage)
