@@ -67,7 +67,7 @@
           <label for="price" class="font-semibold">Price</label>
           <div id="container-price">
             <input
-              v-model="validate.price"
+              v-model.number="validate.price"
               type="text"
               name="price"
               id="price"
@@ -165,7 +165,7 @@ export default {
       validate:{
         id: "",
         name: "",
-        price: null,
+        price: 0,
         description: "",
         date: "",
         colors: [],
@@ -184,13 +184,14 @@ export default {
   },
   methods: {
     submitForm() {
+      console.log(typeof this.validate.price)
       let i = 0;
       for(i=0; i<this.products.length; i++){
         this.invalidProdName = this.validate.name === this.products[i].name ? true : false;
       }
       this.invalidProdName = this.validate.name === "" ? true : false;
       this.invalidProdBrand = this.validate.brand === "" ? true : false;
-      this.invalidProdPrice = this.validate.price === null ? true : this.validate.price < 0 ? true : this.validate.price !== "" ? true : false;
+      this.invalidProdPrice = this.validate.price  <=0 ? true : typeof this.validate.price === 'string' ? true : false;
       this.invalidProdDes = this.validate.description === "" ? true : false;
       this.invalidProdDate = this.validate.date === "" ? true : false;
       this.invalidProdColors = !this.validate.colors.length ? true : false;
@@ -216,6 +217,7 @@ export default {
         this.invalidProdColors = false;
         this.invalidProdImage = false;
       }
+      
     },
     previewFile(event) {
       let data = event.target.files[0];
