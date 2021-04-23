@@ -6,7 +6,8 @@
         id="product-form"
         class="flex flex-row h-full justify-center space-x-10"
       >
-        <div id="component-preview-img">
+      <Previewimage :invalidProdImage="invalidProdImage"/>
+        <!-- <div id="component-preview-img">
           <div id="preview-img">
             <p class="font-semibold text-xl">Preview</p>
             <div class="w-80 h-80 mt-4 border-2">
@@ -22,21 +23,24 @@
             </div>
           </div>
           <div id="upload-file" class="w-80 h-8 mt-4 space-x-4 flex-row flex">
-              <label for="img" class="custom-file-upload cursor-pointer py-1 px-4 rounded-md text-white bg-green-400 flex-none focus:outline-none hover:bg-green-300 transition delay-75">
-                <input
-                  class="hidden"
-                  type="file"
-                  id="img"
-                  name="img"
-                  accept="image/*"
-                  @change="previewFile"
-                />
-                Choose file
-              </label>
+            <label
+              for="img"
+              class="custom-file-upload cursor-pointer py-1 px-4 rounded-md text-white bg-green-400 flex-none focus:outline-none hover:bg-green-300 transition delay-75"
+            >
+              <input
+                class="hidden"
+                type="file"
+                id="img"
+                name="img"
+                accept="image/*"
+                @change="previewFile"
+              />
+              Choose file
+            </label>
             <span class="text-gray-500" v-if="changeImage">No file chosen</span>
             <p class="break-all text-gray-500">{{ this.filename }}</p>
           </div>
-        </div>
+        </div> -->
         <div
           id="container-input"
           class="flex flex-col w-80 h-1/6 space-y-2 mt-10"
@@ -59,7 +63,14 @@
             id="brand"
             class="border-gray-400 border"
           >
-            <option v-for="(brand) in brands" :key="brand.id" id="loopbrand" :value="brand.name">{{brand.name}}</option>
+            <option
+              v-for="brand in brands"
+              :key="brand.id"
+              id="loopbrand"
+              :value="brand.name"
+            >
+              {{ brand.name }}
+            </option>
           </select>
           <div class="text-red-500 text-lg font-base" v-if="invalidProdBrand">
             Invalid product brand!
@@ -104,13 +115,15 @@
           </div>
           <label for="color" class="font-semibold">Color</label>
           <div id="container-colors" class="w-80 h-12 grid grid-cols-11">
-            <div v-for="(color) in colors" :key="color.id" id="loopcolor">
+            <div v-for="color in colors" :key="color.id" id="loopcolor">
               <label
                 :for="color.name"
                 class="flex justify-center items-center border border-gray-400 w-5 h-5"
                 :style="{ backgroundColor: color.value }"
               >
-              <i v-show="color.checked" class="material-icons text-gray-300"> check </i>
+                <i v-show="color.checked" class="material-icons text-gray-300">
+                  check
+                </i>
               </label>
               <input
                 v-model="validate.colors"
@@ -118,10 +131,10 @@
                 :id="color.name"
                 :value="color.value"
                 class="hidden"
-                @change="color.checked=!color.checked"
+                @change="color.checked = !color.checked"
               />
+            </div>
           </div>
-        </div>
           <div class="text-red-500 text-lg font-base" v-if="invalidProdColors">
             Invalid product colors!
           </div>
@@ -141,38 +154,36 @@
 
 <script>
 // @ is an alias to /src
-
+import Previewimage from "@/components/Previewimage"
 export default {
   name: "Home",
-  components: {},
+  components: {Previewimage},
   data() {
     return {
       colors: [
-        { id: "1", name: "white", value: "#FFFFFF",checked:false},
-        { id: "2", name: "black", value: "#000000",checked:false},
+        { id: "1", name: "white", value: "#FFFFFF", checked: false },
+        { id: "2", name: "black", value: "#000000", checked: false },
       ],
       brands: [
         { id: "1", name: "test1" },
         { id: "2", name: "test2" },
       ],
       products: [],
-      productHasColor:[
+      productHasColor: [
         {
           productId: "",
-          colorId:""
-        }
+          colorId: "",
+        },
       ],
-      validate:{
+      validate: {
         id: "",
         name: "",
-        price: 0.00,
+        price: 0.0,
         description: "",
         date: "",
         colors: [],
-        brand: ""
+        brand: "",
       },
-      filename: "",
-      changeImage: true,
       invalidProdName: false,
       invalidProdBrand: false,
       invalidProdPrice: false,
@@ -180,18 +191,25 @@ export default {
       invalidProdDate: false,
       invalidProdColors: false,
       invalidProdImage: false,
+      changeImage: true,
     };
   },
   methods: {
     submitForm() {
-      console.log(typeof this.validate.price)
+      // console.log(typeof this.validate.price)
       let i = 0;
-      for(i=0; i<this.products.length; i++){
-        this.invalidProdName = this.validate.name === this.products[i].name ? true : false;
+      for (i = 0; i < this.products.length; i++) {
+        this.invalidProdName =
+          this.validate.name === this.products[i].name ? true : false;
       }
       this.invalidProdName = this.validate.name === "" ? true : false;
       this.invalidProdBrand = this.validate.brand === "" ? true : false;
-      this.invalidProdPrice = this.validate.price  <=0 ? true : typeof this.validate.price === 'string' ? true : false;
+      this.invalidProdPrice =
+        this.validate.price <= 0
+          ? true
+          : typeof this.validate.price === "string"
+          ? true
+          : false;
       this.invalidProdDes = this.validate.description === "" ? true : false;
       this.invalidProdDate = this.validate.date === "" ? true : false;
       this.invalidProdColors = !this.validate.colors.length ? true : false;
@@ -206,8 +224,7 @@ export default {
       ) {
         this.isSubmit = false;
         return;
-      } 
-      else {
+      } else {
         this.isSubmit = true;
         this.invalidProdName = false;
         this.invalidProdBrand = false;
@@ -217,22 +234,6 @@ export default {
         this.invalidProdColors = false;
         this.invalidProdImage = false;
       }
-      
-    },
-    previewFile(event) {
-      let data = event.target.files[0];
-      this.filename = data.name;
-      this.changeImage = false;
-      console.log(URL.createObjectURL(data))
-    },
-
-  },
-  computed: {
-    ConvertFileName() {
-      return {
-        ...this.filename,
-        filename: this.filename && require(`@/assets/${this.filename}`),
-      };
     },
   },
 };
