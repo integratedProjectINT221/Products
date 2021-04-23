@@ -17,7 +17,7 @@
                 ref="Product Image"
               />
             </div>
-            <div class="text-red-500 text-lg font-base" v-if="invalidProdPrice">
+            <div class="text-red-500 text-lg font-base" v-if="invalidProdImage">
               Please select your product image!
             </div>
           </div>
@@ -169,7 +169,7 @@ export default {
         description: "",
         date: "",
         colors: [],
-        brand: "",
+        brand: ""
       },
       filename: "",
       changeImage: true,
@@ -179,16 +179,22 @@ export default {
       invalidProdDes: false,
       invalidProdDate: false,
       invalidProdColors: false,
+      invalidProdImage: false,
     };
   },
   methods: {
     submitForm() {
+      let i = 0;
+      for(i=0; i<this.products.length; i++){
+        this.invalidProdName = this.validate.name === this.products[i].name ? true : false;
+      }
       this.invalidProdName = this.validate.name === "" ? true : false;
       this.invalidProdBrand = this.validate.brand === "" ? true : false;
-      this.invalidProdPrice = this.validate.price === null ? true : false;
+      this.invalidProdPrice = this.validate.price === null ? true : this.validate.price < 0 ? true : this.validate.price !== "" ? true : false;
       this.invalidProdDes = this.validate.description === "" ? true : false;
       this.invalidProdDate = this.validate.date === "" ? true : false;
       this.invalidProdColors = !this.validate.colors.length ? true : false;
+      this.invalidProdImage = this.previewFile === null ? true : false;
       if (
         this.invalidProdName ||
         this.invalidProdBrand ||
@@ -199,7 +205,8 @@ export default {
       ) {
         this.isSubmit = false;
         return;
-      } else {
+      } 
+      else {
         this.isSubmit = true;
         this.invalidProdName = false;
         this.invalidProdBrand = false;
@@ -207,15 +214,16 @@ export default {
         this.invalidProdDes = false;
         this.invalidProdDate = false;
         this.invalidProdColors = false;
+        this.invalidProdImage = false;
       }
     },
     previewFile(event) {
-      console.log(event);
       let data = event.target.files[0];
-      console.log(data);
       this.filename = data.name;
       this.changeImage = false;
+      console.log(data.mozFullPath)
     },
+
   },
   computed: {
     ConvertFileName() {
