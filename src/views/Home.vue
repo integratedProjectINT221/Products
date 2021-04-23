@@ -7,6 +7,7 @@
         class="flex flex-row h-full justify-center space-x-10"
       >
       <Previewimage :invalidProdImage="invalidProdImage" :changeImage="changeImage" :filename="filename" @preview-img="previewFile"/>
+      <Groupinput :invalidProdName="invalidProdName" :invalidProdBrand="invalidProdBrand" :invalidProdPrice="invalidProdPrice" :invalidProdDes="invalidProdDes" :invalidDate="invalidProdDate" :invalidProdColor="invalidProdColors"/>
         <!-- <div id="component-preview-img">
           <div id="preview-img">
             <p class="font-semibold text-xl">Preview</p>
@@ -41,7 +42,7 @@
             <p class="break-all text-gray-500">{{ this.filename }}</p>
           </div>
         </div> -->
-        <div
+        <!-- <div
           id="container-input"
           class="flex flex-col w-80 h-1/6 space-y-2 mt-10"
         >
@@ -145,7 +146,7 @@
               Submit
             </button>
           </div>
-        </div>
+        </div> -->
       </div>
     </form>
     <!-- </div> -->
@@ -155,9 +156,10 @@
 <script>
 // @ is an alias to /src
 import Previewimage from "@/components/Previewimage"
+import Groupinput from "@/components/Groupinput"
 export default {
   name: "Home",
-  components: {Previewimage},
+  components: {Previewimage,Groupinput},
   data() {
     return {
       colors: [
@@ -175,15 +177,6 @@ export default {
           colorId: "",
         },
       ],
-      validate: {
-        id: "",
-        name: "",
-        price: 0.0,
-        description: "",
-        date: "",
-        colors: [],
-        brand: "",
-      },
       invalidProdName: false,
       invalidProdBrand: false,
       invalidProdPrice: false,
