@@ -39,20 +39,20 @@ export default {
     return {
       validate: {},
       colors: [
-        { id: "1", name: "white", value: "#FFFFFF", checked: false },
-        { id: "2", name: "black", value: "#000000", checked: false },
+        // { id: "1", name: "white", value: "#FFFFFF", checked: false },
+        // { id: "2", name: "black", value: "#000000", checked: false },
       ],
       brands: [
         { id: "1", name: "test1" },
         { id: "2", name: "test2" },
       ],
       products: [],
-      productHasColor: [
-        {
-          productId: "",
-          colorId: "",
-        },
-      ],
+      // productHasColor: [
+      //   {
+      //     productId: "",
+      //     colorId: "",
+      //   },
+      // ],
       invalidProdName: false,
       invalidProdBrand: false,
       invalidProdPrice: false,
@@ -68,10 +68,6 @@ export default {
   methods: {
     submitForm() {
       let i = 0;
-      for (i = 0; i < this.products.length; i++) {
-        this.invalidProdName =
-          this.validate.name === this.products[i].name ? true : false;
-      }
       this.invalidProdName = this.validate.name === "" ? true : false;
       this.invalidProdBrand = this.validate.brand === "" ? true : false;
       this.invalidProdPrice =
@@ -84,6 +80,11 @@ export default {
       this.invalidProdDate = this.validate.date === "" ? true : false;
       this.invalidProdColors = !this.validate.colors.length ? true : false;
       this.invalidProdImage = !this.changeImage === false ? true : false;
+      for (i = 0; i < this.products.length; i++) {
+        if(this.products[i].name.toLowerCase() === this.validate.name.toLowerCase()){
+          this.invalidProdName = true
+        }
+      }
       if (
         this.invalidProdName ||
         this.invalidProdBrand ||
@@ -96,6 +97,14 @@ export default {
         this.isSubmit = false;
         return;
       } else {
+        this.addProduct({id: this.validate.productid,
+        name: this.validate.name,
+        price: this.validate.price,
+        description: this.validate.description,
+        date: this.validate.date,
+        colors: this.validate.colors,
+        brand: this.validate.brand
+        });
         this.isSubmit = true;
         this.invalidProdName = false;
         this.invalidProdBrand = false;
@@ -114,6 +123,59 @@ export default {
     passValidate(validate) {
       this.validate = validate;
     },
+    async getColors() {
+      try {
+        const res = await fetch("http://localhost:5000/colors");
+        const data = await res.json();
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getProducts() {
+      try {
+        const res = await fetch("http://localhost:5000/products");
+        const data = await res.json();
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getBrands() {
+      try {
+        const res = await fetch("http://localhost:5000/brands");
+        const data = await res.json();
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async addProduct(product) {
+      try {
+        await fetch("http://localhost:5000/products", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            productid: product.productid,
+            name: product.name,
+            price: product.price,
+            description: product.description,
+            date: product.date,
+            colors: product.colors,
+            brand: product.brand
+          }),
+        });
+      } catch (error) {
+        console.log(`Failed to add product! + ${error}`);
+      }
+    },
+  },
+  async created() {
+    this.colors = await this.getColors();
+    this.brands = await this.getBrands();
+    this.products = await this.getProducts();
   },
 };
 </script>

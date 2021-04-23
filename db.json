@@ -1,0 +1,51 @@
+{
+  "brands": [
+    {
+      "id": "1",
+      "name": "test1"
+    },
+    {
+      "id": "2",
+      "name": "test2"
+    }
+  ],
+  "colors": [
+    {
+      "id": "1",
+      "name": "white",
+      "value": "#FFFFFF",
+      "checked": false
+    },
+    {
+      "id": "2",
+      "name": "black",
+      "value": "#000000",
+      "checked": false
+    }
+  ],
+  "products": [
+    {
+      "name": "KUY",
+      "price": 5,
+      "description": "ddasda",
+      "date": "2021-04-29",
+      "colors": [
+        "#FFFFFF",
+        "#000000"
+      ],
+      "brand": "test2",
+      "id": 1
+    },
+    {
+      "name": "dsda",
+      "price": 5,
+      "description": "dsada",
+      "date": "2021-04-07",
+      "colors": [
+        "#FFFFFF"
+      ],
+      "brand": "test1",
+      "id": 2
+    }
+  ]
+}
