@@ -6,7 +6,7 @@
               <img
                 v-if="!changeImage"
                 class="w-80 h-80"
-                :src="ConvertFileName.filename"
+                :src="require(`@/assets/${filename}`)"
                 ref="Product Image"
               />
             </div>
@@ -29,8 +29,8 @@
               />
               Choose file
             </label>
-            <span class="text-gray-500" v-if="changeImage">No file chosen</span>
-            <p class="break-all text-gray-500">{{ this.filename }}</p>
+            <span class="text-gray-500" v-show="changeImage">No file chosen</span>
+            <p class="break-all text-gray-500">{{ filename }}</p>
           </div>
         </div>
 </template>
@@ -43,37 +43,30 @@ export default {
             type: Boolean,
             require: true
         },
-        // changeImage:{
-        //     type: Boolean,
-        //     require: true,
-        // },
+        changeImage:{
+            type: Boolean,
+            require: true,
+            default: true
+        },
+        filename:{
+          type: String,
+          require: true
+        }
 
-  },
-  data(){
-    return{
-      filename:"",
-      changeImage: true
-    }
   },
   methods:{
     previewFile(event) {
-      let data = event.target.files[0];
-      this.filename = data.name;
-      this.changeImage = false;
-      return this.changeImage
-    },
-    // submitForm(changeimage){
-    //         this.$emit('submit-form',changeimage)
-    // }
-  },
-  computed: {
-    ConvertFileName() {
-      return {
-        ...this.filename,
-        filename: this.filename && require(`@/assets/${this.filename}`),
-      };
+      this.$emit('preview-img',event)
     },
   },
+  // computed: {
+  //   ConvertFileName() {
+  //     return {
+  //       ...this.filename,
+  //       filename: this.filename && require(`@/assets/${this.filename}`),
+  //     };
+  //   },
+  // },
 }
 </script>
 

@@ -6,7 +6,7 @@
         id="product-form"
         class="flex flex-row h-full justify-center space-x-10"
       >
-      <Previewimage :invalidProdImage="invalidProdImage"/>
+      <Previewimage :invalidProdImage="invalidProdImage" :changeImage="changeImage" :filename="filename" @preview-img="previewFile"/>
         <!-- <div id="component-preview-img">
           <div id="preview-img">
             <p class="font-semibold text-xl">Preview</p>
@@ -192,6 +192,7 @@ export default {
       invalidProdColors: false,
       invalidProdImage: false,
       changeImage: true,
+      filename: ""
     };
   },
   methods: {
@@ -233,8 +234,13 @@ export default {
         this.invalidProdDes = false;
         this.invalidProdDate = false;
         this.invalidProdColors = false;
-        this.invalidProdImage = false;
       }
+    },
+    previewFile(event) {
+      let data = event.target.files[0];
+      this.filename = data.name;
+      this.changeImage = false;
+      this.invalidProdImage = false;
     },
   },
 };
