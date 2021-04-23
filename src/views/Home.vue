@@ -194,7 +194,7 @@ export default {
       this.invalidProdDes = this.validate.description === "" ? true : false;
       this.invalidProdDate = this.validate.date === "" ? true : false;
       this.invalidProdColors = !this.validate.colors.length ? true : false;
-      this.invalidProdImage = this.previewFile === null ? true : false;
+      this.invalidProdImage = !this.changeImage === false ? true : false;
       if (
         this.invalidProdName ||
         this.invalidProdBrand ||
