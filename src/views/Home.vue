@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <p id="header" class="text-2xl font-semibold text-center p-10">Home</p>
-    <form id="form" @submit.prevent="submitForm">
+    <form id="form" method="post" @submit.prevent="submitForm">
       <div
         id="product-form"
         class="flex flex-row h-full justify-center space-x-10"
@@ -165,7 +165,7 @@ export default {
       validate:{
         id: "",
         name: "",
-        price: null,
+        price: 0.00,
         description: "",
         date: "",
         colors: [],
@@ -190,7 +190,7 @@ export default {
       }
       this.invalidProdName = this.validate.name === "" ? true : false;
       this.invalidProdBrand = this.validate.brand === "" ? true : false;
-      this.invalidProdPrice = this.validate.price === null ? true : this.validate.price < 0 ? true : this.validate.price === "" ? true : false;
+      this.invalidProdPrice = this.validate.price <= 0 ? true : false;
       this.invalidProdDes = this.validate.description === "" ? true : false;
       this.invalidProdDate = this.validate.date === "" ? true : false;
       this.invalidProdColors = !this.validate.colors.length ? true : false;
