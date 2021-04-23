@@ -19,7 +19,7 @@
           :invalidProdPrice="invalidProdPrice"
           :invalidProdDes="invalidProdDes"
           :invalidProdDate="invalidProdDate"
-          :invalidProdColor="invalidProdColors"
+          :invalidProdColors="invalidProdColors"
           :colors="colors"
           :brands="brands"
           :isSubmit="isSubmit"
