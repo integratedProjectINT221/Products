@@ -3,12 +3,13 @@
     <div id="preview-img">
       <p class="font-semibold text-xl">Preview</p>
       <div class="w-80 h-80 mt-4 border-2">
+        <!-- <base-card> -->
         <img
           v-if="!changeImage"
           class="w-80 h-80"
           :src="require(`@/assets/${filename}`)"
           ref="Product Image"
-        />
+        <!-- /></base-card> -->
       </div>
       <div class="text-red-500 text-lg font-base" v-if="invalidProdImage">
         Please select your product image!
