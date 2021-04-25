@@ -38,14 +38,15 @@ export default {
 </script>
 <style>
 #contrainer-brands::-webkit-scrollbar {
-    width: 16px;
+    width: 14px;
     height: 18px;
 }
 #contrainer-brands::-webkit-scrollbar-thumb {
     height: 6px;
-    border: 4px solid rgba(0, 0, 0, 0);
+    border-left: 3px solid rgba(0, 0, 0, 0);
+    border-right: 3px solid rgba(0, 0, 0, 0);
     background-clip: padding-box;
-    border-radius: 20px;
+    border-radius: 10px;
     background-color:#566573;
 }
 
