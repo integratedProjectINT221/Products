@@ -43,8 +43,8 @@ export default {
         // { id: "2", name: "black", value: "#000000", checked: false },
       ],
       brands: [
-        { id: "1", name: "test1" },
-        { id: "2", name: "test2" },
+        // { id: "1", name: "test1" },
+        // { id: "2", name: "test2" },
       ],
       products: [],
       // productHasColor: [
