@@ -13,18 +13,18 @@
     </div>
     <label for="brand" class="font-semibold">Brand</label>
     <select
-      v-model="validate.brand"
+      v-model="validate.brandId"
       name="brand"
       id="brand"
       class="border-gray-400 border"
     >
       <option
         v-for="brand in brands"
-        :key="brand.id"
+        :key="brand.brandId"
         id="loopbrand"
-        :value="brand.name"
+        :value="brand.brandId"
       >
-        {{ brand.name }}
+        {{ brand.brandName}}
       </option>
     </select>
     <div class="text-red-500 text-lg font-base" v-if="invalidProdBrand">
@@ -151,26 +151,24 @@ export default {
   data() {
     return {
       validate: {
-        productid: "",
         name: "",
         price: 0.0,
         description: "",
         date: "",
         colors: [],
-        brand: "",
+        brandId: "",
       },
     };
   },
   methods: {
     dataSubmit() {
       const data = {
-        productid: this.validate.productid,
         name: this.validate.name,
         price: this.validate.price,
         description: this.validate.description,
         date: this.validate.date,
         colors: this.validate.colors,
-        brand: this.validate.brand,
+        brandId: this.validate.brandId,
       };
       this.$emit("pass-validate", data);
     },

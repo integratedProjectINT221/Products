@@ -9,10 +9,11 @@
     </router-link>
     <div
       id="nav"
-      class="border-black border-b w-screen h-16 pl-36 pt-7 space-x-32"
+      class="border-black border-b w-screen h-16 pl-36 pt-7 space-x-32 md:text-base font-medium"
     >
       <router-link to="/">Home</router-link>
-      <router-link to="/shop_collection">Shop Collection</router-link>
+      <router-link to="/all_product_brands">Brands</router-link>
+      <router-link to="/product_collections">Product Collections</router-link>
       <router-link to="/our_story">Our Strory</router-link>
     </div>
     <router-view />

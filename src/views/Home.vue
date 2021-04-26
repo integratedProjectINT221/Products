@@ -47,12 +47,12 @@ export default {
         // { id: "2", name: "test2" },
       ],
       products: [],
-      // productHasColor: [
-      //   {
-      //     productId: "",
-      //     colorId: "",
-      //   },
-      // ],
+      productHasColor: [
+        // {
+        //   productId: "",
+        //   colorId: "",
+        // },
+      ],
       invalidProdName: false,
       invalidProdBrand: false,
       invalidProdPrice: false,
@@ -69,7 +69,7 @@ export default {
     submitForm() {
       let i = 0;
       this.invalidProdName = this.validate.name === "" ? true : false;
-      this.invalidProdBrand = this.validate.brand === "" ? true : false;
+      this.invalidProdBrand = this.validate.brandId === "" ? true : false;
       this.invalidProdPrice =
         this.validate.price <= 0
           ? true
@@ -81,8 +81,11 @@ export default {
       this.invalidProdColors = !this.validate.colors.length ? true : false;
       this.invalidProdImage = !this.changeImage === false ? true : false;
       for (i = 0; i < this.products.length; i++) {
-        if(this.products[i].name.toLowerCase() === this.validate.name.toLowerCase()){
-          this.invalidProdName = true
+        if (
+          this.products[i].prodName.toLowerCase() ===
+          this.validate.name.toLowerCase()
+        ) {
+          this.invalidProdName = true;
         }
       }
       if (
@@ -97,14 +100,8 @@ export default {
         this.isSubmit = false;
         return;
       } else {
-        this.addProduct({id: this.validate.productid,
-        name: this.validate.name,
-        price: this.validate.price,
-        description: this.validate.description,
-        date: this.validate.date,
-        colors: this.validate.colors,
-        brand: this.validate.brand
-        });
+        this.addProduct();
+        this.addColorsInProduct();
         this.isSubmit = true;
         this.invalidProdName = false;
         this.invalidProdBrand = false;
@@ -150,7 +147,8 @@ export default {
         console.log(error);
       }
     },
-    async addProduct(product) {
+    async addProduct() {
+      console.log(this.products)
       try {
         await fetch("http://localhost:5000/products", {
           method: "POST",
@@ -158,13 +156,30 @@ export default {
             "Content-type": "application/json",
           },
           body: JSON.stringify({
-            productid: product.productid,
-            name: product.name,
-            price: product.price,
-            description: product.description,
-            date: product.date,
-            colors: product.colors,
-            brand: product.brand
+            prodName: this.validate.name,
+            description: this.validate.description,
+            price: this.validate.price,
+            date: this.validate.date,
+            brandId: this.validate.brandId,
+            image: this.filename,
+          }),
+          
+        });
+      } 
+      catch (error) {
+        console.log(`Failed to add product! + ${error}`);
+      }
+    },
+    async addColorsInProduct() {
+    console.log(this.products)
+      try {
+        await fetch("http://localhost:5000/productsHasColors", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            product: this.products[i]
           }),
         });
       } catch (error) {
@@ -176,6 +191,7 @@ export default {
     this.colors = await this.getColors();
     this.brands = await this.getBrands();
     this.products = await this.getProducts();
+    console.log(this.products)
   },
 };
 </script>
