@@ -14,6 +14,7 @@
         />
         <Groupinput
           @pass-validate="passValidate"
+          @pass-colors="passCheckedColor"
           :invalidProdName="invalidProdName"
           :invalidProdBrand="invalidProdBrand"
           :invalidProdPrice="invalidProdPrice"
@@ -26,6 +27,8 @@
         />
       </div>
     </form>
+    {{this.validate}}
+    {{this.checkedColor}}
   </div>
 </template>
 
@@ -38,6 +41,7 @@ export default {
   data() {
     return {
       validate: {},
+      checkedColor:{},
       colors: [
         // { id: "1", name: "white", value: "#FFFFFF", checked: false },
         // { id: "2", name: "black", value: "#000000", checked: false },
@@ -78,7 +82,7 @@ export default {
           : false;
       this.invalidProdDes = this.validate.description === "" ? true : false;
       this.invalidProdDate = this.validate.date === "" ? true : false;
-      this.invalidProdColors = !this.validate.colors.length ? true : false;
+      // this.invalidProdColors = !this.validate.colors === {} ? true : false;
       this.invalidProdImage = !this.changeImage === false ? true : false;
       for (i = 0; i < this.products.length; i++) {
         if (
@@ -94,7 +98,7 @@ export default {
         this.invalidProdPrice ||
         this.invalidProdDes ||
         this.invalidProdDate ||
-        this.invalidProdColors ||
+        // this.invalidProdColors ||
         this.invalidProdImage === true
       ) {
         this.isSubmit = false;
@@ -108,7 +112,7 @@ export default {
         this.invalidProdPrice = false;
         this.invalidProdDes = false;
         this.invalidProdDate = false;
-        this.invalidProdColors = false;
+        // this.invalidProdColors = false;
       }
     },
     previewFile(event) {
@@ -119,6 +123,9 @@ export default {
     },
     passValidate(validate) {
       this.validate = validate;
+    },
+    passCheckedColor(colors) {
+      this.checkedColor = colors;
     },
     async getColors() {
       try {
@@ -148,7 +155,7 @@ export default {
       }
     },
     async addProduct() {
-      console.log(this.products)
+      console.log(this.products);
       try {
         await fetch("http://localhost:5000/products", {
           method: "POST",
@@ -156,6 +163,7 @@ export default {
             "Content-type": "application/json",
           },
           body: JSON.stringify({
+            id: this.validate.id,
             prodName: this.validate.name,
             description: this.validate.description,
             price: this.validate.price,
@@ -163,15 +171,12 @@ export default {
             brandId: this.validate.brandId,
             image: this.filename,
           }),
-          
         });
-      } 
-      catch (error) {
+      } catch (error) {
         console.log(`Failed to add product! + ${error}`);
       }
     },
     async addColorsInProduct() {
-    console.log(this.products)
       try {
         await fetch("http://localhost:5000/productsHasColors", {
           method: "POST",
@@ -179,7 +184,8 @@ export default {
             "Content-type": "application/json",
           },
           body: JSON.stringify({
-            product: this.products[i]
+            product: this.validate,
+            color: this.checkedColor,
           }),
         });
       } catch (error) {
@@ -191,7 +197,6 @@ export default {
     this.colors = await this.getColors();
     this.brands = await this.getBrands();
     this.products = await this.getProducts();
-    console.log(this.products)
   },
 };
 </script>

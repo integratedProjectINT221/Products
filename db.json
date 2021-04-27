@@ -3,44 +3,12 @@
     {
       "brandId": "B0002",
       "brandName": "Snowman",
-      "products": [
-        {
-          "prodName": "Winter cardigan",
-          "description": "Yarn cardigan",
-          "price": 450,
-          "brandBrandId": "B0002",
-          "image": "image02.jpg"
-        },
-        {
-          "prodName": "HoodieBaer",
-          "description": "Big Hoodie",
-          "price": 690,
-          "brandBrandId": "B0002",
-          "image": "image03.jpg"
-        },
-        {
-          "prodId": "C0004",
-          "prodName": "Sweetie summer ",
-          "description": "Women Vest",
-          "price": 250,
-          "brandBrandId": "B0002",
-          "image": "image04.jpg"
-        }
-      ]
+      "products": []
     },
     {
       "brandId": "B0001",
       "brandName": "Sunday",
-      "products": [
-        {
-          "prodId": "C0001",
-          "prodName": "Simple wear",
-          "description": "Cottont-shirt",
-          "price": 150,
-          "brandBrandId": "B0001",
-          "image": "image01.jpg"
-        }
-      ]
+      "products": []
     }
   ],
   "colors": [
@@ -58,166 +26,9 @@
     }
   ],
   "products": [
-    {
-      "prodName": "dasd",
-      "description": "sada",
-      "price": 55,
-      "date": "2021-04-12",
-      "brandId": "B0002",
-      "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
-      "id": 1
-    },
-    {
-      "prodName": "sda",
-      "description": "dsad",
-      "price": 555,
-      "date": "2021-04-15",
-      "brandId": "B0002",
-      "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
-      "id": 2
-    },
-    {
-      "prodName": "kjkhjk",
-      "description": "dsad",
-      "price": 555,
-      "date": "2021-04-07",
-      "brandId": "B0001",
-      "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
-      "id": 3
-    },
-    {
-      "prodName": "hjghj",
-      "description": "jjjjj",
-      "price": 555,
-      "date": "2021-04-15",
-      "brandId": "B0002",
-      "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
-      "id": 4
-    },
-    {
-      "prodName": "saS",
-      "description": "dsadassd",
-      "price": 5555,
-      "date": "2021-04-29",
-      "brandId": "B0002",
-      "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
-      "id": 5
-    }
+   
   ],
   "productsHasColors": [
-    {
-      "product": [],
-      "id": 1
-    },
-    {
-      "product": [
-        {
-          "prodName": "dasd",
-          "description": "sada",
-          "price": 55,
-          "date": "2021-04-12",
-          "brandId": "B0002",
-          "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
-          "id": 1
-        }
-      ],
-      "id": 2
-    },
-    {
-      "product": [
-        {
-          "prodName": "dasd",
-          "description": "sada",
-          "price": 55,
-          "date": "2021-04-12",
-          "brandId": "B0002",
-          "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
-          "id": 1
-        },
-        {
-          "prodName": "sda",
-          "description": "dsad",
-          "price": 555,
-          "date": "2021-04-15",
-          "brandId": "B0002",
-          "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
-          "id": 2
-        }
-      ],
-      "id": 3
-    },
-    {
-      "product": [
-        {
-          "prodName": "dasd",
-          "description": "sada",
-          "price": 55,
-          "date": "2021-04-12",
-          "brandId": "B0002",
-          "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
-          "id": 1
-        },
-        {
-          "prodName": "sda",
-          "description": "dsad",
-          "price": 555,
-          "date": "2021-04-15",
-          "brandId": "B0002",
-          "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
-          "id": 2
-        },
-        {
-          "prodName": "kjkhjk",
-          "description": "dsad",
-          "price": 555,
-          "date": "2021-04-07",
-          "brandId": "B0001",
-          "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
-          "id": 3
-        }
-      ],
-      "id": 4
-    },
-    {
-      "product": [
-        {
-          "prodName": "dasd",
-          "description": "sada",
-          "price": 55,
-          "date": "2021-04-12",
-          "brandId": "B0002",
-          "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
-          "id": 1
-        },
-        {
-          "prodName": "sda",
-          "description": "dsad",
-          "price": 555,
-          "date": "2021-04-15",
-          "brandId": "B0002",
-          "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
-          "id": 2
-        },
-        {
-          "prodName": "kjkhjk",
-          "description": "dsad",
-          "price": 555,
-          "date": "2021-04-07",
-          "brandId": "B0001",
-          "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
-          "id": 3
-        },
-        {
-          "prodName": "hjghj",
-          "description": "jjjjj",
-          "price": 555,
-          "date": "2021-04-15",
-          "brandId": "B0002",
-          "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
-          "id": 4
-        }
-      ],
-      "id": 5
-    }
+   
   ]
 }

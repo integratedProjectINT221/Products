@@ -84,11 +84,12 @@
           v-model="validate.colors"
           type="checkbox"
           :id="color.name"
-          :value="color.value"
+          :value="color"
           class="hidden"
           @change="color.checked = !color.checked"
         />
       </div>
+      <!-- <span>Checked names: {{ validate.colors }}</span> -->
     </div>
     <div class="text-red-500 text-lg font-base" v-if="invalidProdColors">
       Invalid product colors!
@@ -150,24 +151,31 @@ export default {
   },
   data() {
     return {
+      count: 0,
       validate: {
         name: "",
         price: 0.0,
         description: "",
         date: "",
-        colors: [],
         brandId: "",
+        colors:[]
       },
     };
   },
   methods: {
     dataSubmit() {
+      this.count++
+      console.log(this.count)
+      const checkedColor = {
+        colors: this.validate.colors 
+      }
+      console.log(checkedColor)
       const data = {
+        id: this.count,
         name: this.validate.name,
         price: this.validate.price,
         description: this.validate.description,
         date: this.validate.date,
-        colors: this.validate.colors,
         brandId: this.validate.brandId,
       };
       this.$emit("pass-validate", data);
