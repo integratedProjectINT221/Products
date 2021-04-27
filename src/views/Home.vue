@@ -183,9 +183,13 @@ export default {
           headers: {
             "Content-type": "application/json",
           },
+          
           body: JSON.stringify({
             product: this.validate,
-            color: this.checkedColor,
+            
+            color: this.checkedColor.forEach(element => {
+              element.id
+            }),
           }),
         });
       } catch (error) {

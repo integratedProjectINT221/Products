@@ -26,9 +26,27 @@
     }
   ],
   "products": [
-   
+    {
+      "id": 1,
+      "prodName": " voervnm",
+      "description": "asdcqwc",
+      "price": 50,
+      "date": "2021-04-08",
+      "brandId": "B0001",
+      "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg"
+    }
   ],
   "productsHasColors": [
-   
+    {
+      "product": {
+        "id": 1,
+        "name": " voervnm",
+        "price": 50,
+        "description": "asdcqwc",
+        "date": "2021-04-08",
+        "brandId": "B0001"
+      },
+      "id": 1
+    }
   ]
 }

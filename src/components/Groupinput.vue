@@ -166,10 +166,10 @@ export default {
     dataSubmit() {
       this.count++
       console.log(this.count)
-      const checkedColor = {
-        colors: this.validate.colors 
-      }
-      console.log(checkedColor)
+      // const checkedColor = {
+      //   colors: this.validate.colors 
+      // }
+      // console.log(checkedColor)
       const data = {
         id: this.count,
         name: this.validate.name,
@@ -179,6 +179,7 @@ export default {
         brandId: this.validate.brandId,
       };
       this.$emit("pass-validate", data);
+      this.$emit("pass-colors", this.validate.colors );
     },
   },
 };
