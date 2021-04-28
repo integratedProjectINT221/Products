@@ -6,7 +6,7 @@
       type="text"
       name="name"
       id="name"
-      class="border-gray-400 border"
+      class="border-gray-400 border pl-1"
     />
     <div class="text-red-500 text-lg font-base" v-if="invalidProdName">
       Invalid validate name!
@@ -16,7 +16,7 @@
       v-model="validate.brand"
       name="brand"
       id="brand"
-      class="border-gray-400 border"
+      class="border-gray-400 border pl-1"
     >
       <option
         v-for="brand in brands"
@@ -37,7 +37,7 @@
         type="text"
         name="price"
         id="price"
-        class="w-20 border-gray-400 border"
+        class="w-20 border-gray-400 border pl-1"
       />
       <label class="currency p-2">THB</label>
       <div class="text-red-500 text-lg font-base" v-if="invalidProdPrice">
@@ -50,7 +50,7 @@
       type="date"
       name="date"
       id="date"
-      class="border-gray-400 border"
+      class="border-gray-400 border pl-1"
     />
     <div class="text-red-500 text-lg font-base" v-if="invalidProdDate">
       Invalid product date!
@@ -61,7 +61,7 @@
       id="Description"
       cols="50"
       rows="4"
-      class="border-gray-400 border"
+      class="border-gray-400 border pl-1"
       v-model="validate.description"
     >
     </textarea>
@@ -69,11 +69,11 @@
       Invalid product description!
     </div>
     <label for="color" class="font-semibold">Color</label>
-    <div id="container-colors" class="w-80 h-12 grid grid-cols-11">
+    <div id="container-colors" class="w-80 h-12 grid grid-cols-11 gap-8">
       <div v-for="(color) in colors" :key="color.colorId" id="loopcolor">
         <label
           :for="color.colorName"
-          class="flex justify-center items-center border border-gray-400 w-5 h-5"
+          class="flex justify-center items-center border border-gray-400 w-6 h-6 rounded-full"
           :style="{ backgroundColor: color.value }"
         >
           <i v-show="color.checked" class="material-icons text-gray-300">

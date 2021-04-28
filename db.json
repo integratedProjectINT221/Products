@@ -49,6 +49,26 @@
         }
       ],
       "id": 1
+    },
+    {
+      "prodName": "dsdadsaddada",
+      "description": "ddddd",
+      "price": 4444,
+      "date": "2021-04-21",
+      "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
+      "brand": {
+        "brandId": "B0002",
+        "brandName": "Snowman"
+      },
+      "colors": [
+        {
+          "colorId": "CL0002",
+          "colorName": "black",
+          "value": "#000000",
+          "checked": true
+        }
+      ],
+      "id": 2
     }
   ]
 }

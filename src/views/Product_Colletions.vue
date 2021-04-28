@@ -5,20 +5,20 @@
     </p>
     <div id="brands-page" class="w-screen flex justify-center">
       <div id="contrainer-brands" class="grid grid-cols-3 gap-4">
-        <div
-          v-for="(collection) in products"
-          :key="collection.id"
-          id="loopCollection"
-        >
+        <div v-for="product in products" :key="product.id" id="loopCollection">
           <div
             class="bg-gray-300 h-60 w-48 flex justify-center items-center group cursor-pointer"
           ></div>
+          <div id="container-colors" class="w-48 grid grid-cols-7 mt-2">
             <div
-              class="flex justify-center items-center border border-gray-400 w-5 h-5"
-              :style="{ backgroundColor: collection.color.value }"
+              v-for="color in product.colors"
+              :key="color.colorId"
+              class="flex justify-center items-center border border-gray-400 w-5 h-5 rounded-full"
+              :style="{ backgroundColor: color.value }"
             ></div>
-          <p class="font-medium">{{ collection.product.name }}</p>
-          <p class="font-base">{{ collection.product.price }} THB</p>
+          </div>
+          <p class="font-medium">{{ product.prodName }}</p>
+          <p class="font-base">{{ product.price }} THB</p>
         </div>
       </div>
     </div>
