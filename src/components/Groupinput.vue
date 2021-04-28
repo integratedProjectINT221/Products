@@ -70,9 +70,9 @@
     </div>
     <label for="color" class="font-semibold">Color</label>
     <div id="container-colors" class="w-80 h-12 grid grid-cols-11">
-      <div v-for="color in colors" :key="color.ColorId" id="loopcolor">
+      <div v-for="(color) in colors" :key="color.colorId" id="loopcolor">
         <label
-          :for="color.ColorName"
+          :for="color.colorName"
           class="flex justify-center items-center border border-gray-400 w-5 h-5"
           :style="{ backgroundColor: color.value }"
         >
@@ -83,13 +83,13 @@
         <input
           v-model="validate.colors"
           type="checkbox"
-          :id="color.ColorName"
+          :id="color.colorName"
           :value="color"
           class="hidden"
           @change="color.checked = !color.checked"
         />
       </div>
-      <!-- <span>Checked names: {{ color }}</span> -->
+      <!-- <span>Checked names: {{ validate.colors }}</span> -->
     </div>
     <div class="text-red-500 text-lg font-base" v-if="invalidProdColors">
       Invalid product colors!
@@ -151,7 +151,6 @@ export default {
   },
   data() {
     return {
-      // count: 0,
       validate: {
         name: "",
         price: 0.0,
@@ -163,14 +162,6 @@ export default {
     };
   },
   methods: {
-    deleteChecked(){
-       
-      for(let i = 0; i < this.validate.colors.length; i++) {
-          var color = this.validate.colors
-          delete color[i]['checked'];
-      }
-      return color;
-    },
     dataSubmit() {
       // this.count++
       // console.log(this.count)
@@ -185,7 +176,7 @@ export default {
         description: this.validate.description,
         date: this.validate.date,
         brand: this.validate.brand,
-        colors: this.deleteChecked()
+        colors: this.validate.colors
       };
       this.$emit("pass-validate", data);
       

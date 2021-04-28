@@ -24,6 +24,31 @@
     }
   ],
   "products": [
-  
+    {
+      "prodName": "dsddddddddd",
+      "description": "gdfgdgd",
+      "price": 550,
+      "date": "2021-04-10",
+      "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
+      "brand": {
+        "brandId": "B0001",
+        "brandName": "Sunday"
+      },
+      "colors": [
+        {
+          "colorId": "CL0002",
+          "colorName": "black",
+          "value": "#000000",
+          "checked": true
+        },
+        {
+          "colorId": "CL0001",
+          "colorName": "white",
+          "value": "#FFFFFF",
+          "checked": true
+        }
+      ],
+      "id": 1
+    }
   ]
 }

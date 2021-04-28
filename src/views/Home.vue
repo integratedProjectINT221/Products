@@ -115,9 +115,11 @@ export default {
     },
     passValidate(validate) {
       this.validate = validate;
-    },
-    passCheckedColor(colors) {
-      this.checkedColor = colors;
+      // for(let i = 0; i < this.validate.colors.length; i++ ){
+      //   var color = this.validate.colors
+      //   delete color[i]["checked"];
+      // }
+      // console.log(this.validate.colors)
     },
     async getColors() {
       try {
