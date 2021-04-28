@@ -13,7 +13,6 @@
     >
       <router-link to="/">Home</router-link>
       <router-link to="/all_product_brands">Brands</router-link>
-      <router-link to="/product_collections">Product Collections</router-link>
       <router-link to="/our_story">Our Strory</router-link>
     </div>
     <router-view />

@@ -4,7 +4,7 @@
     <form id="form" method="post" @submit.prevent="submitForm">
       <div
         id="product-form"
-        class="flex flex-row h-full justify-center space-x-10"
+        class="flex flex-row h-full justify-center space-x-16"
       >
         <Previewimage
           :invalidProdImage="invalidProdImage"
@@ -123,7 +123,7 @@ export default {
     },
     async getColors() {
       try {
-        const res = await fetch("http://localhost:5000/colors");
+        const res = await fetch("http://localhost:8081/colors");
         const data = await res.json();
         return data;
       } catch (error) {
@@ -132,7 +132,7 @@ export default {
     },
     async getProducts() {
       try {
-        const res = await fetch("http://localhost:5000/products");
+        const res = await fetch("http://localhost:8081/products");
         const data = await res.json();
         return data;
       } catch (error) {
@@ -141,7 +141,7 @@ export default {
     },
     async getBrands() {
       try {
-        const res = await fetch("http://localhost:5000/brands");
+        const res = await fetch("http://localhost:8081/brands");
         const data = await res.json();
         return data;
       } catch (error) {
@@ -150,7 +150,7 @@ export default {
     },
     async addProduct() {
       try {
-        await fetch("http://localhost:5000/products", {
+        await fetch("http://localhost:8081/products", {
           method: "POST",
           headers: {
             "Content-type": "application/json",

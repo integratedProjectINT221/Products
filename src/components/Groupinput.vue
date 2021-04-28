@@ -68,8 +68,22 @@
     <div class="text-red-500 text-lg font-base" v-if="invalidProdDes">
       Invalid product description!
     </div>
+  
+    <div class="submit-button">
+      <button
+        class="transition delay-75 hover:text-white hover:bg-gray-700 hover:tr py-1 px-6 mt-3 rounded-full focus:outline-none border-gray-400 border-2 text-base font-medium"
+        @click="dataSubmit"
+      >
+        Submit
+      </button>
+    </div>
+    <div class="text-green-400 text-lg font-base" v-if="isSubmit">
+      Product Added!
+    </div>
+  </div>
+  <div class="mt-10">
     <label for="color" class="font-semibold">Color</label>
-    <div id="container-colors" class="w-80 h-12 grid grid-cols-11 gap-8">
+  <div id="container-colors" class="w-full h-auto grid grid-cols-6 gap-4 mt-2">
       <div v-for="(color) in colors" :key="color.colorId" id="loopcolor">
         <label
           :for="color.colorName"
@@ -93,17 +107,6 @@
     </div>
     <div class="text-red-500 text-lg font-base" v-if="invalidProdColors">
       Invalid product colors!
-    </div>
-    <div class="submit-button">
-      <button
-        class="transition delay-75 hover:text-white hover:bg-gray-700 hover:tr py-1 px-6 rounded-full focus:outline-none border-gray-400 border-2 text-base font-medium"
-        @click="dataSubmit"
-      >
-        Submit
-      </button>
-    </div>
-    <div class="text-green-400 text-lg font-base" v-if="isSubmit">
-      Product Added!
     </div>
   </div>
 </template>

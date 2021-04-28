@@ -9,12 +9,12 @@
     >
       <div v-for="brand in brands" :key="brand.brandId" id="loopbrands">
         <router-link  :to="{ name: 'Product Colletions', 
-           params: { passBrandId: brand.brandId }}">
+           params: { passBrandId: brand.brandId,passBrandName: brand.brandName }}">
           <div 
             class="bg-gray-300 h-40 w-40 hover:bg-gray-400 flex justify-center items-center group transition duration-100 cursor-pointer"
           >
             <div
-              class="text-gray-800 text-2xl font-medium group-hover:text-white transition duration-75 cursor-pointer"
+              class="text-gray-800 text-2xl font-medium group-hover:text-white transition duration-75 cursor-pointer break-all text-center"
             >
               {{ brand.brandName }}
               
@@ -42,7 +42,7 @@ export default {
     
     async getBrands() {
       try {
-        const res = await fetch("http://localhost:5000/brands");
+        const res = await fetch("http://localhost:8081/brands");
         const data = await res.json();
         return data;
       } catch (error) {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <p id="header" class="text-2xl font-semibold text-center p-10">
-      Product Collections
+      {{passBrandName}}
     </p>
     <div id="brands-page" class="w-screen flex justify-center">
       <div id="contrainer-brands" class="grid grid-cols-3 gap-4">
@@ -22,14 +22,14 @@
         </div>
       </div>
     </div>
-    {{this.$route.params.passBrandId}}
   </div>
 </template>
 <script>
 export default {
   name: "Product Collections",
   props: {
-        passBrandId: String
+        passBrandId: String,
+        passBrandName: String
     },
   data() {
     return {
