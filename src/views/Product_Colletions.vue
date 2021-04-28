@@ -22,17 +22,22 @@
         </div>
       </div>
     </div>
+    {{this.passBrandId}}
   </div>
 </template>
 <script>
 export default {
   name: "Product Collections",
+  props: {
+        passBrandId: String
+    },
   data() {
     return {
       products: [],
     };
   },
   methods: {
+    
     async getProducts() {
       try {
         const res = await fetch("http://localhost:5000/products");

@@ -7,8 +7,9 @@
       class="grid grid-cols-4 gap-1 overflow-scroll overflow-x-hidden"
       style="height: 30rem"
     >
-      <div v-for="brand in brands" :key="brand.id" id="loopbrands">
-        <router-link to="/product_collections">
+      <div v-for="brand in brands" :key="brand.brandId" id="loopbrands">
+        <router-link  :to="{ name: 'Product Colletions', 
+           params: { passBrandId: brand.brandId }}">
           <div
             class="bg-gray-300 h-40 w-40 hover:bg-gray-400 flex justify-center items-center group transition duration-100 cursor-pointer"
           >
