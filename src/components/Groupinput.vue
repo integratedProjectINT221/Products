@@ -13,7 +13,7 @@
     </div>
     <label for="brand" class="font-semibold">Brand</label>
     <select
-      v-model="validate.brandId"
+      v-model="validate.brand"
       name="brand"
       id="brand"
       class="border-gray-400 border"
@@ -22,7 +22,7 @@
         v-for="brand in brands"
         :key="brand.brandId"
         id="loopbrand"
-        :value="brand.brandId"
+        :value="brand"
       >
         {{ brand.brandName}}
       </option>
@@ -70,9 +70,9 @@
     </div>
     <label for="color" class="font-semibold">Color</label>
     <div id="container-colors" class="w-80 h-12 grid grid-cols-11">
-      <div v-for="color in colors" :key="color.id" id="loopcolor">
+      <div v-for="color in colors" :key="color.ColorId" id="loopcolor">
         <label
-          :for="color.name"
+          :for="color.ColorName"
           class="flex justify-center items-center border border-gray-400 w-5 h-5"
           :style="{ backgroundColor: color.value }"
         >
@@ -83,13 +83,13 @@
         <input
           v-model="validate.colors"
           type="checkbox"
-          :id="color.name"
+          :id="color.ColorName"
           :value="color"
           class="hidden"
           @change="color.checked = !color.checked"
         />
       </div>
-      <!-- <span>Checked names: {{ validate.colors }}</span> -->
+      <!-- <span>Checked names: {{ color }}</span> -->
     </div>
     <div class="text-red-500 text-lg font-base" v-if="invalidProdColors">
       Invalid product colors!
@@ -151,35 +151,44 @@ export default {
   },
   data() {
     return {
-      count: 0,
+      // count: 0,
       validate: {
         name: "",
         price: 0.0,
         description: "",
         date: "",
-        brandId: "",
+        brand: "",
         colors:[]
       },
     };
   },
   methods: {
+    deleteChecked(){
+       
+      for(let i = 0; i < this.validate.colors.length; i++) {
+          var color = this.validate.colors
+          delete color[i]['checked'];
+      }
+      return color;
+    },
     dataSubmit() {
-      this.count++
-      console.log(this.count)
+      // this.count++
+      // console.log(this.count)
       // const checkedColor = {
       //   colors: this.validate.colors 
       // }
       // console.log(checkedColor)
+      
       const data = {
-        id: this.count,
         name: this.validate.name,
         price: this.validate.price,
         description: this.validate.description,
         date: this.validate.date,
-        brandId: this.validate.brandId,
+        brand: this.validate.brand,
+        colors: this.deleteChecked()
       };
       this.$emit("pass-validate", data);
-      this.$emit("pass-colors", this.validate.colors );
+      
     },
   },
 };

@@ -2,51 +2,28 @@
   "brands": [
     {
       "brandId": "B0002",
-      "brandName": "Snowman",
-      "products": []
+      "brandName": "Snowman"
     },
     {
       "brandId": "B0001",
-      "brandName": "Sunday",
-      "products": []
+      "brandName": "Sunday"
     }
   ],
   "colors": [
     {
-      "id": "CL0001",
-      "name": "white",
+      "colorId": "CL0001",
+      "colorName": "white",
       "value": "#FFFFFF",
       "checked": false
     },
     {
-      "id": "CL0002",
-      "name": "black",
+      "colorId": "CL0002",
+      "colorName": "black",
       "value": "#000000",
       "checked": false
     }
   ],
   "products": [
-    {
-      "id": 1,
-      "prodName": " voervnm",
-      "description": "asdcqwc",
-      "price": 50,
-      "date": "2021-04-08",
-      "brandId": "B0001",
-      "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg"
-    }
-  ],
-  "productsHasColors": [
-    {
-      "product": {
-        "id": 1,
-        "name": " voervnm",
-        "price": 50,
-        "description": "asdcqwc",
-        "date": "2021-04-08",
-        "brandId": "B0001"
-      },
-      "id": 1
-    }
+  
   ]
 }

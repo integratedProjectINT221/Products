@@ -6,7 +6,7 @@
     <div id="brands-page" class="w-screen flex justify-center">
       <div id="contrainer-brands" class="grid grid-cols-3 gap-4">
         <div
-          v-for="(collection) in productsHasColors"
+          v-for="(collection) in products"
           :key="collection.id"
           id="loopCollection"
         >
@@ -29,13 +29,13 @@ export default {
   name: "Product Collections",
   data() {
     return {
-      productsHasColors: [],
+      products: [],
     };
   },
   methods: {
-    async getProductsHasColors() {
+    async getProducts() {
       try {
-        const res = await fetch("http://localhost:5000/productsHasColors");
+        const res = await fetch("http://localhost:5000/products");
         const data = await res.json();
         return data;
       } catch (error) {
@@ -46,7 +46,7 @@ export default {
   async created() {
     // this.colors = await this.getColors();
     // this.brands = await this.getBrands();
-    this.productsHasColors = await this.getProductsHasColors();
+    this.products = await this.getProducts();
   },
 };
 </script>
