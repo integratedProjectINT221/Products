@@ -16,7 +16,7 @@
           }"
           >{{ this.brand.brandName }}
       </router-link>
-      <span>></span><router-link to="/show">{{ this.product.prodName }}</router-link>
+      <span>></span><router-link :to="{path: `/show/${this.product.prodId}`}">{{ this.product.prodName }}</router-link>
       </div>
       <div id="preview-img">
         <div class="w-80 h-80 border-2">
@@ -61,15 +61,16 @@
         Delete
       </button>
       </div>
+      {{$route.params.id}}
     </div>
   </div>
 </template>
 <script>
 export default {
   name: "Show Product",
-  props: {
-    passProdId: String,
-  },
+  // props: {
+  //   passProdId: String,
+  // },
   data() {
     return {
       product: {},
@@ -80,7 +81,7 @@ export default {
     async getProductsbyId() {
       try {
         const res = await fetch(
-          `http://localhost:8081/products/${this.passProdId}`
+          `http://localhost:8081/products/${this.$route.params.id}`
         );
         const data = await res.json();
         return data;
@@ -94,6 +95,7 @@ export default {
     // this.brands = await this.getBrands();
     this.product = await this.getProductsbyId();
     this.brand = await this.product.brand;
+    // console.log(this.passProdId)
   },
 };
 </script>

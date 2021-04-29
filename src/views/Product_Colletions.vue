@@ -11,12 +11,7 @@
           id="loopCollection"
         >
           <router-link
-            :to="{
-              name: 'Show Product',
-              params: {
-                passProdId: product.prodId,
-              },
-            }"
+            :to="{path: `/show/${product.prodId}`}"
           >
             <div
               class="bg-gray-300 h-60 w-48 flex justify-center items-center group cursor-pointer"
@@ -66,6 +61,7 @@ export default {
     // this.colors = await this.getColors();
     // this.brands = await this.getBrands();
     this.productsByBrand = await this.getProductsbyBrand();
+    
   },
 };
 </script>
