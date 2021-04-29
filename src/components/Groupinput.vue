@@ -71,7 +71,7 @@
   
     <div class="submit-button">
       <button
-        class="transition delay-75 hover:text-white hover:bg-gray-700 hover:tr py-1 px-6 mt-3 rounded-full focus:outline-none border-gray-400 border-2 text-base font-medium"
+        class="transition delay-75 hover:text-white hover:bg-gray-700 hover:tr py-1 px-6 mt-3 rounded-full focus:outline-none border-gray-700 border-2 text-base font-medium"
         @click="dataSubmit"
       >
         Submit

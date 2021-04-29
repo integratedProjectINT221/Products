@@ -4,7 +4,21 @@
     class="flex flex-row h-full justify-center space-x-10"
   >
     <div id="component-preview-img">
-      <!-- <div><router-link to="/all_product_brands"> BRANDS</router-link></div> -->
+      <span class="space-x-2"
+        ><router-link to="/all_product_brands">All Brands</router-link
+        ><span>></span
+        ><router-link
+          :to="{
+            name: 'Product Colletions',
+            params: {
+              passBrandId: this.brand.brandId,
+              passBrandName: this.brand.brandName,
+            },
+          }"
+          >{{ this.brand.brandName }}</router-link
+        ><span>></span
+        ><router-link to="/show">{{ this.product.prodName }}</router-link></span
+      >
       <div id="preview-img">
         <div class="w-80 h-80 border-2">
           <!-- <base-card> -->
@@ -17,11 +31,12 @@
           <!-- </base-card> -->
         </div>
       </div>
+      <p class="text-center">{{ this.product.image }}</p>
     </div>
     <div class="space-y-4">
       <p class="text-3xl">{{ this.product.prodName }}</p>
       <div class="space-y-3 text-xl">
-        <p>{{product.brand.brandName}}</p>
+        <p>{{ this.brand.brandName }}</p>
         <p>{{ this.product.price }} THB</p>
         <p>{{ this.product.date }}</p>
       </div>
@@ -35,6 +50,16 @@
           :style="{ backgroundColor: color.value }"
         ></div>
       </div>
+      <button
+        class="transition delay-75 hover:text-white hover:bg-gray-700 hover:tr py-1 px-6 mt-3 rounded-full focus:outline-none border-gray-700 border-2 text-base font-medium"
+      >
+        Edit
+      </button>
+      <button
+        class="transition delay-75 hover:text-white hover:bg-red-500 hover:tr py-1 px-6 mt-3 rounded-full focus:outline-none border-red-500  text-red-500 border-2 text-base font-medium"
+      >
+        Delete
+      </button>
     </div>
   </div>
 </template>
@@ -47,6 +72,7 @@ export default {
   data() {
     return {
       product: {},
+      brand: {},
     };
   },
   methods: {
@@ -66,7 +92,7 @@ export default {
     // this.colors = await this.getColors();
     // this.brands = await this.getBrands();
     this.product = await this.getProductsbyId();
-    console.log(this.product);
+    this.brand = await this.product.brand;
   },
 };
 </script>
