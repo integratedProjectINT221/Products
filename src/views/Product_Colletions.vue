@@ -1,14 +1,27 @@
 <template>
   <div>
     <p id="header" class="text-2xl font-semibold text-center p-10">
-      {{passBrandName}}
+      {{ passBrandName }}
     </p>
     <div id="brands-page" class="w-screen flex justify-center">
       <div id="contrainer-brands" class="grid grid-cols-3 gap-4">
-        <div v-for="product in productsByBrand" :key="product.id" id="loopCollection">
-          <div
-            class="bg-gray-300 h-60 w-48 flex justify-center items-center group cursor-pointer"
-          ></div>
+        <div
+          v-for="product in productsByBrand"
+          :key="product.prodId"
+          id="loopCollection"
+        >
+          <router-link
+            :to="{
+              name: 'Show Product',
+              params: {
+                passProdId: product.prodId,
+              },
+            }"
+          >
+            <div
+              class="bg-gray-300 h-60 w-48 flex justify-center items-center group cursor-pointer"
+            ></div>
+          </router-link>
           <div id="container-colors" class="w-48 grid grid-cols-7 mt-2">
             <div
               v-for="color in product.colors"
@@ -28,27 +41,26 @@
 export default {
   name: "Product Collections",
   props: {
-        passBrandId: String,
-        passBrandName: String
-    },
+    passBrandId: String,
+    passBrandName: String,
+  },
   data() {
     return {
-      productsByBrand:[]
+      productsByBrand: [],
     };
   },
   methods: {
     async getProductsbyBrand() {
       try {
-        const res = await fetch(`http://localhost:8081/products/${this.passBrandId}`);
+        const res = await fetch(
+          `http://localhost:8081/productsByBrand/${this.passBrandId}`
+        );
         const data = await res.json();
-        this.productsByBrand = data;
-        console.log(data)
-        console.log(this.productsByBrand)
         return data;
       } catch (error) {
         console.log(error);
       }
-    },  
+    },
   },
   async created() {
     // this.colors = await this.getColors();
