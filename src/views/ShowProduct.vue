@@ -1,13 +1,12 @@
 <template>
   <div
     id="container-product"
-    class="flex flex-row h-full justify-center space-x-10"
+    class="flex flex-row h-full justify-center space-x-10 pt-10"
   >
     <div id="component-preview-img">
-      <span class="space-x-2"
-        ><router-link to="/all_product_brands">All Brands</router-link
-        ><span>></span
-        ><router-link
+      <div class="space-x-2 mb-4">
+      <router-link to="/all_product_brands">All Brands</router-link><span>></span>
+      <router-link
           :to="{
             name: 'Product Colletions',
             params: {
@@ -15,10 +14,10 @@
               passBrandName: this.brand.brandName,
             },
           }"
-          >{{ this.brand.brandName }}</router-link
-        ><span>></span
-        ><router-link to="/show">{{ this.product.prodName }}</router-link></span
-      >
+          >{{ this.brand.brandName }}
+      </router-link>
+      <span>></span><router-link to="/show">{{ this.product.prodName }}</router-link>
+      </div>
       <div id="preview-img">
         <div class="w-80 h-80 border-2">
           <!-- <base-card> -->
@@ -31,9 +30,9 @@
           <!-- </base-card> -->
         </div>
       </div>
-      <p class="text-center">{{ this.product.image }}</p>
+      <p class="text-center mt-4">{{ this.product.image }}</p>
     </div>
-    <div class="space-y-4">
+    <div class="space-y-4 mt-10">
       <p class="text-3xl">{{ this.product.prodName }}</p>
       <div class="space-y-3 text-xl">
         <p>{{ this.brand.brandName }}</p>
@@ -46,10 +45,11 @@
         <div
           v-for="color in product.colors"
           :key="color.colorId"
-          class="flex justify-center items-center border border-gray-400 w-5 h-5 rounded-full"
-          :style="{ backgroundColor: color.value }"
+          class="flex justify-center items-center border border-gray-100 w-5 h-5 rounded-full"
+          :style="{ backgroundColor: color.colorId }"
         ></div>
       </div>
+      <div class="space-x-10">
       <button
         class="transition delay-75 hover:text-white hover:bg-gray-700 hover:tr py-1 px-6 mt-3 rounded-full focus:outline-none border-gray-700 border-2 text-base font-medium"
       >
@@ -60,6 +60,7 @@
       >
         Delete
       </button>
+      </div>
     </div>
   </div>
 </template>
