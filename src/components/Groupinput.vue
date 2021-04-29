@@ -87,8 +87,8 @@
       <div v-for="(color) in colors" :key="color.colorId" id="loopcolor">
         <label
           :for="color.colorName"
-          class="flex justify-center items-center border border-gray-400 w-6 h-6 rounded-full"
-          :style="{ backgroundColor: color.value }"
+          class="flex justify-center border border-gray-100 items-center w-6 h-6 rounded-full"
+          :style="{ backgroundColor: color.colorId }"
         >
           <i v-show="color.checked" class="material-icons text-gray-300">
             check
