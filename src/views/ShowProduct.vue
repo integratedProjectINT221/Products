@@ -6,16 +6,7 @@
     <div id="component-preview-img">
       <div class="space-x-2 mb-4">
       <router-link to="/all_product_brands">All Brands</router-link><span>></span>
-      <router-link
-          :to="{
-            name: 'Product Colletions',
-            params: {
-              passBrandId: this.brand.brandId,
-              passBrandName: this.brand.brandName,
-            },
-          }"
-          >{{ this.brand.brandName }}
-      </router-link>
+      <router-link :to="{path: `/product_collections/${brand.brandId}`}">{{this.brand.brandName}}</router-link>
       <span>></span><router-link :to="{path: `/show/${this.product.prodId}`}">{{ this.product.prodName }}</router-link>
       </div>
       <div id="preview-img">
@@ -32,7 +23,7 @@
       </div>
       <p class="text-center mt-4">{{ this.product.image }}</p>
     </div>
-    <div class="space-y-4 mt-10">
+    <div class="space-y-4 mt-10 w-64">
       <p class="text-3xl">{{ this.product.prodName }}</p>
       <div class="space-y-3 text-xl">
         <p>{{ this.brand.brandName }}</p>
@@ -45,23 +36,23 @@
         <div
           v-for="color in product.colors"
           :key="color.colorId"
-          class="flex justify-center items-center border border-gray-100 w-5 h-5 rounded-full"
+          class="flex justify-center items-center border-2 border-gray-700 w-5 h-5 rounded-full"
           :style="{ backgroundColor: color.colorId }"
         ></div>
       </div>
       <div class="space-x-10">
       <button
-        class="transition delay-75 hover:text-white hover:bg-gray-700 hover:tr py-1 px-6 mt-3 rounded-full focus:outline-none border-gray-700 border-2 text-base font-medium"
+        class="transition delay-75 hover:text-white hover:bg-gray-700 py-1 px-6 mt-3 rounded-full focus:outline-none border-gray-700 border-2 text-base font-medium"
       >
         Edit
       </button>
       <button
-        class="transition delay-75 hover:text-white hover:bg-red-500 hover:tr py-1 px-6 mt-3 rounded-full focus:outline-none border-red-500  text-red-500 border-2 text-base font-medium"
+        class="transition delay-75 hover:text-white hover:bg-red-500 py-1 px-6 mt-3 rounded-full focus:outline-none border-red-500  text-red-500 border-2 text-base font-medium"
       >
         Delete
       </button>
       </div>
-      {{$route.params.id}}
+      <!-- {{$route.params.id}} -->
     </div>
   </div>
 </template>

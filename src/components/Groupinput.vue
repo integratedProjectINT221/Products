@@ -71,7 +71,7 @@
   
     <div class="submit-button">
       <button
-        class="transition delay-75 hover:text-white hover:bg-gray-700 hover:tr py-1 px-6 mt-3 rounded-full focus:outline-none border-gray-700 border-2 text-base font-medium"
+        class="transition delay-75 hover:text-white hover:bg-gray-700 py-1 px-6 mt-3 rounded-full focus:outline-none border-gray-700 border-2 text-base font-medium"
         @click="dataSubmit"
       >
         Submit
@@ -87,10 +87,10 @@
       <div v-for="(color) in colors" :key="color.colorId" id="loopcolor">
         <label
           :for="color.colorName"
-          class="flex justify-center border border-gray-100 items-center w-6 h-6 rounded-full"
+          class="flex justify-center border-2 border-gray-700 items-center w-6 h-6 rounded-full"
           :style="{ backgroundColor: color.colorId }"
         >
-          <i v-show="color.checked" class="material-icons text-gray-300">
+          <i v-show="color.checked" class="material-icons text-gray-300 text-base font-bold" >
             check
           </i>
         </label>
