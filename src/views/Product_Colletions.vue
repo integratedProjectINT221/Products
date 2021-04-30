@@ -18,7 +18,7 @@
 
           <router-link :to="{ path: `/show/${product.prodId}` }">
             <img :src="`http://localhost:8081/files/${product.image}`"
-              class="bg-gray-300 h-60 w-48 flex justify-center items-center group cursor-pointer">
+              class="bg-gray-300 h-60 w-48 flex justify-center items-center group cursor-pointer object-cover">
 
           </router-link>
           <div id="container-colors" class="w-48 grid grid-cols-7 mt-2">
