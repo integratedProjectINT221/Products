@@ -45,6 +45,7 @@ export default {
   // },
   data() {
     return {
+      url: 'http://localhost:8081',
       productsByBrand: [],
       brand: {},
     };
@@ -53,7 +54,7 @@ export default {
     async getProductsbyBrand() {
       try {
         const res = await fetch(
-          `http://localhost:8081/productsByBrand/${this.$route.params.brandId}`
+          `${this.url}/${this.$route.params.brandId}`
         );
         const data = await res.json();
         return data;

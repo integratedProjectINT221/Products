@@ -37,6 +37,7 @@ export default {
   components: { Groupinput },
   data() {
     return {
+      url: 'http://localhost:8081',
       validate: {},
       colors: [
         // { id: "1", name: "white", value: "#FFFFFF", checked: false },
@@ -125,7 +126,7 @@ export default {
       data.append("file", this.selectedFile);
       console.log(data);
       try {
-        await fetch("http://localhost:8081/upload", {
+        await fetch(`${this.url}/upload`, {
           method: "POST",
           body: data,
         });
@@ -137,7 +138,7 @@ export default {
 
     async getColors() {
       try {
-        const res = await fetch("http://localhost:8081/colors");
+        const res = await fetch(`${this.url}/colors`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -146,7 +147,7 @@ export default {
     },
     async getProducts() {
       try {
-        const res = await fetch("http://localhost:8081/products");
+        const res = await fetch(`${this.url}/products`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -155,7 +156,7 @@ export default {
     },
     async getBrands() {
       try {
-        const res = await fetch("http://localhost:8081/brands");
+        const res = await fetch(`${this.url}/brands`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -164,7 +165,7 @@ export default {
     },
     async addProduct() {
       try {
-        await fetch("http://localhost:8081/products", {
+        await fetch(`${this.url}/products`, {
           method: "POST",
           headers: {
             "Content-type": "application/json",

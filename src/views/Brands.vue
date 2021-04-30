@@ -34,13 +34,13 @@ export default {
   data() {
     return {
       brands: [],
+      url: 'http://localhost:8081',
     };
   },
   methods: {
-    
     async getBrands() {
       try {
-        const res = await fetch("http://localhost:8081/brands");
+        const res = await fetch(`${this.url}/brands`);
         const data = await res.json();
         return data;
       } catch (error) {

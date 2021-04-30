@@ -58,13 +58,14 @@ export default {
     return {
       product: {},
       brand: {},
+      url: 'http://localhost:8081',
       error:false
     };
   },
   methods: {
     async getProductsbyId() {
       try {
-        const res = await fetch(`http://localhost:8081/products/${this.$route.params.id}`, {
+        const res = await fetch(`${this.url}/${this.$route.params.id}`, {
         });
         console.log(res)
         const data = await res.json();
@@ -78,7 +79,7 @@ export default {
       if(confirm("Do you want to delete this photo?") === false){
         return;
       }
-        await fetch(`http://localhost:8081/products/${this.$route.params.id}`, {
+        await fetch(`${this.url}/${this.$route.params.id}`, {
         method: "DELETE",
       });
       alert("Delete Complete");

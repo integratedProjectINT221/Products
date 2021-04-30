@@ -135,7 +135,7 @@
       Invalid product colors!
     </div>
     <div class="submit-button mt-5">
-      <base-button label="Submit" border="border-2"></base-button>
+      <base-button @click="dataSubmit" label="Submit" border="border-2"></base-button>
     </div>
     <div class="text-green-400 text-lg font-base" v-if="isSubmit">
       Product Added!
