@@ -135,12 +135,7 @@
       Invalid product colors!
     </div>
     <div class="submit-button mt-5">
-      <button
-        class="transition delay-75 hover:text-white hover:bg-gray-700 py-1 px-6 mt-3 rounded-full focus:outline-none border-gray-700 border-2 text-base font-medium"
-        @click="dataSubmit"
-      >
-        Submit
-      </button>
+      <base-button label="Submit" border="border-2"></base-button>
     </div>
     <div class="text-green-400 text-lg font-base" v-if="isSubmit">
       Product Added!

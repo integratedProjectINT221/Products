@@ -40,17 +40,9 @@
           :style="{ backgroundColor: color.colorId }"
         ></div>
       </div>
-      <div class="space-x-10">
-      <button
-        class="transition delay-75 hover:text-white hover:bg-gray-700 py-1 px-6 mt-3 rounded-full focus:outline-none border-gray-700 border-2 text-base font-medium"
-      >
-        Edit
-      </button>
-      <button
-        class="transition delay-75 hover:text-white hover:bg-red-500 py-1 px-6 mt-3 rounded-full focus:outline-none border-red-500  text-red-500 border-2 text-base font-medium"
-      >
-        Delete
-      </button>
+      <div class="flex space-x-10">
+      <base-button label="Edit" border="border-2"></base-button>
+      <base-button @click="deleteProductsbyId" label="Delete" border="border-2" textcolor="text-red-500" hovercolor="hover:bg-red-500" bordercolor="border-red-500"></base-button>
       </div>
       <!-- {{$route.params.id}} -->
     </div>
@@ -72,9 +64,8 @@ export default {
   methods: {
     async getProductsbyId() {
       try {
-        const res = await fetch(
-          `http://localhost:8081/products/${this.$route.params.id}`
-        );
+        const res = await fetch(`http://localhost:8081/products/${this.$route.params.id}`, {
+        });
         console.log(res)
         const data = await res.json();
         return data;
@@ -82,6 +73,13 @@ export default {
         console.log(error);
         this.error = true
       }
+    },
+    async deleteProductsbyId() {
+        await fetch(`http://localhost:8081/products/${this.$route.params.id}`, {
+        method: "DELETE",
+      });
+      confirm("Do you want to delete this photo?");
+      alert("Delete Complete");
     },
   },
   async created() {
