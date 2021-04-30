@@ -4,11 +4,8 @@
       <p class="font-semibold text-xl">Preview</p>
       <div class="w-80 h-80 mt-4 border-2">
         <!-- <base-card> -->
-        <img
-          v-if="!changeImage"
-          class="w-80 h-80"
-          :src="previewImage"
-        />
+        <img v-if="!changeImage" class="w-80 h-80 object-fit" :src="previewImage" />
+        <img v-else class="w-80 h-80 object-contain" src="https://cwimports.com.au/wp-content/uploads/2020/10/no-image.png" />
         <!-- </base-card> -->
       </div>
       <div class="text-red-500 text-lg font-base" v-if="invalidProdImage">
@@ -138,16 +135,16 @@
       Invalid product colors!
     </div>
     <div class="submit-button mt-5">
-    <button
-      class="transition delay-75 hover:text-white hover:bg-gray-700 py-1 px-6 mt-3 rounded-full focus:outline-none border-gray-700 border-2 text-base font-medium"
-      @click="dataSubmit"
-    >
-      Submit
-    </button>
-  </div>
-  <div class="text-green-400 text-lg font-base" v-if="isSubmit">
-    Product Added!
-  </div>
+      <button
+        class="transition delay-75 hover:text-white hover:bg-gray-700 py-1 px-6 mt-3 rounded-full focus:outline-none border-gray-700 border-2 text-base font-medium"
+        @click="dataSubmit"
+      >
+        Submit
+      </button>
+    </div>
+    <div class="text-green-400 text-lg font-base" v-if="isSubmit">
+      Product Added!
+    </div>
   </div>
 </template>
 
@@ -207,7 +204,7 @@ export default {
   },
   data() {
     return {
-      previewImage:null,
+      previewImage: null,
       validate: {
         name: "",
         price: 0.0,
@@ -220,14 +217,15 @@ export default {
   },
   methods: {
     previewFile(event) {
-      let selectedFile = event.target.files[0]
-        if (selectedFile) {
-          let reader = new FileReader
-          reader.onload = event => {
-            this.previewImage = event.target.result
-          }
-          reader.readAsDataURL(selectedFile)
-        }
+      let selectedFile = event.target.files[0];
+      if (selectedFile) {
+        let reader = new FileReader();
+        reader.onload = (event) => {
+          this.previewImage = event.target.result;
+          console.log(this.previewImage)
+        };
+        reader.readAsDataURL(selectedFile);
+      }
       // console.log("adding");
       this.$emit("preview-img", selectedFile);
     },
@@ -242,7 +240,6 @@ export default {
       };
       this.$emit("pass-validate", data);
     },
-    
   },
 };
 </script>
