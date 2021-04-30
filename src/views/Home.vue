@@ -6,12 +6,6 @@
         id="product-form"
         class="flex flex-row h-full justify-center space-x-16"
       >
-        <Previewimage
-          :invalidProdImage="invalidProdImage"
-          :changeImage="changeImage"
-          :filename="filename"
-          @preview-img="previewFile"
-        />
         <Groupinput
           @pass-validate="passValidate"
           :invalidProdName="invalidProdName"
@@ -23,6 +17,10 @@
           :colors="colors"
           :brands="brands"
           :isSubmit="isSubmit"
+          :invalidProdImage="invalidProdImage"
+          :changeImage="changeImage"
+          :selectedFile="selectedFile"
+          @preview-img="previewFile"
         />
       </div>
     </form>
@@ -32,11 +30,11 @@
 </template>
 
 <script>
-import Previewimage from "@/components/Previewimage";
+// import Previewimage from "@/components/Previewimage";
 import Groupinput from "@/components/Groupinput";
 export default {
   name: "Home",
-  components: { Previewimage, Groupinput },
+  components: { Groupinput },
   data() {
     return {
       validate: {},
@@ -58,12 +56,12 @@ export default {
       invalidProdImage: false,
       isSubmit: false,
       changeImage: true,
-      filename: "",
+      selectedFile:""
     };
   },
   methods: {
     submitForm() {
-      console.log(this.validate.colors)
+      console.log(this.validate.colors);
       let i = 0;
       this.invalidProdName = this.validate.name === "" ? true : false;
       this.invalidProdBrand = this.validate.brand === "" ? true : false;
@@ -98,6 +96,7 @@ export default {
         return;
       } else {
         this.addProduct();
+        this.addPicture();
         this.isSubmit = true;
         this.invalidProdName = false;
         this.invalidProdBrand = false;
@@ -107,9 +106,8 @@ export default {
         this.invalidProdColors = false;
       }
     },
-    previewFile(event) {
-      let data = event.target.files[0];
-      this.filename = data.name;
+    previewFile(selectedFile) {
+      this.selectedFile = selectedFile;
       this.changeImage = false;
       this.invalidProdImage = false;
     },
@@ -121,6 +119,22 @@ export default {
       // }
       // console.log(this.validate.colors)
     },
+    async addPicture() {
+      console.log(this.selectedFile);
+      let data = new FormData();
+      data.append("file", this.selectedFile);
+      console.log(data);
+      try {
+        await fetch("http://localhost:8081/upload", {
+          method: "POST",
+          body: data,
+        });
+        console.log(this.onUploadProgress);
+      } catch (error) {
+        console.log(`Failed to add product! + ${error}`);
+      }
+    },
+
     async getColors() {
       try {
         const res = await fetch("http://localhost:8081/colors");
@@ -161,9 +175,9 @@ export default {
             description: this.validate.description,
             price: this.validate.price,
             date: this.validate.date,
-            image: this.filename,
+            image: this.selectedFile.name,
             brand: this.validate.brand,
-            colors: this.validate.colors
+            colors: this.validate.colors,
           }),
         });
       } catch (error) {

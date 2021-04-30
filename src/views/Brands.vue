@@ -13,7 +13,7 @@
             class="bg-gray-300 h-40 w-40 hover:bg-gray-400 flex justify-center items-center group transition duration-100 cursor-pointer"
           >
             <div
-              class="text-gray-800 text-2xl font-medium group-hover:text-white transition duration-75 cursor-pointer break-all text-center"
+              class="text-gray-800 text-2xl p-5 font-medium group-hover:text-white transition duration-75 cursor-pointer break-words text-center"
             >
               {{ brand.brandName }}
               

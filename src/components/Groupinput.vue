@@ -1,4 +1,39 @@
 <template>
+  <div id="component-preview-img">
+    <div id="preview-img">
+      <p class="font-semibold text-xl">Preview</p>
+      <div class="w-80 h-80 mt-4 border-2">
+        <!-- <base-card> -->
+        <img
+          v-if="!changeImage"
+          class="w-80 h-80"
+          :src="previewImage"
+        />
+        <!-- </base-card> -->
+      </div>
+      <div class="text-red-500 text-lg font-base" v-if="invalidProdImage">
+        Please select your product image!
+      </div>
+    </div>
+    <div id="upload-file" class="w-80 h-8 mt-4 space-x-4 flex-row flex">
+      <label
+        for="img"
+        class="custom-file-upload cursor-pointer py-1 px-4 rounded-md text-white bg-green-400 flex-none focus:outline-none hover:bg-green-300 transition delay-75"
+      >
+        <input
+          class="hidden"
+          type="file"
+          id="img"
+          name="img"
+          accept="image/*"
+          @change="previewFile"
+        />
+        Choose file
+      </label>
+      <span class="text-gray-500" v-show="changeImage">No file chosen</span>
+      <p class="break-all text-gray-500">{{ selectedFile.name }}</p>
+    </div>
+  </div>
   <div id="container-input" class="flex flex-col w-80 h-1/6 space-y-2 mt-10">
     <label for="name" class="font-semibold">Name</label>
     <input
@@ -24,7 +59,7 @@
         id="loopbrand"
         :value="brand"
       >
-        {{ brand.brandName}}
+        {{ brand.brandName }}
       </option>
     </select>
     <div class="text-red-500 text-lg font-base" v-if="invalidProdBrand">
@@ -68,29 +103,23 @@
     <div class="text-red-500 text-lg font-base" v-if="invalidProdDes">
       Invalid product description!
     </div>
-  
-    <div class="submit-button">
-      <button
-        class="transition delay-75 hover:text-white hover:bg-gray-700 py-1 px-6 mt-3 rounded-full focus:outline-none border-gray-700 border-2 text-base font-medium"
-        @click="dataSubmit"
-      >
-        Submit
-      </button>
-    </div>
-    <div class="text-green-400 text-lg font-base" v-if="isSubmit">
-      Product Added!
-    </div>
   </div>
-  <div class="mt-10">
+  <div id="container-colorsandlabel" class="mt-10">
     <label for="color" class="font-semibold">Color</label>
-  <div id="container-colors" class="w-full h-auto grid grid-cols-6 gap-4 mt-2">
-      <div v-for="(color) in colors" :key="color.colorId" id="loopcolor">
+    <div
+      id="container-colors"
+      class="w-full h-auto grid grid-cols-6 gap-4 mt-2"
+    >
+      <div v-for="color in colors" :key="color.colorId" id="loopcolor">
         <label
           :for="color.colorName"
           class="flex justify-center border-2 border-gray-700 items-center w-6 h-6 rounded-full"
           :style="{ backgroundColor: color.colorId }"
         >
-          <i v-show="color.checked" class="material-icons text-gray-300 text-base font-bold" >
+          <i
+            v-show="color.checked"
+            class="material-icons text-gray-300 text-base font-bold"
+          >
             check
           </i>
         </label>
@@ -108,6 +137,17 @@
     <div class="text-red-500 text-lg font-base" v-if="invalidProdColors">
       Invalid product colors!
     </div>
+    <div class="submit-button mt-5">
+    <button
+      class="transition delay-75 hover:text-white hover:bg-gray-700 py-1 px-6 mt-3 rounded-full focus:outline-none border-gray-700 border-2 text-base font-medium"
+      @click="dataSubmit"
+    >
+      Submit
+    </button>
+  </div>
+  <div class="text-green-400 text-lg font-base" v-if="isSubmit">
+    Product Added!
+  </div>
   </div>
 </template>
 
@@ -151,39 +191,58 @@ export default {
       type: Array,
       require: true,
     },
+    invalidProdImage: {
+      type: Boolean,
+      require: true,
+    },
+    changeImage: {
+      type: Boolean,
+      require: true,
+      default: true,
+    },
+    selectedFile: {
+      type: String,
+      require: true,
+    },
   },
   data() {
     return {
+      previewImage:null,
       validate: {
         name: "",
         price: 0.0,
         description: "",
         date: "",
         brand: "",
-        colors:[]
+        colors: [],
       },
     };
   },
   methods: {
+    previewFile(event) {
+      let selectedFile = event.target.files[0]
+        if (selectedFile) {
+          let reader = new FileReader
+          reader.onload = event => {
+            this.previewImage = event.target.result
+          }
+          reader.readAsDataURL(selectedFile)
+        }
+      // console.log("adding");
+      this.$emit("preview-img", selectedFile);
+    },
     dataSubmit() {
-      // this.count++
-      // console.log(this.count)
-      // const checkedColor = {
-      //   colors: this.validate.colors 
-      // }
-      // console.log(checkedColor)
-      
       const data = {
         name: this.validate.name,
         price: this.validate.price,
         description: this.validate.description,
         date: this.validate.date,
         brand: this.validate.brand,
-        colors: this.validate.colors
+        colors: this.validate.colors,
       };
       this.$emit("pass-validate", data);
-      
     },
+    
   },
 };
 </script>
