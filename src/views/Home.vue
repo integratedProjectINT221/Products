@@ -125,10 +125,11 @@ export default {
       data.append("file", this.selectedFile);
       console.log(data);
       try {
-        await fetch("http://localhost:8081/upload", {
+        const res = await fetch("http://localhost:8081/upload", {
           method: "POST",
           body: data,
         });
+        console.log(res)
         console.log(this.onUploadProgress);
       } catch (error) {
         console.log(`Failed to add product! + ${error}`);
@@ -163,8 +164,8 @@ export default {
       }
     },
     async addProduct() {
-      try {
-        await fetch("http://localhost:8081/products", {
+      
+          fetch("http://localhost:8081/products", {
           method: "POST",
           headers: {
             "Content-type": "application/json",
@@ -179,11 +180,17 @@ export default {
             brand: this.validate.brand,
             colors: this.validate.colors,
           }),
-        });
-      } catch (error) {
-        console.log(`Failed to add product! + ${error}`);
-      }
-    },
+        }).then(response => {
+          if(response.status == 417){
+            console.log('ok')
+          }else{
+            throw new Error('error')
+          }}).catch(error => {
+            console.log(`Failed to add product! + ${error}`);
+          })
+        
+     
+    }
   },
   async created() {
     this.colors = await this.getColors();
