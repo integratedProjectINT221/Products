@@ -1,5 +1,5 @@
 <template>
-  <div
+  <div v-show="!this.error"
     id="container-product"
     class="flex flex-row h-full justify-center space-x-10 pt-10"
   >
@@ -75,6 +75,7 @@ export default {
     return {
       product: {},
       brand: {},
+      error:false
     };
   },
   methods: {
@@ -83,10 +84,12 @@ export default {
         const res = await fetch(
           `http://localhost:8081/products/${this.$route.params.id}`
         );
+        console.log(res)
         const data = await res.json();
         return data;
       } catch (error) {
         console.log(error);
+        this.error = true
       }
     },
   },
@@ -95,6 +98,8 @@ export default {
     // this.brands = await this.getBrands();
     this.product = await this.getProductsbyId();
     this.brand = await this.product.brand;
+    console.log("asdasd")
+    
     // console.log(this.passProdId)
   },
 };

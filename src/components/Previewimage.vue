@@ -57,8 +57,29 @@ export default {
   },
   methods: {
     previewFile(event) {
+    
+      this.addProduct(event);
+      console.log('adding')
       this.$emit("preview-img", event);
     },
+    async addPicture(event) {
+      console.log(event.target.files[0])
+        let data = new FormData();
+    // data.append('name', 'my-picture');
+    data.append('file', event.target.files[0]); 
+    console.log(data)
+      try {
+        await fetch("http://localhost:8081/upload", {
+          method: "POST",
+          
+          body: 
+            data
+          ,
+        });
+      } catch (error) {
+        console.log(`Failed to add product! + ${error}`);
+      }
+    }
   },
 };
 </script>
