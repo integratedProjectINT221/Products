@@ -75,11 +75,14 @@ export default {
       }
     },
     async deleteProductsbyId() {
+      if(confirm("Do you want to delete this photo?") === false){
+        return;
+      }
         await fetch(`http://localhost:8081/products/${this.$route.params.id}`, {
         method: "DELETE",
       });
-      confirm("Do you want to delete this photo?");
       alert("Delete Complete");
+  
     },
   },
   async created() {
