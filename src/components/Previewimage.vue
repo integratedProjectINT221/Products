@@ -58,7 +58,7 @@ export default {
   methods: {
     previewFile(event) {
     
-      this.addProduct(event);
+      this.addPicture(event);
       console.log('adding')
       this.$emit("preview-img", event);
     },
