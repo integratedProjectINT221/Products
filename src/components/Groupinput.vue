@@ -207,17 +207,19 @@ export default {
         date: "",
         brand: "",
         colors: [],
+        image:""
       },
     };
   },
   methods: {
     previewFile(event) {
       let selectedFile = event.target.files[0];
+      this.validate.image = selectedFile.name
       if (selectedFile) {
         let reader = new FileReader();
         reader.onload = (event) => {
           this.previewImage = event.target.result;
-          console.log(this.previewImage)
+          // console.log(this.previewImage)
         };
         reader.readAsDataURL(selectedFile);
       }
@@ -232,6 +234,7 @@ export default {
         date: this.validate.date,
         brand: this.validate.brand,
         colors: this.validate.colors,
+        image: this.validate.image
       };
       this.$emit("pass-validate", data);
     },

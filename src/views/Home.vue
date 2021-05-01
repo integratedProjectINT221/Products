@@ -37,7 +37,7 @@ export default {
   components: { Groupinput },
   data() {
     return {
-      url: 'http://localhost:8081',
+      url: "http://localhost:8081",
       validate: {},
       colors: [
         // { id: "1", name: "white", value: "#FFFFFF", checked: false },
@@ -57,7 +57,7 @@ export default {
       invalidProdImage: false,
       isSubmit: false,
       changeImage: true,
-      selectedFile:""
+      selectedFile: "",
     };
   },
   methods: {
@@ -66,22 +66,15 @@ export default {
       let i = 0;
       this.invalidProdName = this.validate.name === "" ? true : false;
       this.invalidProdBrand = this.validate.brand === "" ? true : false;
-      this.invalidProdPrice =
-        this.validate.price <= 0
-          ? true
-          : typeof this.validate.price === "string"
-          ? true
-          : false;
+      this.invalidProdPrice =this.validate.price <= 0 ? true: typeof this.validate.price === "string" ? true : false;
       this.invalidProdDes = this.validate.description === "" ? true : false;
       this.invalidProdDate = this.validate.date === "" ? true : false;
       this.invalidProdColors = this.validate.colors.length === 0 ? true : false;
       this.invalidProdImage = !this.changeImage === false ? true : false;
       for (i = 0; i < this.products.length; i++) {
-        if (
-          this.products[i].prodName.toLowerCase() ===
-          this.validate.name.toLowerCase()
-        ) {
-          this.invalidProdName = true;
+        if (this.products[i].prodName.toLowerCase() === this.validate.name.toLowerCase() || this.products[i].image === this.validate.image) {
+              this.invalidProdName = true;
+              this.invalidProdImage = true;
         }
       }
       if (
@@ -97,17 +90,8 @@ export default {
         return;
       } else {
         this.addProduct();
-        console.log(this.products.length)
-        this.products[this.products.length] = {
-            // prodId: 1,
-            prodName: this.validate.name,
-            // description: this.validate.description,
-            // price: this.validate.price,
-            // date: this.validate.date,
-            // image: this.selectedFile.name,
-            // brand: this.validate.brand,
-            // colors: this.validate.colors,
-            }
+        console.log(this.products.length);
+        this.products.push({prodName: this.validate.name,image: this.validate.image})
         this.addPicture();
         this.isSubmit = true;
         this.invalidProdName = false;
@@ -119,6 +103,8 @@ export default {
       }
     },
     previewFile(selectedFile) {
+      console.log(selectedFile.name)
+      console.log(this.products)
       this.selectedFile = selectedFile;
       this.changeImage = false;
       this.invalidProdImage = false;
@@ -141,8 +127,7 @@ export default {
           method: "POST",
           body: data,
         });
-        console.log(res)
-        console.log(this.onUploadProgress);
+        console.log(res);
       } catch (error) {
         console.log(`Failed to add pic! + ${error}`);
       }
@@ -176,28 +161,25 @@ export default {
       }
     },
     async addProduct() {
-      
-          fetch(`${this.url}/products`, {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
-            prodId: 1,
-            prodName: this.validate.name,
-            description: this.validate.description,
-            price: this.validate.price,
-            date: this.validate.date,
-            image: this.selectedFile.name,
-            brand: this.validate.brand,
-            colors: this.validate.colors,
-          }),
-        }).catch(error => {
-            console.log(`Failed to add product! + ${error}`);
-          })
-        
-     
-    }
+      fetch(`${this.url}/products`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          prodId: 1,
+          prodName: this.validate.name,
+          description: this.validate.description,
+          price: this.validate.price,
+          date: this.validate.date,
+          image: this.selectedFile.name,
+          brand: this.validate.brand,
+          colors: this.validate.colors,
+        }),
+      }).catch((error) => {
+        console.log(`Failed to add product! + ${error}`);
+      });
+    },
   },
   async created() {
     this.colors = await this.getColors();
