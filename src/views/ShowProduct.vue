@@ -79,11 +79,10 @@ export default {
       if(confirm("Do you want to delete this photo?") === false){
         return;
       }
-        await fetch(`${this.url}/products/${this.$route.params.id}`, {
-        method: "DELETE",
-      });
-      alert("Delete Complete");
-  
+        await fetch(`${this.url}/products/${this.$route.params.id}`, 
+        {method: "DELETE"},
+        alert("Delete Complete"),
+        this.$router.push("/all_product_brands"));
     },
   },
   async created() {
@@ -91,8 +90,6 @@ export default {
     // this.brands = await this.getBrands();
     this.product = await this.getProductsbyId();
     this.brand = await this.product.brand;
-    console.log("asdasd")
-    
     // console.log(this.passProdId)
   },
 };

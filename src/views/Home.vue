@@ -72,9 +72,11 @@ export default {
       this.invalidProdColors = this.validate.colors.length === 0 ? true : false;
       this.invalidProdImage = !this.changeImage === false ? true : false;
       for (i = 0; i < this.products.length; i++) {
-        if (this.products[i].prodName.toLowerCase() === this.validate.name.toLowerCase() || this.products[i].image === this.validate.image) {
+        if (this.products[i].prodName.toLowerCase() === this.validate.name.toLowerCase()) {
               this.invalidProdName = true;
-              this.invalidProdImage = true;
+        }
+        if(this.products[i].image === this.validate.image){
+            this.invalidProdImage = true;
         }
       }
       if (
@@ -90,7 +92,6 @@ export default {
         return;
       } else {
         this.addProduct();
-        console.log(this.products.length);
         this.products.push({prodName: this.validate.name,image: this.validate.image})
         this.addPicture();
         this.isSubmit = true;
@@ -103,8 +104,6 @@ export default {
       }
     },
     previewFile(selectedFile) {
-      console.log(selectedFile.name)
-      console.log(this.products)
       this.selectedFile = selectedFile;
       this.changeImage = false;
       this.invalidProdImage = false;
