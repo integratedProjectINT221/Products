@@ -97,6 +97,17 @@ export default {
         return;
       } else {
         this.addProduct();
+        console.log(this.products.length)
+        this.products[this.products.length] = {
+            // prodId: 1,
+            prodName: this.validate.name,
+            // description: this.validate.description,
+            // price: this.validate.price,
+            // date: this.validate.date,
+            // image: this.selectedFile.name,
+            // brand: this.validate.brand,
+            // colors: this.validate.colors,
+            }
         this.addPicture();
         this.isSubmit = true;
         this.invalidProdName = false;
@@ -133,7 +144,7 @@ export default {
         console.log(res)
         console.log(this.onUploadProgress);
       } catch (error) {
-        console.log(`Failed to add product! + ${error}`);
+        console.log(`Failed to add pic! + ${error}`);
       }
     },
 
@@ -181,12 +192,7 @@ export default {
             brand: this.validate.brand,
             colors: this.validate.colors,
           }),
-        }).then(response => {
-          if(response.status == 417){
-            console.log('ok')
-          }else{
-            throw new Error('error')
-          }}).catch(error => {
+        }).catch(error => {
             console.log(`Failed to add product! + ${error}`);
           })
         

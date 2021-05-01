@@ -65,7 +65,7 @@ export default {
   methods: {
     async getProductsbyId() {
       try {
-        const res = await fetch(`${this.url}/${this.$route.params.id}`, {
+        const res = await fetch(`${this.url}/products/${this.$route.params.id}`, {
         });
         console.log(res)
         const data = await res.json();
@@ -79,7 +79,7 @@ export default {
       if(confirm("Do you want to delete this photo?") === false){
         return;
       }
-        await fetch(`${this.url}/${this.$route.params.id}`, {
+        await fetch(`${this.url}/products/${this.$route.params.id}`, {
         method: "DELETE",
       });
       alert("Delete Complete");

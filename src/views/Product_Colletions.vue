@@ -54,8 +54,9 @@ export default {
     async getProductsbyBrand() {
       try {
         const res = await fetch(
-          `${this.url}/${this.$route.params.brandId}`
+          `${this.url}/productsByBrand/${this.$route.params.brandId}`
         );
+        console.log(res)
         const data = await res.json();
         return data;
       } catch (error) {
