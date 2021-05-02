@@ -40,6 +40,7 @@
       id="name"
       class="border-gray-400 border pl-1"
     />
+    {{getProduct.prodName}}
     <div class="text-red-500 text-lg font-base" v-if="invalidProdName">
       Invalid validate name!
     </div>
