@@ -6,6 +6,7 @@
         id="product-form"
         class="flex flex-row h-full justify-center space-x-16"
       > 
+      {{this.validate}}
         <Groupinput
           @pass-validate="passValidate"
           :editProduct="editProduct"
@@ -36,12 +37,12 @@
 // import Previewimage from "@/components/Previewimage";
 import Groupinput from "@/components/Groupinput";
 export default {
-  name: "Edit",
+  name: "Add",
   components: { Groupinput },
   data() {
     return {
       products:[],
-      label: 'Save Change',
+      label: 'Add Product',
       url: 'http://localhost:8081',
       validate: {},
       colors: [

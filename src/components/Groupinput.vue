@@ -40,7 +40,7 @@
       name="name"
       id="name"
       class="border-gray-400 border pl-1"
-    />{{getProduct.prodName}}
+    />
     <div class="text-red-500 text-lg font-base" v-if="invalidProdName">
       Invalid validate name!
     </div>
@@ -245,7 +245,7 @@ export default {
         description: this.editProduct.description,
         date: this.editProduct.date,
         brand: this.editBrand,
-        colors: this.editProduct.colors,
+        colors: this.getProduct.colors = this.getProduct.colors === undefined ? [] : this.getProduct.colors,
         image: this.editImage
       };
       this.$emit("pass-validate", data);

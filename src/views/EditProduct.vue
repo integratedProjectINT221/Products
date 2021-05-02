@@ -5,7 +5,7 @@
       <div
         id="product-form"
         class="flex flex-row h-full justify-center space-x-16"
-      > 
+      > {{this.validate}}
         <Groupinput
           @pass-validate="passValidate"
           :editProduct="editProduct"
