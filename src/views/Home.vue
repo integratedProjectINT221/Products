@@ -119,6 +119,7 @@ export default {
     },
     passValidate(validate) {
       this.validate = validate;
+      console.log(this.validate)
       // for(let i = 0; i < this.validate.colors.length; i++ ){
       //   var color = this.validate.colors
       //   delete color[i]["checked"];
@@ -195,6 +196,7 @@ export default {
     this.colors = await this.getColors();
     this.brands = await this.getBrands();
     this.editProduct = await this.getProducts();
+    console.log(this.editProduct.length)
   },
 };
 </script>

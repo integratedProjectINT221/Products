@@ -5,7 +5,7 @@
       <div class="w-80 h-80 mt-4 border-2">
         <!-- <base-card> -->
         <img v-if="!changeImage" class="w-80 h-80 object-cover" :src="previewImage" />
-        <img v-else class="w-80 h-80 object-contain" src="https://cwimports.com.au/wp-content/uploads/2020/10/no-image.png" />
+        <img v-else class="w-80 h-80 object-cover" :src="`http://localhost:8081/files/${getProduct.image}`" />
         <!-- </base-card> -->
       </div>
       <div class="text-red-500 text-lg font-base" v-if="invalidProdImage">
@@ -27,8 +27,8 @@
         />
         Choose file
       </label>
-      <span class="text-gray-500" v-show="changeImage">No file chosen</span>
-      <p class="break-all text-gray-500">{{ selectedFile.name }}</p>
+      <span class="text-gray-500" v-if="changeImage">{{this.getProduct.image}}</span>
+      <p class="break-all text-gray-500" v-else>{{this.editImage}}</p>
     </div>
   </div>
   <div id="container-input" class="flex flex-col w-80 h-1/6 space-y-2 mt-10">
@@ -39,7 +39,7 @@
       name="name"
       id="name"
       class="border-gray-400 border pl-1"
-    />
+    />{{getProduct.prodName}}
     <div class="text-red-500 text-lg font-base" v-if="invalidProdName">
       Invalid validate name!
     </div>
@@ -55,6 +55,7 @@
         :key="brand.brandId"
         id="loopbrand"
       >
+      
         {{ brand.brandName }}
       </option>
     </select>
@@ -198,10 +199,10 @@ export default {
       require: true,
       default: true,
     },
-    selectedFile: {
-      type: String,
-      require: true,
-    },
+    // selectedFile: {
+    //   type: String,
+    //   require: true,
+    // },
     label:{
       type: String,
       require: true
@@ -227,8 +228,9 @@ export default {
       if (selectedFile) {
         let reader = new FileReader();
         reader.onload = (event) => {
+          console.log(this.previewImage)
           this.previewImage = event.target.result;
-          // console.log(this.previewImage)
+          console.log(this.previewImage)
         };
         reader.readAsDataURL(selectedFile);
       }
@@ -246,10 +248,13 @@ export default {
         image: this.editImage
       };
       this.$emit("pass-validate", data);
+      console.log(data)
     },
   },
   computed:{
     getProduct(){
+      console.log(this.editProduct)
+      // console.log(this.previewImage)
       return this.editProduct
     },
     getBrand(){
