@@ -4,7 +4,7 @@
       <p class="font-semibold text-xl">Preview</p>
       <div class="w-80 h-80 mt-4 border-2">
         <!-- <base-card> -->
-        <img v-if="!changeImage" class="w-80 h-80 object-fit" :src="previewImage" />
+        <img v-if="!changeImage" class="w-80 h-80 object-cover" :src="previewImage" />
         <img v-else class="w-80 h-80 object-contain" src="https://cwimports.com.au/wp-content/uploads/2020/10/no-image.png" />
         <!-- </base-card> -->
       </div>
@@ -15,7 +15,7 @@
     <div id="upload-file" class="w-80 h-8 mt-4 space-x-4 flex-row flex">
       <label
         for="img"
-        class="custom-file-upload cursor-pointer py-1 px-4 rounded-md text-white bg-green-400 flex-none focus:outline-none hover:bg-green-300 transition delay-75"
+        class="select-none custom-file-upload cursor-pointer py-1 px-4 rounded-md text-white bg-green-400 flex-none focus:outline-none hover:bg-green-300 transition delay-75"
       >
         <input
           class="hidden"
@@ -34,7 +34,7 @@
   <div id="container-input" class="flex flex-col w-80 h-1/6 space-y-2 mt-10">
     <label for="name" class="font-semibold">Name</label>
     <input
-      v-model="validate.name"
+      v-model="getProduct.prodName"
       type="text"
       name="name"
       id="name"
@@ -45,7 +45,7 @@
     </div>
     <label for="brand" class="font-semibold">Brand</label>
     <select
-      v-model="validate.brand"
+      v-model="getBrand.brandName"
       name="brand"
       id="brand"
       class="border-gray-400 border pl-1"
@@ -54,7 +54,6 @@
         v-for="brand in brands"
         :key="brand.brandId"
         id="loopbrand"
-        :value="brand"
       >
         {{ brand.brandName }}
       </option>
@@ -65,7 +64,7 @@
     <label for="price" class="font-semibold">Price</label>
     <div id="container-price">
       <input
-        v-model.number="validate.price"
+        v-model.number="getProduct.price"
         type="text"
         name="price"
         id="price"
@@ -78,7 +77,7 @@
     </div>
     <label for="date" class="font-semibold">Date</label>
     <input
-      v-model="validate.date"
+      v-model="getProduct.date"
       type="date"
       name="date"
       id="date"
@@ -94,7 +93,7 @@
       cols="50"
       rows="4"
       class="border-gray-400 border pl-1"
-      v-model="validate.description"
+      v-model="getProduct.description"
     >
     </textarea>
     <div class="text-red-500 text-lg font-base" v-if="invalidProdDes">
@@ -105,23 +104,24 @@
     <label for="color" class="font-semibold">Color</label>
     <div
       id="container-colors"
-      class="w-full h-auto grid grid-cols-6 gap-4 mt-2"
+      class="w-full h-auto grid grid-cols-6 gap-4 mt-2 "
     >
       <div v-for="color in colors" :key="color.colorId" id="loopcolor">
         <label
           :for="color.colorName"
-          class="flex justify-center border-2 border-gray-700 items-center w-6 h-6 rounded-full"
+          class="flex justify-center items-center w-10 h-10 rounded-full select-none"
+          :class="blackBorder(color.colorId)"
           :style="{ backgroundColor: color.colorId }"
         >
           <i
             v-show="color.checked"
-            class="material-icons text-gray-300 text-base font-bold"
+            class="material-icons text-green-300 text-6xl font-thin"
           >
-            check
+            radio_button_unchecked
           </i>
         </label>
         <input
-          v-model="validate.colors"
+          v-model="getProduct.colors"
           type="checkbox"
           :id="color.colorName"
           :value="color"
@@ -129,13 +129,12 @@
           @change="color.checked = !color.checked"
         />
       </div>
-      <!-- <span>Checked names: {{ validate.colors }}</span> -->
     </div>
     <div class="text-red-500 text-lg font-base" v-if="invalidProdColors">
       Invalid product colors!
     </div>
-    <div class="submit-button mt-5">
-      <base-button @click="dataSubmit" label="Submit" border="border-2"></base-button>
+    <div class="submit-button mt-5 select-none">
+      <base-button @click="dataSubmit" :label="label" border="border-2" bordercolor="border-gray-700"></base-button>
     </div>
     <div class="text-green-400 text-lg font-base" v-if="isSubmit">
       Product Added!
@@ -147,6 +146,13 @@
 export default {
   name: "Groupinput",
   props: {
+    editProduct:{
+      type: Object,
+    },
+    editBrand:{
+      type: Object,
+      require: true
+    },
     invalidProdName: {
       type: Boolean,
       require: true,
@@ -196,25 +202,28 @@ export default {
       type: String,
       require: true,
     },
+    label:{
+      type: String,
+      require: true
+    },
   },
   data() {
     return {
       previewImage: null,
-      validate: {
-        name: "",
-        price: 0.0,
-        description: "",
-        date: "",
-        brand: "",
-        colors: [],
-        image:""
-      },
+      editImage:""
+      // product: this.editProduct,
+      // brand: this.editBrand
     };
   },
   methods: {
+    blackBorder(colorId){
+      if(colorId === '#FFFFFF'){
+        return 'border border-gray-400 opacity-80'
+      }
+    },
     previewFile(event) {
       let selectedFile = event.target.files[0];
-      this.validate.image = selectedFile.name
+      this.editImage = selectedFile.name
       if (selectedFile) {
         let reader = new FileReader();
         reader.onload = (event) => {
@@ -228,16 +237,24 @@ export default {
     },
     dataSubmit() {
       const data = {
-        name: this.validate.name,
-        price: this.validate.price,
-        description: this.validate.description,
-        date: this.validate.date,
-        brand: this.validate.brand,
-        colors: this.validate.colors,
-        image: this.validate.image
+        name: this.editProduct.prodName,
+        price: this.editProduct.price,
+        description: this.editProduct.description,
+        date: this.editProduct.date,
+        brand: this.editBrand,
+        colors: this.editProduct.colors,
+        image: this.editImage
       };
       this.$emit("pass-validate", data);
     },
   },
+  computed:{
+    getProduct(){
+      return this.editProduct
+    },
+    getBrand(){
+      return this.editBrand
+    }
+  }
 };
 </script>

@@ -1,13 +1,15 @@
 <template>
   <div class="home">
-    <p id="header" class="text-2xl font-semibold text-center p-10">Home</p>
+    <p id="header" class="text-2xl font-semibold text-center p-10">Edit</p>
     <form id="form" method="post" @submit.prevent="submitForm">
       <div
         id="product-form"
         class="flex flex-row h-full justify-center space-x-16"
-      >
+      > 
         <Groupinput
           @pass-validate="passValidate"
+          :editProduct="editProduct"
+          :editBrand="editBrand"
           :invalidProdName="invalidProdName"
           :invalidProdBrand="invalidProdBrand"
           :invalidProdPrice="invalidProdPrice"
@@ -20,6 +22,7 @@
           :invalidProdImage="invalidProdImage"
           :changeImage="changeImage"
           :selectedFile="selectedFile"
+          :label="label"
           @preview-img="previewFile"
         />
       </div>
@@ -37,6 +40,7 @@ export default {
   components: { Groupinput },
   data() {
     return {
+      label: 'Save Change',
       url: 'http://localhost:8081',
       validate: {},
       colors: [
@@ -47,7 +51,8 @@ export default {
         // { id: "1", name: "test1" },
         // { id: "2", name: "test2" },
       ],
-      products: [],
+      editBrand:{},
+      editProduct: {},
       invalidProdName: false,
       invalidProdBrand: false,
       invalidProdPrice: false,
@@ -145,9 +150,9 @@ export default {
         console.log(error);
       }
     },
-    async getProducts() {
+    async getProductById() {
       try {
-        const res = await fetch(`${this.url}/products`);
+        const res = await fetch(`${this.url}/products/${this.$route.params.id}`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -189,7 +194,8 @@ export default {
   async created() {
     this.colors = await this.getColors();
     this.brands = await this.getBrands();
-    this.products = await this.getProducts();
+    this.editProduct = await this.getProductById();
+    this.editBrand = await this.editProduct.brand;
   },
 };
 </script>
