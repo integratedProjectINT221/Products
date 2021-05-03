@@ -19,13 +19,13 @@
           <router-link :to="{ path: `/show/${product.prodId}` }">
             <img :src="`http://localhost:8081/files/${product.image}`"
               class="bg-gray-300 h-60 w-48 flex justify-center items-center group cursor-pointer object-cover">
-                {{product.image}}
           </router-link>
-          <div id="container-colors" class="w-48 grid grid-cols-7 mt-2">
+          <div id="container-colors" class="w-48 grid grid-cols-7 gap-y-3 gap-x- mt-2">
             <div
               v-for="color in product.colors"
               :key="color.colorId"
-              class="flex justify-center items-center border-2 border-gray-700 w-5 h-5 rounded-full"
+              class="flex justify-center items-center w-5 h-5 rounded-full"
+              :class="blackBorder(color.colorId)"
               :style="{ backgroundColor: color.colorId }"
             ></div>
           </div>
@@ -51,6 +51,11 @@ export default {
     };
   },
   methods: {
+    blackBorder(colorId){
+      if(colorId === '#FFFFFF'){
+        return 'border border-gray-400 opacity-80'
+      }
+    },
     async getProductsbyBrand() {
       try {
         const res = await fetch(

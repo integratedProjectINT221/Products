@@ -1,3 +1,4 @@
+
 <template>
   <div id="component-preview-img">
     <div id="preview-img">
@@ -267,3 +268,4 @@ return this.passProd.prodName
   //test
 };
 </script>
+
