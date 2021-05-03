@@ -196,6 +196,10 @@ export default {
       type: String,
       require: true,
     },
+    passProd:{
+      type: Object,
+      require: true
+    }
   },
   data() {
     return {
@@ -209,6 +213,8 @@ export default {
         colors: [],
         image:""
       },
+      editing: false,
+      tempValue:null
     };
   },
   methods: {
@@ -239,5 +245,25 @@ export default {
       this.$emit("pass-validate", data);
     },
   },
+  created(){
+
+  },
+  beforeUpdate(){
+    // if(this.editing == false)
+    
+    this.validate.name = this.reValidateName
+    console.log(this.passProd.prodName)
+  },
+  computed:{
+    reValidateName(){
+// this.validate.name = this.tempValue
+return this.passProd.prodName
+    }
+  },
+  // watch(
+  //   this.passProd.prodName,() => {
+  //     console.log(this.passProd.prodName)
+  //   })
+  
 };
 </script>

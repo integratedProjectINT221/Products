@@ -8,6 +8,7 @@
       >
         <Groupinput
           @pass-validate="passValidate"
+          :passProd="productsPass"
           :invalidProdName="invalidProdName"
           :invalidProdBrand="invalidProdBrand"
           :invalidProdPrice="invalidProdPrice"
@@ -48,6 +49,7 @@ export default {
         // { id: "2", name: "test2" },
       ],
       products: [],
+      productsPass:{},
       invalidProdName: false,
       invalidProdBrand: false,
       invalidProdPrice: false,
@@ -154,6 +156,15 @@ export default {
         console.log(error);
       }
     },
+    async getProductById() {
+      try {
+        const res = await fetch(`${this.url}/products/${this.$route.params.id}`);
+        const data = await res.json();
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async getBrands() {
       try {
         const res = await fetch(`${this.url}/brands`);
@@ -171,7 +182,7 @@ export default {
             "Content-type": "application/json",
           },
           body: JSON.stringify({
-            prodId: 1,
+            prodId: 100000,
             prodName: this.validate.name,
             description: this.validate.description,
             price: this.validate.price,
@@ -190,6 +201,8 @@ export default {
     this.colors = await this.getColors();
     this.brands = await this.getBrands();
     this.products = await this.getProducts();
+    this.productsPass = await this.getProductById();
+    console.log(this.productsPass)
   },
 };
 </script>

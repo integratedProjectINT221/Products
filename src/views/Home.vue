@@ -166,7 +166,7 @@ export default {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
-          prodId: 1,
+          prodId: 100000,
           prodName: this.validate.name,
           description: this.validate.description,
           price: this.validate.price,
