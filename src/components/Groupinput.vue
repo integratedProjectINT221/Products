@@ -125,7 +125,7 @@
           :style="{ backgroundColor: color.colorId }"
         >
           <i
-            v-if="color.checked"
+            v-if="color.checked == true"
             class="material-icons text-green-300 text-6xl font-thin"
           >
             radio_button_unchecked

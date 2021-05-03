@@ -185,25 +185,19 @@ export default {
     this.brands = await this.getBrands();
     this.products = await this.getProducts();
     this.product = await this.getProductById();
-    console.log(this.product.colors);
+    console.log(this.products.colors);
+    // for (let index = 0; index < this.products.length; index++) {
+      
+    //   for (let j = 0; j < this.products[index].colors.length; j++) {
+    //     this.products[index].colors[j]["checked"] = true;
+    //   }
+    
+    // console.log(this.products)
+    // }  
     for (let index = 0; index < this.product.colors.length; index++) {
-      console.log(this.product.colors[index]);
-      this.product.colors[index]["checked"] = true;
-    }
-    console.log(this.product.colors);
-    console.log(this.colors);
-    for (let index = 0; index < this.colors.length; index++) {
-      this.colors[index]["checked"] = false;
-      console.log(this.colors[index].colorId);
-    }
-    for (let i = 0; i < this.product.colors.length; i++) {
-      for (let j = 0; j < this.colors.length; j++) {
-        if (this.colors[i].colorId === this.product.colors[j].colorId) { 
-          this.colors[i]["checked"] = true;
-        }
-      }
-    }
-    console.log(this.colors);
+    for (let i = 0; i < this.colors.length; i++) {
+      if(this.product.colors[index].colorId == this.colors[i].colorId){
+      this.colors[i]["checked"] = true;}}}
   },
 };
 </script>
