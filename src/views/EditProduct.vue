@@ -1,14 +1,16 @@
 <template>
   <div class="home">
-    <p id="header" class="text-2xl font-semibold text-center p-10">Home</p>
+    <p id="header" class="text-2xl font-semibold text-center p-10">Edit</p>
     <form id="form" method="post" @submit.prevent="submitForm">
       <div
         id="product-form"
         class="flex flex-row h-full justify-center space-x-16"
-      >
+      > {{this.validate}}
         <Groupinput
           @pass-validate="passValidate"
+
           :passProd="productsPass"
+
           :invalidProdName="invalidProdName"
           :invalidProdBrand="invalidProdBrand"
           :invalidProdPrice="invalidProdPrice"
@@ -20,7 +22,8 @@
           :isSubmit="isSubmit"
           :invalidProdImage="invalidProdImage"
           :changeImage="changeImage"
-          :selectedFile="selectedFile"
+          
+          :label="label"
           @preview-img="previewFile"
         />
       </div>
@@ -38,6 +41,8 @@ export default {
   components: { Groupinput },
   data() {
     return {
+      products:[],
+      label: 'Save Change',
       url: 'http://localhost:8081',
       validate: {},
       colors: [
@@ -48,8 +53,10 @@ export default {
         // { id: "1", name: "test1" },
         // { id: "2", name: "test2" },
       ],
+
       products: [],
       productsPass:{},
+
       invalidProdName: false,
       invalidProdBrand: false,
       invalidProdPrice: false,
@@ -98,7 +105,7 @@ export default {
         this.isSubmit = false;
         return;
       } else {
-        this.addProduct();
+        this.editingProduct();
         this.addPicture();
         this.isSubmit = true;
         this.invalidProdName = false;
@@ -147,9 +154,18 @@ export default {
         console.log(error);
       }
     },
+    async getProductById() {
+      try {
+        const res = await fetch(`${this.url}/products/${this.$route.params.id}`);
+        const data = await res.json();
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async getProducts() {
       try {
-        const res = await fetch(`${this.url}/products`);
+        const res = await fetch(`${this.url}/products/`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -174,13 +190,14 @@ export default {
         console.log(error);
       }
     },
-    async addProduct() {
+    async editingProduct() {
       try {
         await fetch(`${this.url}/products`, {
-          method: "POST",
+          method: "PUT",
           headers: {
             "Content-type": "application/json",
           },
+
           body: JSON.stringify({
             prodId: 100000,
             prodName: this.validate.name,
@@ -191,6 +208,7 @@ export default {
             brand: this.validate.brand,
             colors: this.validate.colors,
           }),
+
         });
       } catch (error) {
         console.log(`Failed to add product! + ${error}`);
@@ -200,9 +218,12 @@ export default {
   async created() {
     this.colors = await this.getColors();
     this.brands = await this.getBrands();
+    this.editProduct = await this.getProductById();
     this.products = await this.getProducts();
+
     this.productsPass = await this.getProductById();
     console.log(this.productsPass)
+
   },
 };
 </script>
