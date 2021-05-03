@@ -24,7 +24,7 @@
       <p class="text-center mt-4">{{ this.product.image }}</p>
     </div>
     <div class="space-y-4 mt-10 w-64">
-      <p class="text-3xl border-b border-gray-400 pb-3">{{ this.product.prodName }}</p>
+     <p class="text-3xl border-b border-gray-400 pb-3">{{ this.product.prodName }}</p>
       <div class="space-y-3 text-xl">
         <p>{{ this.brand.brandName }}</p>
         <p>{{ this.product.price }} THB</p>
@@ -42,11 +42,9 @@
         ></div>
       </div>
       <div class="flex space-x-10">
-
-        <router-link :to="{ path: `/edit/${product.prodId}` }">
-      <base-button label="Edit" border="border-2"></base-button>
-        </router-link>
-
+       <router-link :to="`/edit/${this.product.prodId}`">
+      <base-button label="Edit" border="border-2" bordercolor="border-gray-700"></base-button>
+      </router-link>
       <base-button @click="deleteProductsbyId" label="Delete" border="border-2" textcolor="text-red-500" hovercolor="hover:bg-red-500" bordercolor="border-red-500"></base-button>
       </div>
       <!-- {{$route.params.id}} -->
@@ -68,7 +66,7 @@ export default {
     };
   },
   methods: {
-    blackBorder(colorId){
+     blackBorder(colorId){
       if(colorId === '#FFFFFF'){
         return 'border border-gray-400 opacity-80'
       }

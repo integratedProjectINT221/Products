@@ -24,7 +24,7 @@
             <div
               v-for="color in product.colors"
               :key="color.colorId"
-              class="flex justify-center items-center w-5 h-5 rounded-full"
+               class="flex justify-center items-center w-5 h-5 rounded-full"
               :class="blackBorder(color.colorId)"
               :style="{ backgroundColor: color.colorId }"
             ></div>

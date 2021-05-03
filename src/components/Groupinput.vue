@@ -2,11 +2,10 @@
   <div id="component-preview-img">
     <div id="preview-img">
       <p class="font-semibold text-xl">Preview</p>
-      <div class="w-80 h-80 mt-4">
+      <div class="w-80 h-80 mt-4 border-2">
         <!-- <base-card> -->
-        <img v-if="!changeImage" class="w-80 h-80 object-cover border-4 border-gray-300" :src="previewImage" />
-        <img v-else-if="getProduct.image===undefined" class="w-80 h-80 object-cover border-4 border-gray-300" src="https://cwimports.com.au/wp-content/uploads/2020/10/no-image.png">
-        <img v-else class="w-80 h-80 object-cover border-4 border-gray-300" :src="`http://localhost:8081/files/${getProduct.image}`" />
+        <img v-if="!changeImage" class="w-80 h-80 object-cover" :src="previewImage" />
+        <img v-else class="w-80 h-80 object-contain" src="https://cwimports.com.au/wp-content/uploads/2020/10/no-image.png" />
         <!-- </base-card> -->
       </div>
       <div class="text-red-500 text-lg font-base" v-if="invalidProdImage">
@@ -28,14 +27,14 @@
         />
         Choose file
       </label>
-      <span class="text-gray-500" v-if="changeImage">{{this.getProduct.image}}</span>
-      <p class="break-all text-gray-500" v-else>{{this.editImage}}</p>
+      <span class="text-gray-500" v-show="changeImage">No file chosen</span>
+      <p class="break-all text-gray-500">{{ selectedFile.name }}</p>
     </div>
   </div>
   <div id="container-input" class="flex flex-col w-80 h-1/6 space-y-2 mt-10">
     <label for="name" class="font-semibold">Name</label>
     <input
-      v-model="getProduct.prodName"
+      v-model="validate.prodName"
       type="text"
       name="name"
       id="name"
@@ -46,7 +45,7 @@
     </div>
     <label for="brand" class="font-semibold">Brand</label>
     <select
-      v-model="getBrand.brandName"
+      v-model="validate.brand"
       name="brand"
       id="brand"
       class="border-gray-400 border pl-1"
@@ -55,8 +54,8 @@
         v-for="brand in brands"
         :key="brand.brandId"
         id="loopbrand"
+        :value="brand"
       >
-      
         {{ brand.brandName }}
       </option>
     </select>
@@ -66,7 +65,7 @@
     <label for="price" class="font-semibold">Price</label>
     <div id="container-price">
       <input
-        v-model.number="getProduct.price"
+        v-model.number="validate.price"
         type="text"
         name="price"
         id="price"
@@ -79,7 +78,7 @@
     </div>
     <label for="date" class="font-semibold">Date</label>
     <input
-      v-model="getProduct.date"
+      v-model="validate.date"
       type="date"
       name="date"
       id="date"
@@ -95,7 +94,7 @@
       cols="50"
       rows="4"
       class="border-gray-400 border pl-1"
-      v-model="getProduct.description"
+      v-model="validate.description"
     >
     </textarea>
     <div class="text-red-500 text-lg font-base" v-if="invalidProdDes">
@@ -106,7 +105,7 @@
     <label for="color" class="font-semibold">Color</label>
     <div
       id="container-colors"
-      class="w-full h-auto grid grid-cols-6 gap-4 mt-2 "
+      class="w-full h-auto grid grid-cols-6 gap-4 mt-2"
     >
       <div v-for="color in colors" :key="color.colorId" id="loopcolor">
         <label
@@ -123,7 +122,7 @@
           </i>
         </label>
         <input
-          v-model="getProduct.colors"
+          v-model="validate.colors"
           type="checkbox"
           :id="color.colorName"
           :value="color"
@@ -131,6 +130,7 @@
           @change="color.checked = !color.checked"
         />
       </div>
+      <!-- <span>Checked names: {{ validate.colors }}</span> -->
     </div>
     <div class="text-red-500 text-lg font-base" v-if="invalidProdColors">
       Invalid product colors!
@@ -142,17 +142,18 @@
       Product Added!
     </div>
   </div>
+  <!-- {{this.product}} -->
 </template>
 
 <script>
 export default {
   name: "Groupinput",
   props: {
-    editProduct:{
-      type: Object,
+    product:{
+      type: Object
     },
-    editBrand:{
-      type: Object,
+    label:{
+      type: String,
       require: true
     },
     invalidProdName: {
@@ -200,23 +201,14 @@ export default {
       require: true,
       default: true,
     },
-    // selectedFile: {
-    //   type: String,
-    //   require: true,
-    // },
-    label:{
+    selectedFile: {
       type: String,
-      require: true
+      require: true,
     },
-    passProd:{
-      type: Object,
-      require: true
-    }
   },
   data() {
     return {
       previewImage: null,
-
       validate: {
         name: "",
         price: 0.0,
@@ -226,9 +218,6 @@ export default {
         colors: [],
         image:""
       },
-      editing: false,
-      tempValue:null
-
     };
   },
   methods: {
@@ -239,11 +228,10 @@ export default {
     },
     previewFile(event) {
       let selectedFile = event.target.files[0];
-      this.editImage = selectedFile.name
+      this.validate.image = selectedFile.name
       if (selectedFile) {
         let reader = new FileReader();
         reader.onload = (event) => {
-          // console.log(this.previewImage)
           this.previewImage = event.target.result;
           // console.log(this.previewImage)
         };
@@ -254,39 +242,19 @@ export default {
     },
     dataSubmit() {
       const data = {
-        name: this.editProduct.prodName,
-        price: this.editProduct.price,
-        description: this.editProduct.description,
-        date: this.editProduct.date,
-        brand: this.editBrand,
-        colors: this.getProduct.colors = this.getProduct.colors === undefined ? [] : this.getProduct.colors,
-        image: this.editImage
+        name: this.validate.name,
+        price: this.validate.price,
+        description: this.validate.description,
+        date: this.validate.date,
+        brand: this.validate.brand,
+        colors: this.validate.colors,
+        image: this.validate.image
       };
       this.$emit("pass-validate", data);
-      console.log(data)
     },
   },
-
-  created(){
-
+  updated() {
+    this.validate = this.product;
   },
-  beforeUpdate(){
-    // if(this.editing == false)
-    
-    this.validate.name = this.reValidateName
-    console.log(this.passProd.prodName)
-  },
-  computed:{
-    reValidateName(){
-// this.validate.name = this.tempValue
-return this.passProd.prodName
-    }
-  },
-  // watch(
-  //   this.passProd.prodName,() => {
-  //     console.log(this.passProd.prodName)
-  //   })
-  
-
 };
 </script>

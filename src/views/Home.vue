@@ -1,16 +1,13 @@
 <template>
   <div class="home">
-    <p id="header" class="text-2xl font-semibold text-center p-10">Add</p>
+    <p id="header" class="text-2xl font-semibold text-center p-10">Home</p>
     <form id="form" method="post" @submit.prevent="submitForm">
       <div
         id="product-form"
         class="flex flex-row h-full justify-center space-x-16"
-      > 
-      {{this.validate}}
+      >
         <Groupinput
           @pass-validate="passValidate"
-          :editProduct="editProduct"
-          :editBrand="editBrand"
           :invalidProdName="invalidProdName"
           :invalidProdBrand="invalidProdBrand"
           :invalidProdPrice="invalidProdPrice"
@@ -22,9 +19,9 @@
           :isSubmit="isSubmit"
           :invalidProdImage="invalidProdImage"
           :changeImage="changeImage"
-          
-          :label="label"
+          :selectedFile="selectedFile"
           @preview-img="previewFile"
+          :label="label"
         />
       </div>
     </form>
@@ -37,13 +34,12 @@
 // import Previewimage from "@/components/Previewimage";
 import Groupinput from "@/components/Groupinput";
 export default {
-  name: "Add",
+  name: "Home",
   components: { Groupinput },
   data() {
     return {
-      products:[],
-      label: 'Add Product',
-      url: 'http://localhost:8081',
+      label: "Submit",
+      url: "http://localhost:8081",
       validate: {},
       colors: [
         // { id: "1", name: "white", value: "#FFFFFF", checked: false },
@@ -53,8 +49,7 @@ export default {
         // { id: "1", name: "test1" },
         // { id: "2", name: "test2" },
       ],
-      editBrand:{},
-      editProduct: {},
+      products: [],
       invalidProdName: false,
       invalidProdBrand: false,
       invalidProdPrice: false,
@@ -64,7 +59,7 @@ export default {
       invalidProdImage: false,
       isSubmit: false,
       changeImage: true,
-      selectedFile:""
+      selectedFile: "",
     };
   },
   methods: {
@@ -90,6 +85,9 @@ export default {
         ) {
           this.invalidProdName = true;
         }
+        if (this.products[i].image === this.validate.image) {
+          this.invalidProdImage = true;
+        }
       }
       if (
         this.invalidProdName ||
@@ -103,7 +101,11 @@ export default {
         this.isSubmit = false;
         return;
       } else {
-        this.editingProduct();
+        this.addProduct();
+        this.products.push({
+          prodName: this.validate.name,
+          image: this.validate.image,
+        });
         this.addPicture();
         this.isSubmit = true;
         this.invalidProdName = false;
@@ -133,13 +135,13 @@ export default {
       data.append("file", this.selectedFile);
       console.log(data);
       try {
-        await fetch(`${this.url}/upload`, {
+        const res = await fetch(`${this.url}/upload`, {
           method: "POST",
           body: data,
         });
-        console.log(this.onUploadProgress);
+        console.log(res);
       } catch (error) {
-        console.log(`Failed to add product! + ${error}`);
+        console.log(`Failed to add pic! + ${error}`);
       }
     },
 
@@ -154,7 +156,7 @@ export default {
     },
     async getProducts() {
       try {
-        const res = await fetch(`${this.url}/products/`);
+        const res = await fetch(`${this.url}/products`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -170,25 +172,25 @@ export default {
         console.log(error);
       }
     },
-
     async addProduct() {
-      fetch(`${this.url}/products`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          prodId: 100000,
-          prodName: this.validate.name,
-          description: this.validate.description,
-          price: this.validate.price,
-          date: this.validate.date,
-          image: this.selectedFile.name,
-          brand: this.validate.brand,
-          colors: this.validate.colors,
-        }),
-      }).catch((error) => {
-
+      try {
+        await fetch(`${this.url}/products`, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            prodId: 1,
+            prodName: this.validate.name,
+            description: this.validate.description,
+            price: this.validate.price,
+            date: this.validate.date,
+            image: this.selectedFile.name,
+            brand: this.validate.brand,
+            colors: this.validate.colors,
+          }),
+        });
+      } catch (error) {
         console.log(`Failed to add product! + ${error}`);
       }
     },
@@ -196,10 +198,7 @@ export default {
   async created() {
     this.colors = await this.getColors();
     this.brands = await this.getBrands();
-    // this.editProduct = await this.getProductById();
     this.products = await this.getProducts();
-    // this.editBrand = await this.editProduct.brand;
-    // console.log(this.editProduct.length)
   },
 };
 </script>
