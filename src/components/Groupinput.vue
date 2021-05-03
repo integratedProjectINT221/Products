@@ -3,14 +3,23 @@
   <div id="component-preview-img">
     <div id="preview-img">
       <p class="font-semibold text-xl">Preview</p>
-      <div class="w-80 h-80 mt-4 border-2">
+      <div class="w-80 h-80 mt-4">
         <!-- <base-card> -->
-        <img v-if="!changeImage" class="w-80 h-80 object-cover" :src="previewImage" />
-        <img v-else class="w-80 h-80 object-contain" src="https://cwimports.com.au/wp-content/uploads/2020/10/no-image.png" />
+        <img
+          v-if="!changeImage"
+          class="w-80 h-80 object-cover border-2 bg-gray-300"
+          :src="previewImage"
+        />
+        <!-- <img v-else-if="validate.image===undefined" class="w-80 h-80 object-cover border-2 bg-gray-300" src="https://cwimports.com.au/wp-content/uploads/2020/10/no-image.png"/> -->
+        <img
+          v-else
+          class="w-80 h-80 object-cover border-2 bg-gray-300"
+          :src="`http://localhost:8081/files/${validate.image}`"
+        />
         <!-- </base-card> -->
       </div>
       <div class="text-red-500 text-lg font-base" v-if="invalidProdImage">
-        Please select your product image!
+        Invalid Image!
       </div>
     </div>
     <div id="upload-file" class="w-80 h-8 mt-4 space-x-4 flex-row flex">
@@ -28,8 +37,8 @@
         />
         Choose file
       </label>
-      <span class="text-gray-500" v-show="changeImage">No file chosen</span>
-      <p class="break-all text-gray-500">{{ selectedFile.name }}</p>
+      <!-- <span class="text-gray-500" v-show="changeImage">No file chosen</span> -->
+      <p class="break-all text-gray-500">{{ validate.image }}</p>
     </div>
   </div>
   <div id="container-input" class="flex flex-col w-80 h-1/6 space-y-2 mt-10">
@@ -131,13 +140,18 @@
           @change="color.checked = !color.checked"
         />
       </div>
-      <!-- <span>Checked names: {{ validate.colors }}</span> -->
+      <span>Checked names: {{ validate.colors }}</span>
     </div>
     <div class="text-red-500 text-lg font-base" v-if="invalidProdColors">
       Invalid product colors!
     </div>
     <div class="submit-button mt-5 select-none">
-      <base-button @click="dataSubmit" :label="label" border="border-2" bordercolor="border-gray-700"></base-button>
+      <base-button
+        @click="dataSubmit"
+        :label="label"
+        border="border-2"
+        bordercolor="border-gray-700"
+      ></base-button>
     </div>
     <div class="text-green-400 text-lg font-base" v-if="isSubmit">
       Product Added!
@@ -150,12 +164,17 @@
 export default {
   name: "Groupinput",
   props: {
-    product:{
-      type: Object
+    edit: {
+      type: Boolean,
+      require: true,
+      default: false
     },
-    label:{
+    product: {
+      type: Object,
+    },
+    label: {
       type: String,
-      require: true
+      require: true,
     },
     invalidProdName: {
       type: Boolean,
@@ -211,25 +230,28 @@ export default {
     return {
       previewImage: null,
       validate: {
-        name: "",
+        prodName: "",
         price: 0.0,
         description: "",
         date: "",
         brand: "",
-        colors: [],
-        image:""
+        colors: [{checked:true}],
+        image: "",
       },
     };
   },
   methods: {
-    blackBorder(colorId){
-      if(colorId === '#FFFFFF'){
-        return 'border border-gray-400 opacity-80'
+    pushChecked(){
+         console.log(this.validate.colors)
+    },
+    blackBorder(colorId) {
+      if (colorId === "#FFFFFF") {
+        return "border border-gray-400 opacity-80";
       }
     },
     previewFile(event) {
       let selectedFile = event.target.files[0];
-      this.validate.image = selectedFile.name
+      this.validate.image = selectedFile.name;
       if (selectedFile) {
         let reader = new FileReader();
         reader.onload = (event) => {
@@ -243,19 +265,31 @@ export default {
     },
     dataSubmit() {
       const data = {
-        name: this.validate.name,
+        name: this.validate.prodName,
         price: this.validate.price,
         description: this.validate.description,
         date: this.validate.date,
         brand: this.validate.brand,
         colors: this.validate.colors,
-        image: this.validate.image
+        image: this.validate.image,
       };
       this.$emit("pass-validate", data);
+      console.log(data)
     },
   },
   updated() {
-    this.validate = this.product;
+    if (this.edit===true) {
+      for (let index = 0; index < this.validate.colors.length; index++) {
+                  this.validate.colors = {colorId: this.product.colors[index].colorId,colorName: this.product.colors[index].colorName,checked: true},
+      }
+      this.validate.prodName = this.product.prodName,
+        this.validate.price = this.product.price,
+        this.validate.description = this.product.description,
+        this.validate.date =this.product.date,
+       this.validate.brand = this.product.brand,
+       this.validate.image = this.product.image
+    }
+    console.log(this.validate.colors)
   },
 };
 </script>

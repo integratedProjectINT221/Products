@@ -23,6 +23,7 @@
           :selectedFile="selectedFile"
           @preview-img="previewFile"
           :label="label"
+          :edit="false"
         />
       </div>
     </form>

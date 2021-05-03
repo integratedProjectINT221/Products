@@ -23,6 +23,7 @@
           @preview-img="previewFile"
           :label="label"
           :product="product"
+          :edit="true"
         />
       </div>
     </form>
