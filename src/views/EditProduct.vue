@@ -115,7 +115,6 @@ export default {
     previewFile(selectedFile) {
       this.selectedFile = selectedFile;
       this.changeImage = true;
-      this.invalidProdImage = false;
     },
     passValidate(validate) {
       this.validate = validate;

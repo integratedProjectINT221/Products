@@ -79,7 +79,7 @@ export default {
       this.invalidProdDes = this.validate.description === "" ? true : false;
       this.invalidProdDate = this.validate.date === "" ? true : false;
       this.invalidProdColors = this.validate.colors.length === 0 ? true : false;
-      this.invalidProdImage = this.changeImage === false ? true : false;
+      this.invalidProdImage = this.validate.image === "" ? true : false;
       for (i = 0; i < this.products.length; i++) {
         if (
           this.products[i].prodName.toLowerCase() ===
@@ -103,6 +103,11 @@ export default {
         this.isSubmit = false;
         return;
       } else {
+        for (let i = 0; i < this.validate.colors.length; i++) {
+          var color = this.validate.colors;
+          delete color[i]["checked"];
+        }
+        console.log(this.validate.colors);
         this.addProduct();
         this.products.push({
           prodName: this.validate.name,
@@ -121,15 +126,10 @@ export default {
     previewFile(selectedFile) {
       this.selectedFile = selectedFile;
       this.changeImage = true;
-      this.invalidProdImage = false;
+      // this.invalidProdImage = false;
     },
     passValidate(validate) {
       this.validate = validate;
-      for(let i = 0; i < this.validate.colors.length; i++ ){
-        var color = this.validate.colors
-        delete color[i]["checked"];
-      }
-      console.log(this.validate.colors)
     },
     async addPicture() {
       console.log(this.selectedFile);
@@ -182,7 +182,6 @@ export default {
             "Content-type": "application/json",
           },
           body: JSON.stringify({
-            prodId: 1,
             prodName: this.validate.name,
             description: this.validate.description,
             price: this.validate.price,
@@ -204,9 +203,9 @@ export default {
     // console.log(this.colors)
     for (let index = 0; index < this.colors.length; index++) {
       // console.log(this.colors[index].colorId)
-      this.colors[index]["checked"] = false
+      this.colors[index]["checked"] = false;
     }
-    console.log(this.colors)
+    console.log(this.colors);
   },
 };
 </script>
