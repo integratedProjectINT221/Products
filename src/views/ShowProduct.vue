@@ -42,9 +42,11 @@
         ></div>
       </div>
       <div class="flex space-x-10">
-      <router-link :to="`/edit/${this.product.prodId}`">
-      <base-button label="Edit" border="border-2" bordercolor="border-gray-700"></base-button>
-      </router-link>
+
+        <router-link :to="{ path: `/edit/${product.prodId}` }">
+      <base-button label="Edit" border="border-2"></base-button>
+        </router-link>
+
       <base-button @click="deleteProductsbyId" label="Delete" border="border-2" textcolor="text-red-500" hovercolor="hover:bg-red-500" bordercolor="border-red-500"></base-button>
       </div>
       <!-- {{$route.params.id}} -->

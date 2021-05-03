@@ -8,8 +8,9 @@
       > {{this.validate}}
         <Groupinput
           @pass-validate="passValidate"
-          :editProduct="editProduct"
-          :editBrand="editBrand"
+
+          :passProd="productsPass"
+
           :invalidProdName="invalidProdName"
           :invalidProdBrand="invalidProdBrand"
           :invalidProdPrice="invalidProdPrice"
@@ -52,8 +53,10 @@ export default {
         // { id: "1", name: "test1" },
         // { id: "2", name: "test2" },
       ],
-      editBrand:{},
-      editProduct: {},
+
+      products: [],
+      productsPass:{},
+
       invalidProdName: false,
       invalidProdBrand: false,
       invalidProdPrice: false,
@@ -169,6 +172,15 @@ export default {
         console.log(error);
       }
     },
+    async getProductById() {
+      try {
+        const res = await fetch(`${this.url}/products/${this.$route.params.id}`);
+        const data = await res.json();
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async getBrands() {
       try {
         const res = await fetch(`${this.url}/brands`);
@@ -185,7 +197,18 @@ export default {
           headers: {
             "Content-type": "application/json",
           },
-          body: JSON.stringify(this.editProduct),
+
+          body: JSON.stringify({
+            prodId: 100000,
+            prodName: this.validate.name,
+            description: this.validate.description,
+            price: this.validate.price,
+            date: this.validate.date,
+            image: this.selectedFile.name,
+            brand: this.validate.brand,
+            colors: this.validate.colors,
+          }),
+
         });
       } catch (error) {
         console.log(`Failed to add product! + ${error}`);
@@ -197,8 +220,10 @@ export default {
     this.brands = await this.getBrands();
     this.editProduct = await this.getProductById();
     this.products = await this.getProducts();
-    this.editBrand = await this.editProduct.brand;
-    console.log(this.editProduct.length)
+
+    this.productsPass = await this.getProductById();
+    console.log(this.productsPass)
+
   },
 };
 </script>

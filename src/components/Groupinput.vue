@@ -208,13 +208,27 @@ export default {
       type: String,
       require: true
     },
+    passProd:{
+      type: Object,
+      require: true
+    }
   },
   data() {
     return {
       previewImage: null,
-      editImage:""
-      // product: this.editProduct,
-      // brand: this.editBrand
+
+      validate: {
+        name: "",
+        price: 0.0,
+        description: "",
+        date: "",
+        brand: "",
+        colors: [],
+        image:""
+      },
+      editing: false,
+      tempValue:null
+
     };
   },
   methods: {
@@ -252,15 +266,27 @@ export default {
       console.log(data)
     },
   },
+
+  created(){
+
+  },
+  beforeUpdate(){
+    // if(this.editing == false)
+    
+    this.validate.name = this.reValidateName
+    console.log(this.passProd.prodName)
+  },
   computed:{
-    getProduct(){
-      console.log(this.editProduct)
-      // console.log(this.previewImage)
-      return this.editProduct
-    },
-    getBrand(){
-      return this.editBrand
+    reValidateName(){
+// this.validate.name = this.tempValue
+return this.passProd.prodName
     }
-  }
+  },
+  // watch(
+  //   this.passProd.prodName,() => {
+  //     console.log(this.passProd.prodName)
+  //   })
+  
+
 };
 </script>

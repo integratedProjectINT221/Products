@@ -170,16 +170,25 @@ export default {
         console.log(error);
       }
     },
-    async editingProduct() {
-      try {
-        await fetch(`${this.url}/products`, {
-          method: "PUT",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(this.editProduct),
-        });
-      } catch (error) {
+
+    async addProduct() {
+      fetch(`${this.url}/products`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          prodId: 100000,
+          prodName: this.validate.name,
+          description: this.validate.description,
+          price: this.validate.price,
+          date: this.validate.date,
+          image: this.selectedFile.name,
+          brand: this.validate.brand,
+          colors: this.validate.colors,
+        }),
+      }).catch((error) => {
+
         console.log(`Failed to add product! + ${error}`);
       }
     },
