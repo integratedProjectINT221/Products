@@ -61,7 +61,7 @@ export default {
       invalidProdColors: false,
       invalidProdImage: false,
       isSubmit: false,
-      changeImage: true,
+      changeImage: false,
       selectedFile: "",
     };
   },
@@ -80,7 +80,7 @@ export default {
       this.invalidProdDes = this.validate.description === "" ? true : false;
       this.invalidProdDate = this.validate.date === "" ? true : false;
       this.invalidProdColors = this.validate.colors.length === 0 ? true : false;
-      this.invalidProdImage = !this.changeImage === false ? true : false;
+      this.invalidProdImage = this.changeImage === false ? true : false;
       for (i = 0; i < this.products.length; i++) {
         if (
           this.products[i].prodName.toLowerCase() ===
@@ -114,7 +114,7 @@ export default {
     },
     previewFile(selectedFile) {
       this.selectedFile = selectedFile;
-      this.changeImage = false;
+      this.changeImage = true;
       this.invalidProdImage = false;
     },
     passValidate(validate) {
@@ -187,17 +187,21 @@ export default {
     this.product = await this.getProductById();
     console.log(this.products.colors);
     // for (let index = 0; index < this.products.length; index++) {
-      
+
     //   for (let j = 0; j < this.products[index].colors.length; j++) {
     //     this.products[index].colors[j]["checked"] = true;
     //   }
-    
+
     // console.log(this.products)
-    // }  
+    // }
     for (let index = 0; index < this.product.colors.length; index++) {
-    for (let i = 0; i < this.colors.length; i++) {
-      if(this.product.colors[index].colorId == this.colors[i].colorId){
-      this.colors[i]["checked"] = true;}}}
+      for (let i = 0; i < this.colors.length; i++) {
+        if (this.product.colors[index].colorId == this.colors[i].colorId) {
+          this.product.colors[index]["checked"] = true
+          this.colors[i]["checked"] = true;
+        }
+      }
+    }
   },
 };
 </script>

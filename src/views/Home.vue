@@ -79,7 +79,7 @@ export default {
       this.invalidProdDes = this.validate.description === "" ? true : false;
       this.invalidProdDate = this.validate.date === "" ? true : false;
       this.invalidProdColors = this.validate.colors.length === 0 ? true : false;
-      this.invalidProdImage = !this.changeImage === false ? true : false;
+      this.invalidProdImage = this.changeImage === false ? true : false;
       for (i = 0; i < this.products.length; i++) {
         if (
           this.products[i].prodName.toLowerCase() ===
@@ -120,7 +120,7 @@ export default {
     },
     previewFile(selectedFile) {
       this.selectedFile = selectedFile;
-      this.changeImage = false;
+      this.changeImage = true;
       this.invalidProdImage = false;
     },
     passValidate(validate) {
@@ -201,9 +201,9 @@ export default {
     this.colors = await this.getColors();
     this.brands = await this.getBrands();
     this.products = await this.getProducts();
-    console.log(this.colors)
+    // console.log(this.colors)
     for (let index = 0; index < this.colors.length; index++) {
-      console.log(this.colors[index].colorId)
+      // console.log(this.colors[index].colorId)
       this.colors[index]["checked"] = false
     }
     console.log(this.colors)

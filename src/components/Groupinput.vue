@@ -6,11 +6,10 @@
       <div class="w-80 h-80 mt-4">
         <!-- <base-card> -->
         <img
-          v-if="!changeImage"
+          v-if="changeImage"
           class="w-80 h-80 object-cover border-2 bg-gray-300"
-          :src="previewImage"
+          :src="previewImage ||'https://cwimports.com.au/wp-content/uploads/2020/10/no-image.png'"
         />
-        <!-- <img v-else-if="validate.image===undefined" class="w-80 h-80 object-cover border-2 bg-gray-300" src="https://cwimports.com.au/wp-content/uploads/2020/10/no-image.png"/> -->
         <img
           v-else
           class="w-80 h-80 object-cover border-2 bg-gray-300"
@@ -38,7 +37,7 @@
         Choose file
       </label>
       <!-- <span class="text-gray-500" v-show="changeImage">No file chosen</span> -->
-      <p class="break-all text-gray-500">{{ validate.image }}</p>
+      <p class="break-all text-gray-500">{{ validate.image || 'No file chosen' }}</p>
     </div>
   </div>
   <div id="container-input" class="flex flex-col w-80 h-1/6 space-y-2 mt-10">
@@ -130,7 +129,7 @@
           >
             radio_button_unchecked
           </i>
-          {{color.checked}}
+          <!-- {{color.checked}} -->
           <!-- <i
             v-else-if="validate.colors.checked === true"
             class="material-icons text-green-300 text-6xl font-thin"
@@ -148,7 +147,7 @@
           @change="color.checked = !color.checked"
         />
       </div>
-      <span>Checked names: {{ validate.colors }}</span>
+      <!-- <span>Checked names: {{ validate.colors }}</span> -->
     </div>
     <div class="text-red-500 text-lg font-base" v-if="invalidProdColors">
       Invalid product colors!
@@ -227,7 +226,6 @@ export default {
     changeImage: {
       type: Boolean,
       require: true,
-      default: true,
     },
     selectedFile: {
       type: String,
