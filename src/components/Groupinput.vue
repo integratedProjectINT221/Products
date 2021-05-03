@@ -264,6 +264,6 @@ return this.passProd.prodName
   //   this.passProd.prodName,() => {
   //     console.log(this.passProd.prodName)
   //   })
-  
+  //test
 };
 </script>
