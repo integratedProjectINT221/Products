@@ -125,11 +125,19 @@
           :style="{ backgroundColor: color.colorId }"
         >
           <i
-            v-show="color.checked"
+            v-if="color.checked"
             class="material-icons text-green-300 text-6xl font-thin"
           >
             radio_button_unchecked
           </i>
+          {{color.checked}}
+          <!-- <i
+            v-else-if="validate.colors.checked === true"
+            class="material-icons text-green-300 text-6xl font-thin"
+          >
+          
+            radio_button_unchecked
+          </i> -->
         </label>
         <input
           v-model="validate.colors"
@@ -235,15 +243,12 @@ export default {
         description: "",
         date: "",
         brand: "",
-        colors: [{checked:true}],
+        colors: [],
         image: "",
       },
     };
   },
   methods: {
-    pushChecked(){
-         console.log(this.validate.colors)
-    },
     blackBorder(colorId) {
       if (colorId === "#FFFFFF") {
         return "border border-gray-400 opacity-80";
@@ -279,17 +284,8 @@ export default {
   },
   updated() {
     if (this.edit===true) {
-      for (let index = 0; index < this.validate.colors.length; index++) {
-                  this.validate.colors = {colorId: this.product.colors[index].colorId,colorName: this.product.colors[index].colorName,checked: true},
-      }
-      this.validate.prodName = this.product.prodName,
-        this.validate.price = this.product.price,
-        this.validate.description = this.product.description,
-        this.validate.date =this.product.date,
-       this.validate.brand = this.product.brand,
-       this.validate.image = this.product.image
+      this.validate = this.product
     }
-    console.log(this.validate.colors)
   },
 };
 </script>

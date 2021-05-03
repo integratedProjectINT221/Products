@@ -40,9 +40,9 @@ export default {
   components: { Groupinput },
   data() {
     return {
-      product :{},
-      label: 'Save Change',
-      url: 'http://localhost:8081',
+      product: {},
+      label: "Save Change",
+      url: "http://localhost:8081",
       validate: {},
       colors: [
         // { id: "1", name: "white", value: "#FFFFFF", checked: false },
@@ -62,7 +62,7 @@ export default {
       invalidProdImage: false,
       isSubmit: false,
       changeImage: true,
-      selectedFile:""
+      selectedFile: "",
     };
   },
   methods: {
@@ -170,7 +170,9 @@ export default {
     },
     async getProductById() {
       try {
-        const res = await fetch(`${this.url}/products/${this.$route.params.id}`);
+        const res = await fetch(
+          `${this.url}/products/${this.$route.params.id}`
+        );
         const data = await res.json();
         return data;
       } catch (error) {
@@ -183,7 +185,25 @@ export default {
     this.brands = await this.getBrands();
     this.products = await this.getProducts();
     this.product = await this.getProductById();
-    console.log(this.product)
+    console.log(this.product.colors);
+    for (let index = 0; index < this.product.colors.length; index++) {
+      console.log(this.product.colors[index]);
+      this.product.colors[index]["checked"] = true;
+    }
+    console.log(this.product.colors);
+    console.log(this.colors);
+    for (let index = 0; index < this.colors.length; index++) {
+      this.colors[index]["checked"] = false;
+      console.log(this.colors[index].colorId);
+    }
+    for (let i = 0; i < this.product.colors.length; i++) {
+      for (let j = 0; j < this.colors.length; j++) {
+        if (this.colors[i].colorId === this.product.colors[j].colorId) { 
+          this.colors[i]["checked"] = true;
+        }
+      }
+    }
+    console.log(this.colors);
   },
 };
 </script>

@@ -125,11 +125,11 @@ export default {
     },
     passValidate(validate) {
       this.validate = validate;
-      // for(let i = 0; i < this.validate.colors.length; i++ ){
-      //   var color = this.validate.colors
-      //   delete color[i]["checked"];
-      // }
-      // console.log(this.validate.colors)
+      for(let i = 0; i < this.validate.colors.length; i++ ){
+        var color = this.validate.colors
+        delete color[i]["checked"];
+      }
+      console.log(this.validate.colors)
     },
     async addPicture() {
       console.log(this.selectedFile);
@@ -201,6 +201,12 @@ export default {
     this.colors = await this.getColors();
     this.brands = await this.getBrands();
     this.products = await this.getProducts();
+    console.log(this.colors)
+    for (let index = 0; index < this.colors.length; index++) {
+      console.log(this.colors[index].colorId)
+      this.colors[index]["checked"] = false
+    }
+    console.log(this.colors)
   },
 };
 </script>
