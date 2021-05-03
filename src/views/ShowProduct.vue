@@ -1,3 +1,4 @@
+
 <template>
   <div v-show="!this.error"
     id="container-product"
@@ -102,3 +103,4 @@ export default {
   },
 };
 </script>
+

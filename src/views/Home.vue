@@ -1,3 +1,4 @@
+
 <template>
   <div class="home">
     <p id="header" class="text-2xl font-semibold text-center p-10">Home</p>
@@ -202,3 +203,4 @@ export default {
   },
 };
 </script>
+

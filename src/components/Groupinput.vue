@@ -1,3 +1,4 @@
+
 <template>
   <div id="component-preview-img">
     <div id="preview-img">
@@ -258,3 +259,4 @@ export default {
   },
 };
 </script>
+
