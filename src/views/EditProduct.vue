@@ -68,7 +68,7 @@ export default {
   methods: {
     submitForm() {
       console.log(this.validate.colors);
-      let i = 0;
+      // let i = 0;
       this.invalidProdName = this.validate.name === "" ? true : false;
       this.invalidProdBrand = this.validate.brand === "" ? true : false;
       this.invalidProdPrice =
@@ -80,15 +80,15 @@ export default {
       this.invalidProdDes = this.validate.description === "" ? true : false;
       this.invalidProdDate = this.validate.date === "" ? true : false;
       this.invalidProdColors = this.validate.colors.length === 0 ? true : false;
-      this.invalidProdImage = this.changeImage === false ? true : false;
-      for (i = 0; i < this.products.length; i++) {
-        if (
-          this.products[i].prodName.toLowerCase() ===
-          this.validate.name.toLowerCase()
-        ) {
-          this.invalidProdName = true;
-        }
-      }
+      // this.invalidProdImage = this.changeImage === false ? true : false;
+      // for (i = 0; i < this.products.length; i++) {
+      //   if (
+      //     this.products[i].prodName.toLowerCase() ===
+      //     this.validate.name.toLowerCase()
+      //   ) {
+      //     this.invalidProdName = true;
+      //   }
+      // }
       if (
         this.invalidProdName ||
         this.invalidProdBrand ||
@@ -140,12 +140,12 @@ export default {
     //     console.log(`Failed to add product! + ${error}`);
     //   }
     // },
-      async editProductAndPic() {
+    async editProductAndPic() {
       try {
-        console.log(this.validate)
+        console.log(this.validate);
         // await fetch(`${this.url}/products`, {
         //   method: "PUT",
-          
+
         //   body: JSON.stringify({
         //     prodId:100000,
         //     prodName: this.validate.name,
@@ -158,22 +158,23 @@ export default {
         //   }),
         // });
         const jsonProduct = JSON.stringify({
-            prodId:this.$route.params.id,
-            prodName: this.validate.name,
-            description: this.validate.description,
-            price: this.validate.price,
-            date: this.validate.date,
-            image: this.selectedFile.name,
-            brand: this.validate.brand,
-            colors: this.validate.colors,
-        })
-        const blob = new Blob([jsonProduct],{
-          type: 'application/json'
-        })
+          prodId: this.$route.params.id,
+          prodName: this.validate.name,
+          description: this.validate.description,
+          price: this.validate.price,
+          date: this.validate.date,
+          image: this.selectedFile.name,
+          brand: this.validate.brand,
+          colors: this.validate.colors,
+        });
+        const blob = new Blob([jsonProduct], {
+          type: "application/json",
+        });
         let data = new FormData();
-      data.append("file", this.selectedFile);
-      data.append("product",blob)
-      await fetch(`${this.url}/products`, {
+        console.log(this.selectedFile)
+        data.append("file", this.selectedFile);
+        data.append("product", blob);
+        await fetch(`${this.url}/products`, {
           method: "PUT",
           body: data,
         });
@@ -238,7 +239,7 @@ export default {
     for (let index = 0; index < this.product.colors.length; index++) {
       for (let i = 0; i < this.colors.length; i++) {
         if (this.product.colors[index].colorId == this.colors[i].colorId) {
-          this.product.colors[index]["checked"] = true
+          this.product.colors[index]["checked"] = true;
           this.colors[i]["checked"] = true;
         }
       }

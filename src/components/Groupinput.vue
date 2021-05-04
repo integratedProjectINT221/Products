@@ -259,7 +259,7 @@ export default {
         let reader = new FileReader();
         reader.onload = (event) => {
           this.previewImage = event.target.result;
-          // console.log(this.previewImage)
+          console.log(this.previewImage)
         };
         reader.readAsDataURL(selectedFile);
       }

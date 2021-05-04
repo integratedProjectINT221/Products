@@ -1,7 +1,9 @@
 
 <template>
   <div class="home">
-    <p id="header" class="text-2xl font-semibold text-center p-10">Home</p>
+    <p id="header" class="text-2xl font-semibold text-center p-10">
+      Add new product
+    </p>
     <form id="form" method="post" @submit.prevent="submitForm">
       <div
         id="product-form"
@@ -40,7 +42,7 @@ export default {
   components: { Groupinput },
   data() {
     return {
-      label: "Submit",
+      label: "Add",
       url: "http://localhost:8081",
       validate: {},
       colors: [
@@ -177,10 +179,10 @@ export default {
     },
     async addProductAndPic() {
       try {
-        console.log(this.validate)
+        console.log(this.validate);
         // await fetch(`${this.url}/products`, {
         //   method: "PUT",
-          
+
         //   body: JSON.stringify({
         //     prodId:100000,
         //     prodName: this.validate.name,
@@ -193,22 +195,22 @@ export default {
         //   }),
         // });
         const jsonProduct = JSON.stringify({
-            prodId:1000000,
-            prodName: this.validate.name,
-            description: this.validate.description,
-            price: this.validate.price,
-            date: this.validate.date,
-            image: this.selectedFile.name,
-            brand: this.validate.brand,
-            colors: this.validate.colors,
-        })
-        const blob = new Blob([jsonProduct],{
-          type: 'application/json'
-        })
+          prodId: 1000000,
+          prodName: this.validate.name,
+          description: this.validate.description,
+          price: this.validate.price,
+          date: this.validate.date,
+          image: this.selectedFile.name,
+          brand: this.validate.brand,
+          colors: this.validate.colors,
+        });
+        const blob = new Blob([jsonProduct], {
+          type: "application/json",
+        });
         let data = new FormData();
-      data.append("file", this.selectedFile);
-      data.append("product",blob)
-      await fetch(`${this.url}/products`, {
+        data.append("file", this.selectedFile);
+        data.append("product", blob);
+        await fetch(`${this.url}/products`, {
           method: "POST",
           body: data,
         });
