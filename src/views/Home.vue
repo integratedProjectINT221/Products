@@ -108,12 +108,13 @@ export default {
           delete color[i]["checked"];
         }
         console.log(this.validate.colors);
-        this.addProduct();
+        // this.addProduct();
         this.products.push({
           prodName: this.validate.name,
           image: this.validate.image,
         });
-        this.addPicture();
+        // this.addPicture();
+        this.addProductAndPic();
         this.isSubmit = true;
         this.invalidProdName = false;
         this.invalidProdBrand = false;
@@ -131,21 +132,21 @@ export default {
     passValidate(validate) {
       this.validate = validate;
     },
-    async addPicture() {
-      console.log(this.selectedFile);
-      let data = new FormData();
-      data.append("file", this.selectedFile);
-      console.log(data);
-      try {
-        const res = await fetch(`${this.url}/upload`, {
-          method: "POST",
-          body: data,
-        });
-        console.log(res);
-      } catch (error) {
-        console.log(`Failed to add pic! + ${error}`);
-      }
-    },
+    // async addPicture() {
+    //   console.log(this.selectedFile);
+    //   let data = new FormData();
+    //   data.append("file", this.selectedFile);
+    //   console.log(data);
+    //   try {
+    //     const res = await fetch(`${this.url}/upload`, {
+    //       method: "POST",
+    //       body: data,
+    //     });
+    //     console.log(res);
+    //   } catch (error) {
+    //     console.log(`Failed to add pic! + ${error}`);
+    //   }
+    // },
 
     async getColors() {
       try {
@@ -174,14 +175,25 @@ export default {
         console.log(error);
       }
     },
-    async addProduct() {
+    async addProductAndPic() {
       try {
-        await fetch(`${this.url}/products`, {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
+        console.log(this.validate)
+        // await fetch(`${this.url}/products`, {
+        //   method: "PUT",
+          
+        //   body: JSON.stringify({
+        //     prodId:100000,
+        //     prodName: this.validate.name,
+        //     description: this.validate.description,
+        //     price: this.validate.price,
+        //     date: this.validate.date,
+        //     image: this.selectedFile.name,
+        //     brand: this.validate.brand,
+        //     colors: this.validate.colors,
+        //   }),
+        // });
+        const jsonProduct = JSON.stringify({
+            prodId:1000000,
             prodName: this.validate.name,
             description: this.validate.description,
             price: this.validate.price,
@@ -189,12 +201,44 @@ export default {
             image: this.selectedFile.name,
             brand: this.validate.brand,
             colors: this.validate.colors,
-          }),
+        })
+        const blob = new Blob([jsonProduct],{
+          type: 'application/json'
+        })
+        let data = new FormData();
+      data.append("file", this.selectedFile);
+      data.append("product",blob)
+      await fetch(`${this.url}/products`, {
+          method: "POST",
+          body: data,
         });
       } catch (error) {
         console.log(`Failed to add product! + ${error}`);
       }
     },
+    // async addProduct() {
+    //   try {
+    //     console.log(this.validate)
+    //     await fetch(`${this.url}/products`, {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-type": "application/json",
+    //       },
+    //       body: JSON.stringify({
+    //         prodId:100000,
+    //         prodName: this.validate.name,
+    //         description: this.validate.description,
+    //         price: this.validate.price,
+    //         date: this.validate.date,
+    //         image: this.selectedFile.name,
+    //         brand: this.validate.brand,
+    //         colors: this.validate.colors,
+    //       }),
+    //     });
+    //   } catch (error) {
+    //     console.log(`Failed to add product! + ${error}`);
+    //   }
+    // },
   },
   async created() {
     this.colors = await this.getColors();

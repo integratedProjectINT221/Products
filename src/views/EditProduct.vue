@@ -101,8 +101,9 @@ export default {
         this.isSubmit = false;
         return;
       } else {
-        this.addProduct();
-        this.addPicture();
+        // this.editProduct();
+        // this.addPicture();
+        this.editProductAndPic();
         this.isSubmit = true;
         this.invalidProdName = false;
         this.invalidProdBrand = false;
@@ -124,17 +125,58 @@ export default {
       // }
       // console.log(this.validate.colors)
     },
-    async addPicture() {
-      console.log(this.selectedFile);
-      let data = new FormData();
-      data.append("file", this.selectedFile);
-      console.log(data);
+    // async addPicture() {
+    //   console.log(this.selectedFile);
+    //   let data = new FormData();
+    //   data.append("file", this.selectedFile);
+    //   console.log(data);
+    //   try {
+    //     await fetch(`${this.url}/upload`, {
+    //       method: "POST",
+    //       body: data,
+    //     });
+    //     console.log(this.onUploadProgress);
+    //   } catch (error) {
+    //     console.log(`Failed to add product! + ${error}`);
+    //   }
+    // },
+      async editProductAndPic() {
       try {
-        await fetch(`${this.url}/upload`, {
-          method: "POST",
+        console.log(this.validate)
+        // await fetch(`${this.url}/products`, {
+        //   method: "PUT",
+          
+        //   body: JSON.stringify({
+        //     prodId:100000,
+        //     prodName: this.validate.name,
+        //     description: this.validate.description,
+        //     price: this.validate.price,
+        //     date: this.validate.date,
+        //     image: this.selectedFile.name,
+        //     brand: this.validate.brand,
+        //     colors: this.validate.colors,
+        //   }),
+        // });
+        const jsonProduct = JSON.stringify({
+            prodId:this.$route.params.id,
+            prodName: this.validate.name,
+            description: this.validate.description,
+            price: this.validate.price,
+            date: this.validate.date,
+            image: this.selectedFile.name,
+            brand: this.validate.brand,
+            colors: this.validate.colors,
+        })
+        const blob = new Blob([jsonProduct],{
+          type: 'application/json'
+        })
+        let data = new FormData();
+      data.append("file", this.selectedFile);
+      data.append("product",blob)
+      await fetch(`${this.url}/products`, {
+          method: "PUT",
           body: data,
         });
-        console.log(this.onUploadProgress);
       } catch (error) {
         console.log(`Failed to add product! + ${error}`);
       }
