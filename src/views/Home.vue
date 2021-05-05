@@ -1,7 +1,7 @@
 
 <template>
   <div class="home">
-    <p id="header" class="text-2xl font-semibold text-center p-10">
+    <p id="header" class="md:text-2xl text-lg font-semibold text-center md:p-10 bg-red-100 p-5">
       Add new product
     </p>
     <form id="form" method="post" @submit.prevent="submitForm">

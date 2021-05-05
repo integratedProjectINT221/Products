@@ -2,7 +2,7 @@
 <template>
   <div v-show="!this.error"
     id="container-product"
-    class="flex flex-row h-full justify-center space-x-10 pt-10"
+    class="flex md:flex-row h-full justify-center space-x-10 pt-10 flex-col items-center"
   >
     <div id="component-preview-img">
       <div class="space-x-2 mb-4">

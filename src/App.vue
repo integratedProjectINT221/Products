@@ -1,5 +1,5 @@
 <template>
-  <div id="background" class="bg-white h-screen w-screen">
+  <div id="background" class="bg-white md:h-screen md:w-screen w-160">
     <router-link to="/">
       <img
         src="@/assets/logo.png"
@@ -9,7 +9,7 @@
     </router-link>
     <div
       id="nav"
-      class="border-black border-b w-160 md:w-screen h-16 md:pl-36 pl-32 pt-7 md:space-x-32 md:text-base font-medium space-x-10"
+      class="border-black border-b w-160 md:w-screen h-16 md:pl-36 pl-32 pt-5 md:pt-7 md:space-x-32 md:text-base text-lg font-medium space-x-10"
     >
       <router-link to="/">Add new</router-link>
       <router-link to="/all_product_brands">Brands</router-link>
