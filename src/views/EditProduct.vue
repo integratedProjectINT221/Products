@@ -163,7 +163,7 @@ export default {
           description: this.validate.description,
           price: this.validate.price,
           date: this.validate.date,
-          image: this.selectedFile.name,
+          image: this.validate.image,
           brand: this.validate.brand,
           colors: this.validate.colors,
         });

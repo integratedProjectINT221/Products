@@ -9,7 +9,7 @@
     </router-link>
     <div
       id="nav"
-      class="border-black border-b w-screen h-16 pl-36 pt-7 space-x-32 md:text-base font-medium"
+      class="border-black border-b w-160 md:w-screen h-16 md:pl-36 pl-32 pt-7 md:space-x-32 md:text-base font-medium space-x-10"
     >
       <router-link to="/">Add new</router-link>
       <router-link to="/all_product_brands">Brands</router-link>

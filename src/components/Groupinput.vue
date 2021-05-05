@@ -280,7 +280,7 @@ export default {
       console.log(data)
     },
   },
-  updated() {
+  beforeUpdate() {
     if (this.edit===true) {
       this.validate = this.product
     }

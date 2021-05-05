@@ -7,8 +7,23 @@
     >
       {{ brand.brandName }}
     </p>
-
-    <div id="brands-page" class="w-screen flex justify-center">
+    <div class="mb-4">
+      <div class="inline-flex space-x-2 ml-116">
+        <router-link to="/all_product_brands">All Brands</router-link><span>></span>
+        <router-link :to="{path: `/product_collections/${brand.brandId}`}">{{this.brand.brandName}}</router-link>
+      </div>
+    </div>
+    <div id="brands-page" class="w-screen h-auto flex justify-center">
+    <div id="contrainer-brands" class="absolute left-28 space-y-2">
+      <p class="text-lg font-semibold pb-1">Brands</p>
+      <div v-for="brand in brands" :key="brand.brandId" id="loopbrands">
+        <router-link  @click="reloadPage(brand)"  :to="{path: `/product_collections/${brand.brandId}`}">
+            <div class="text-base cursor-pointer">
+              {{ brand.brandName }} 
+            </div>
+        </router-link>
+      </div>
+    </div>
       <div id="contrainer-brands" class="grid grid-cols-3 gap-4">
         <div
           v-for="product in productsByBrand"
@@ -48,12 +63,26 @@ export default {
       url: 'http://localhost:8081',
       productsByBrand: [],
       brand: {},
+      brands: [],
     };
   },
   methods: {
+    reloadPage(brand){
+      location.assign(`/product_collections/${brand.brandId}`)
+      console.log("reload!")
+    },
     blackBorder(colorId){
       if(colorId === '#FFFFFF'){
         return 'border border-gray-400 opacity-80'
+      }
+    },
+    async getBrands() {
+      try {
+        const res = await fetch(`${this.url}/brands`);
+        const data = await res.json();
+        return data;
+      } catch (error) {
+        console.log(error);
       }
     },
     async getProductsbyBrand() {
@@ -71,6 +100,7 @@ export default {
   },
   async created() {
     try {
+      this.brands = await this.getBrands();
       this.productsByBrand = await this.getProductsbyBrand();
       this.brand = await this.productsByBrand[0].brand;
     } catch (error) {
@@ -79,5 +109,13 @@ export default {
     // this.colors = await this.getColors();
     // this.brands = await this.getBrands();
   },
+  // async updated(){
+  //   try {
+  //     this.productsByBrand =  await this.getProductsbyBrand();
+  //     this.brand =  await this.productsByBrand[0].brand;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 };
 </script>

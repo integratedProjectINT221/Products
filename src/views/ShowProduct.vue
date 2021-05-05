@@ -91,7 +91,7 @@ export default {
         await fetch(`${this.url}/products/${this.$route.params.id}`, 
         {method: "DELETE"},
         alert("Delete Complete"),
-        this.$router.push(`/product_collections/${this.brand.brandId}`,));
+        location.assign(`/product_collections/${this.brand.brandId}`,));
     },
   },
   async created() {
