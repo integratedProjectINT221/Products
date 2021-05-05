@@ -1,16 +1,16 @@
 <template>
   <p id="header" class="text-2xl font-semibold text-center p-10">Brands</p>
   <!-- <BrandsView :brands="brands"/> -->
-  <div id="brands-page" class="md:w-screen flex justify-center w-160">
+  <div id="brands-page" class="md:w-screen w-160 flex justify-center">
     <div
       id="contrainer-brands"
-      class="grid md:grid-cols-4 grid-cols-2 gap-1 overflow-scroll overflow-x-hidden w-96 md:w-max"
+      class="grid md:grid-cols-4 grid-cols-2 gap-1  md:overflow-scroll md:overflow-x-hidden w-96 md:w-max"
       style="height: 30rem"
     >
       <div v-for="brand in brands" :key="brand.brandId" id="loopbrands">
         <router-link  :to="{path: `/product_collections/${brand.brandId}`}">
           <div 
-            class="bg-gray-300 md:h-40 md:w-40 w-44 h-44 hover:bg-gray-400 flex justify-center items-center group transition duration-100 cursor-pointer"
+            class="bg-gray-300 md:h-40  h-44 md:w-40 hover:bg-gray-400 flex justify-center items-center group transition duration-100 cursor-pointer"
           >
             <div
               class="text-gray-800 text-2xl p-5 font-medium group-hover:text-white transition duration-75 cursor-pointer break-words text-center"

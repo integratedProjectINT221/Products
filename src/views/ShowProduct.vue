@@ -2,7 +2,7 @@
 <template>
   <div v-show="!this.error"
     id="container-product"
-    class="flex flex-row h-full justify-center space-x-10 pt-10"
+    class="flex md:flex-row h-full md:justify-center md:space-x-10 pt-10 flex-col items-center md:items-start  w-160 md:w-screen"
   >
     <div id="component-preview-img">
       <div class="space-x-2 mb-4">
@@ -11,7 +11,7 @@
       <span>></span><router-link :to="{path: `/show/${this.product.prodId}`}">{{ this.product.prodName }}</router-link>
       </div>
       <div id="preview-img">
-        <img :src="`http://localhost:8081/files/${this.product.image}`" class="w-80 h-80 object-cover"/>
+        <img :src="`http://localhost:8081/files/${this.product.image}`" class="md:w-80 w-96 h-96 md:h-80 object-cover"/>
           <!-- <base-card> -->
           <!-- <img
           v-if="!changeImage"
@@ -24,7 +24,7 @@
       </div>
       <p class="text-center mt-4">{{ this.product.image }}</p>
     </div>
-    <div class="space-y-4 mt-10 w-64">
+    <div class="space-y-4 mt-10 w-96 md:w-64">
      <p class="text-3xl border-b border-gray-400 pb-3">{{ this.product.prodName }}</p>
       <div class="space-y-3 text-xl">
         <p>{{ this.brand.brandName }}</p>
