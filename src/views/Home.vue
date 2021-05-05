@@ -1,13 +1,13 @@
 
 <template>
   <div class="home">
-    <p id="header" class="md:text-2xl text-2xl font-semibold text-center md:p-10 p-5">
+    <p id="header" class="md:text-2xl text-2xl font-semibold text-center md:p-10 p-5 bg-red-200">
       Add new product
     </p>
     <form id="form" method="post" @submit.prevent="submitForm">
       <div
         id="product-form"
-        class="flex md:flex-row h-full justify-center md:space-x-16 flex-col items-center"
+        class="flex lg:flex-row h-full justify-center lg:space-x-16 flex-col items-center bg-blue-200"
       >
         <Groupinput
           @pass-validate="passValidate"

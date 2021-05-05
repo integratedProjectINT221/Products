@@ -1,7 +1,7 @@
 <template>
   <p
     id="header"
-    class="text-2xl font-semibold text-center p-10"
+    class="text-2xl font-semibold text-center p-10 bg-pink-500"
     v-if="this.brand !== null"
   >
     {{ brand.brandName }}
@@ -15,9 +15,9 @@
       }}</router-link>
     </div>
   </div> -->
-  <div id="brands-page" class="md:w-screen h-auto flex flex-row space-x-12 justify-center bg-green-200 w-160">
-    <div class="flex flex-row md:mr-64 mr-18"> 
-    <div id="contrainer-brands" class=" space-y-2 bg-blue-200 md:ml-20">
+  <div id="brands-page" class="md:w-screen h-auto flex flex-row md:space-x-12 justify-center bg-green-200 w-160">
+    <!-- <div class="flex flex-row bg-blue-700">  -->
+    <div id="contrainer-brands" class=" space-y-2 bg-blue-200">
       <p class="text-lg font-semibold pb-1">Brands</p>
       <div v-for="brand in brands" :key="brand.brandId" id="loopbrands">
         <router-link
@@ -31,15 +31,15 @@
       </div>
     </div> 
     
-    <div class="flex flex-col bg-pink-200 md:ml-28 ml-14  md:w-160 ">
-    <div class="inline-flex space-x-2 ">
+    <div class="flex flex-col bg-pink-200 md:ml-0 ml-14">
+    <div class="inline-flex space-x-2 bg-yellow-200 md:p-2">
       <router-link to="/all_product_brands">All Brands</router-link
       ><span>></span>
       <router-link :to="{ path: `/product_collections/${brand.brandId}` }">{{
         this.brand.brandName
       }}</router-link>
       </div>
-    <div id="contrainer-brands" class="grid md:grid-cols-2 grid-cols-1 md:gap-0 md:items-center bg-purple-200">
+    <div id="contrainer-brands" class="grid grid-cols-1 md:grid-cols-4 md:grid md:gap-2 bg-purple-200 border-red-600">
       
       <div
         v-for="product in productsByBrand"
@@ -49,7 +49,7 @@
         <router-link :to="{ path: `/show/${product.prodId}` }">
           <img
             :src="`http://localhost:8081/files/${product.image}`"
-            class="bg-gray-300 md:h-60 md:w-32 w-80 h-96 flex justify-center items-center group cursor-pointer object-cover"
+            class="bg-gray-300 md:h-60 md:w-40 w-80 h-96 flex justify-center items-center group cursor-pointer object-cover"
           />
         </router-link>
         <div
@@ -69,7 +69,7 @@
       </div>
     </div>
     </div>
-  </div>
+  <!-- </div> -->
   
   </div>
 </template>

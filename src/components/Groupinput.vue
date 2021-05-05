@@ -1,9 +1,9 @@
 
 <template>
-  <div id="component-preview-img">
-    <div id="preview-img">
-      <p class="font-semibold  text-xl p-1">Preview</p>
-      <div class="md:w-80 md:h-80 md:mt-4 w-96 h-96 bg-red-200">
+  <div id="component-preview-img" class="bg-green-200">
+    <div id="preview-img" class="bg-pink-200">
+      <p class="font-semibold text-xl p-1 ">Preview</p>
+      <div class="md:w-80 md:h-80 md:mt-4 w-96 h-96">
         <!-- <base-card> -->
         <img
           v-if="changeImage"
@@ -21,7 +21,7 @@
         Invalid Image!
       </div>
     </div>
-    <div id="upload-file" class="w-80 h-8  mt-4 space-x-4 flex-row flex  items-center">
+    <div id="upload-file" class="w-80 h-8  mt-4 space-x-4 flex-row flex  items-center bg-indigo-500">
       <label
         for="img"
         class="select-none custom-file-upload cursor-pointer  py-1 px-4 text-xl md:text-base rounded-md text-white bg-green-400 flex-none focus:outline-none hover:bg-green-300 transition delay-75"
@@ -39,7 +39,7 @@
       <p class="text-xl md:text-base break-all text-gray-500">{{ validate.image || 'No file chosen' }}</p>
     </div>
   </div>
-   <div id="container-input" class="flex flex-col w-80 h-1/6 space-y-2 mt-10 ">
+   <div id="container-input" class="bg-green-200 flex flex-col w-80 h-1/6 space-y-2 mt-10 ">
     <label for="name" class="font-semibold">Name</label>
     <input
       v-model="validate.prodName"
@@ -109,7 +109,7 @@
       Invalid product description!
     </div>
   </div>
-  <div id="container-colorsandlabel" class="mt-10">
+  <div id="container-colorsandlabel" class="mt-10 bg-green-300">
     <label for="color" class="font-semibold">Color</label>
     <div
       id="container-colors"
