@@ -2,7 +2,7 @@
 <template>
   <div id="component-preview-img">
     <div id="preview-img">
-      <p class="font-semibold md:text-xl text-2xl p-1">Preview</p>
+      <p class="font-semibold  text-xl p-1">Preview</p>
       <div class="md:w-80 md:h-80 md:mt-4 w-96 h-96 bg-red-200">
         <!-- <base-card> -->
         <img
@@ -21,10 +21,10 @@
         Invalid Image!
       </div>
     </div>
-    <div id="upload-file" class="md:w-80 md:h-8 w-96 h-14 mt-4 space-x-4 flex-row flex bg-red-200 items-center">
+    <div id="upload-file" class="w-80 h-8  mt-4 space-x-4 flex-row flex  items-center">
       <label
         for="img"
-        class="select-none custom-file-upload cursor-pointer md:py-1 md:px-4 py-3 px-8 text-xl rounded-md text-white bg-green-400 flex-none focus:outline-none hover:bg-green-300 transition delay-75"
+        class="select-none custom-file-upload cursor-pointer  py-1 px-4 text-xl md:text-base rounded-md text-white bg-green-400 flex-none focus:outline-none hover:bg-green-300 transition delay-75"
       >
         <input
           class="hidden"
@@ -36,10 +36,10 @@
         />
         Choose file
       </label>
-      <p class="text-xl break-all text-gray-500">{{ validate.image || 'No file chosen' }}</p>
+      <p class="text-xl md:text-base break-all text-gray-500">{{ validate.image || 'No file chosen' }}</p>
     </div>
   </div>
-  <!-- <div id="container-input" class="flex flex-col w-80 h-1/6 space-y-2 mt-10">
+   <div id="container-input" class="flex flex-col w-80 h-1/6 space-y-2 mt-10 ">
     <label for="name" class="font-semibold">Name</label>
     <input
       v-model="validate.prodName"
@@ -143,7 +143,7 @@
     </div>
     <div class="text-red-500 text-lg font-base" v-if="invalidProdColors">
       Invalid product colors!
-    </div>
+    </div> 
     <div class="submit-button mt-5 select-none">
       <base-button
         @click="dataSubmit"
@@ -155,7 +155,7 @@
     <div class="text-green-400 text-lg font-base" v-if="isSubmit">
       Product Added!
     </div>
-  </div> -->
+  </div> 
 
 </template>
 

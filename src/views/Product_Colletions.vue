@@ -31,7 +31,7 @@
       </div>
     </div> 
     
-    <div class="flex flex-col bg-pink-200 md:ml-28 ml-14  md:w-160">
+    <div class="flex flex-col bg-pink-200 md:ml-28 ml-14  md:w-160 ">
     <div class="inline-flex space-x-2 ">
       <router-link to="/all_product_brands">All Brands</router-link
       ><span>></span>
@@ -39,7 +39,7 @@
         this.brand.brandName
       }}</router-link>
       </div>
-    <div id="contrainer-brands" class="grid md:grid-cols-3 grid-cols-1 md:gap-4 ">
+    <div id="contrainer-brands" class="grid md:grid-cols-2 grid-cols-1 md:gap-0 md:items-center bg-purple-200">
       
       <div
         v-for="product in productsByBrand"
@@ -49,7 +49,7 @@
         <router-link :to="{ path: `/show/${product.prodId}` }">
           <img
             :src="`http://localhost:8081/files/${product.image}`"
-            class="bg-gray-300 md:h-60 md:w-48 w-80 h-96 flex justify-center items-center group cursor-pointer object-cover"
+            class="bg-gray-300 md:h-60 md:w-32 w-80 h-96 flex justify-center items-center group cursor-pointer object-cover"
           />
         </router-link>
         <div
