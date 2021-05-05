@@ -2,7 +2,7 @@
 <template>
   <div v-show="!this.error"
     id="container-product"
-    class="flex md:flex-row h-full justify-center space-x-10 pt-10 flex-col items-center"
+    class="flex md:flex-row h-full md:justify-center md:space-x-10 pt-10 flex-col items-center md:items-start  w-160 md:w-screen"
   >
     <div id="component-preview-img">
       <div class="space-x-2 mb-4">
@@ -24,7 +24,7 @@
       </div>
       <p class="text-center mt-4">{{ this.product.image }}</p>
     </div>
-    <div class="space-y-4 mt-10 w-64">
+    <div class="space-y-4 mt-10 w-96 md:w-64">
      <p class="text-3xl border-b border-gray-400 pb-3">{{ this.product.prodName }}</p>
       <div class="space-y-3 text-xl">
         <p>{{ this.brand.brandName }}</p>
