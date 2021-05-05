@@ -39,7 +39,7 @@
         this.brand.brandName
       }}</router-link>
       </div>
-    <div id="contrainer-brands" class="grid grid-cols-1 md:grid-cols-4 md:grid md:gap-2 bg-purple-200 border-red-600">
+    <div id="contrainer-brands" class="grid grid-cols-1 md:grid-cols-4 md:grid md:gap-2 bg-purple-200 lg:w-170 border-red-600">
       
       <div
         v-for="product in productsByBrand"

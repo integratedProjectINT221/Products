@@ -109,7 +109,7 @@
       Invalid product description!
     </div>
   </div>
-  <div id="container-colorsandlabel" class="mt-10 bg-green-300">
+  <div id="container-colorsandlabel" class="mt-10">
     <label for="color" class="font-semibold">Color</label>
     <div
       id="container-colors"
