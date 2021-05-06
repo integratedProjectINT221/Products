@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       brands: [],
-      url: 'http://localhost:8081',
+      url: 'http://product-backend-container:8081',
     };
   },
   methods: {
