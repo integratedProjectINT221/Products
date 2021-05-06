@@ -1,19 +1,19 @@
 module.exports = {
     devServer: {
         proxy: {
-            '/products': {
+            '^/products': {
                 target: 'http://104.215.183.81:8081/',
                 ws: true,
                 changeOrigin: true,
                 logLevel: 'debug'
             },
-            '/brands': {
+            '^/brands': {
                 target: 'http://104.215.183.81:8081/',
                 ws: true,
                 changeOrigin: true,
                 logLevel: 'debug'
             },
-            '/colors': {
+            '^/colors': {
                 target: 'http://104.215.183.81:8081/',
                 ws: true,
                 changeOrigin: true,
