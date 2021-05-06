@@ -2,7 +2,7 @@ module.exports = {
     devServer: {
         proxy: {
             '^/products': {
-                target: 'http://104.215.183.81:8081/',
+                target: 'https://reqres.in/',
                 ws: true,
                 changeOrigin: true,
                 logLevel: 'debug'
