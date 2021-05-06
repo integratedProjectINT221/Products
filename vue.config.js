@@ -1,7 +1,7 @@
 module.exports = {
     devServer: {
       proxy: {
-        '^/api': {
+        '^/products': {
           target: 'http://localhost:8081/',
           ws: true,
           changeOrigin: true
