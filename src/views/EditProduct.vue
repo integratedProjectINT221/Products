@@ -42,7 +42,7 @@ export default {
     return {
       product: {},
       label: "Save Change",
-      url: "http://product-backend-container",
+      url: "http://product-backend-container:8081",
       validate: {},
       colors: [
         // { id: "1", name: "white", value: "#FFFFFF", checked: false },

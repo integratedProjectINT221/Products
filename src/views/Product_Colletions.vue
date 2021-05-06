@@ -82,7 +82,7 @@ export default {
   // },
   data() {
     return {
-      url: "http://product-backend-container",
+      url: "http://product-backend-container:8081",
       productsByBrand: [],
       brand: {},
       brands: [],
