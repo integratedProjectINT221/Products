@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       label: "Add",
-      url: "http://172.20.0.3:8081",
+      url: "http://products_backend",
       validate: {},
       colors: [
         // { id: "1", name: "white", value: "#FFFFFF", checked: false },
