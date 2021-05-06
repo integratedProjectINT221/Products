@@ -43,7 +43,6 @@ export default {
   data() {
     return {
       label: "Add",
-      url: "http://localhost:8081",
       validate: {},
       colors: [
         // { id: "1", name: "white", value: "#FFFFFF", checked: false },
@@ -152,7 +151,7 @@ export default {
 
     async getColors() {
       try {
-        const res = await fetch(`${this.url}/colors`);
+        const res = await fetch(`/colors`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -170,7 +169,7 @@ export default {
     },
     async getBrands() {
       try {
-        const res = await fetch(`${this.url}/brands`);
+        const res = await fetch(`/brands`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -210,7 +209,7 @@ export default {
         let data = new FormData();
         data.append("file", this.selectedFile);
         data.append("product", blob);
-        await fetch(`${this.url}/products`, {
+        await fetch(`/products`, {
           method: "POST",
           body: data,
         });
