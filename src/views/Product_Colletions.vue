@@ -82,7 +82,7 @@ export default {
   // },
   data() {
     return {
-      url: "product-backend-container:8081",
+      url: "http://localhost:8081",
       productsByBrand: [],
       brand: {},
       brands: [],

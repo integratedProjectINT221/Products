@@ -62,7 +62,7 @@ export default {
     return {
       product: {},
       brand: {},
-      url: 'product-backend-container:8081',
+      url: 'http://localhost:8081',
       error:false
     };
   },
