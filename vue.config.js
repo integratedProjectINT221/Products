@@ -1,11 +1,7 @@
-// module.exports = {
-//     devServer: {
-//       proxy: {
-//         '^/products': {
-//           target: 'http://localhost:8081/',
-//           ws: true,
-//           changeOrigin: true
-//         },
-//       }
-//     }
-//   }
+
+module.exports = {
+    devServer: {
+        proxy: 'http://104.215.183.81:8081/'
+    }
+}
+
