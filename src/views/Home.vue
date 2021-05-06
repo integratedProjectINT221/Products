@@ -161,7 +161,7 @@ export default {
     },
     async getProducts() {
       try {
-        const res = await fetch(`${this.url}/products`);
+        const res = await fetch(`/products`);
         const data = await res.json();
         return data;
       } catch (error) {
