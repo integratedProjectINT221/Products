@@ -44,6 +44,7 @@ export default {
     return {
       label: "Add",
       validate: {},
+      // url: "http://localhost:8081",
       colors: [
         // { id: "1", name: "white", value: "#FFFFFF", checked: false },
         // { id: "2", name: "black", value: "#000000", checked: false },

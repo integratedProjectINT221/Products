@@ -42,7 +42,7 @@ export default {
     return {
       product: {},
       label: "Save Change",
-      url: "http://localhost:8081",
+      // url: "http://localhost:8081",
       validate: {},
       colors: [
         // { id: "1", name: "white", value: "#FFFFFF", checked: false },
@@ -185,7 +185,7 @@ export default {
 
     async getColors() {
       try {
-        const res = await fetch(`${this.url}/colors`);
+        const res = await fetch(`/colors`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -194,7 +194,7 @@ export default {
     },
     async getProducts() {
       try {
-        const res = await fetch(`${this.url}/products`);
+        const res = await fetch(`/products`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -203,7 +203,7 @@ export default {
     },
     async getBrands() {
       try {
-        const res = await fetch(`${this.url}/brands`);
+        const res = await fetch(`/brands`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -213,7 +213,7 @@ export default {
     async getProductById() {
       try {
         const res = await fetch(
-          `${this.url}/products/${this.$route.params.id}`
+          `/products/${this.$route.params.id}`
         );
         const data = await res.json();
         return data;

@@ -82,7 +82,7 @@ export default {
   // },
   data() {
     return {
-      url: "http://localhost:8081",
+      // url: "http://localhost:8081",
       productsByBrand: [],
       brand: {},
       brands: [],
@@ -110,7 +110,7 @@ export default {
     async getProductsbyBrand() {
       try {
         const res = await fetch(
-          `${this.url}/productsByBrand/${this.$route.params.brandId}`
+          `/productsByBrand/${this.$route.params.brandId}`
         );
         console.log(res);
         const data = await res.json();
