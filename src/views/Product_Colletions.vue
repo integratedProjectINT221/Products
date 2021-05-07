@@ -100,7 +100,7 @@ export default {
     },
     async getBrands() {
       try {
-        const res = await fetch(`${this.url}/brands`);
+        const res = await fetch(`/brands`);
         const data = await res.json();
         return data;
       } catch (error) {
