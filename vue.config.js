@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 module.exports = {
     devServer: {
         proxy: {
@@ -29,12 +28,3 @@ module.exports = {
         }
     }
 }
-=======
-
-// module.exports = {
-//     devServer: {
-//         proxy: 'http://104.215.183.81:8081/'
-//     }
-// }
-
->>>>>>> f8a0b226a02b9f86895a2b80f03c911c17d6bddd
