@@ -13,7 +13,7 @@
         <img
           v-else
           class="md:w-80 md:h-80 w-96 h-96 object-cover border-2 bg-gray-300"
-          :src="`http://localhost:8081/files/${validate.image}`"
+          :src="`/files/${validate.image}`"
         />
         <!-- </base-card> -->
       </div>

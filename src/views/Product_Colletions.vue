@@ -48,7 +48,7 @@
       >
         <router-link :to="{ path: `/show/${product.prodId}` }">
           <img
-            :src="`http://localhost:8081/files/${product.image}`"
+            :src="`/files/${product.image}`"
             class="bg-gray-300 md:h-60 md:w-40 w-80 h-96 flex justify-center items-center group cursor-pointer object-cover"
           />
         </router-link>
