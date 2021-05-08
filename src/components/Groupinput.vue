@@ -8,12 +8,12 @@
         <img
           v-if="changeImage"
           class="md:w-80 md:h-80 w-96 h-96 object-cover border-2 bg-gray-300"
-          :src="previewImage ||'https://cwimports.com.au/wp-content/uploads/2020/10/no-image.png'"
+          :src="previewImage || `/files/${validate.image}`"
         />
         <img
           v-else
           class="md:w-80 md:h-80 w-96 h-96 object-cover border-2 bg-gray-300"
-          :src="`/files/${validate.image}`"
+          src="https://cwimports.com.au/wp-content/uploads/2020/10/no-image.png"
         />
         <!-- </base-card> -->
       </div>
@@ -163,10 +163,8 @@
 export default {
   name: "Groupinput",
   props: {
-    edit: {
+    isEditing:{
       type: Boolean,
-      require: true,
-      default: false
     },
     product: {
       type: Object,
@@ -273,8 +271,9 @@ export default {
     },
   },
   beforeUpdate() {
-    if (this.edit===true) {
+    if (this.isEditing) {
       this.validate = this.product
+      console.log(this.validate)
     }
   },
 };

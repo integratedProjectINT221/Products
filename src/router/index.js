@@ -2,15 +2,16 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
+    path: '/AddEditProduct/:id',
+    alias: '/AddEditProduct',
+    name: 'AddEditProduct',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AddEditProduct.vue')
   },
-  {
-    path: '/edit/:id',
-    name: 'EditProduct',
-    component: () => import(/* webpackChunkName: "about" */ '../views/EditProduct.vue')
-  },
+  // {
+  //   path: '/edit/:id',
+  //   name: 'EditProduct',
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/EditProduct.vue')
+  // },
   {
     path: '/all_product_brands',
     name: 'All Product Brands',
@@ -29,12 +30,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Product_Colletions.vue')
   },
   {
-    path: '/our_story',
-    name: 'Our Story',
+    path: '/Team',
+    name: 'Team',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/OurStory.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Team.vue')
   },
   {
     path: '/show/:id',

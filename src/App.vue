@@ -1,6 +1,6 @@
 <template>
   <div id="background" class="bg-white md:h-screen md:w-screen w-160">
-    <router-link to="/">
+    <router-link to="/AddEditProduct">
       <img
         src="@/assets/logo.png"
         ref="shopping_logo"
@@ -11,9 +11,9 @@
       id="nav"
       class="border-black border-b w-160 md:w-screen h-16 md:pl-36 pl-32 pt-5 md:pt-7 md:space-x-32 md:text-base text-lg font-medium space-x-10"
     >
-      <router-link to="/">Add new</router-link>
+      <router-link to="/AddEditProduct">Add new</router-link>
       <router-link to="/all_product_brands">Brands</router-link>
-      <router-link to="/our_story">Our Strory</router-link>
+      <router-link to="/Team">Our Strory</router-link>
     </div>
     <router-view />
   </div>
