@@ -11,7 +11,7 @@
       <span>></span><router-link :to="{path: `/show/${this.product.prodId}`}">{{ this.product.prodName }}</router-link>
       </div>
       <div id="preview-img">
-        <img :src="`http://localhost:8081/files/${this.product.image}`" class="md:w-80 w-96 h-96 md:h-80 object-cover"/>
+        <img :src="`/files/${this.product.image}`" class="md:w-80 w-96 h-96 md:h-80 object-cover"/>
           <!-- <base-card> -->
           <!-- <img
           v-if="!changeImage"
