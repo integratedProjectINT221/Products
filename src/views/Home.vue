@@ -37,11 +37,13 @@
 <script>
 // import Previewimage from "@/components/Previewimage";
 import Groupinput from "@/components/Groupinput";
+import axios from 'axios';
 export default {
   name: "Home",
   components: { Groupinput },
   data() {
     return {
+    
       label: "Add",
       validate: {},
       // url: "http://localhost:8081",
@@ -210,10 +212,16 @@ export default {
         let data = new FormData();
         data.append("file", this.selectedFile);
         data.append("product", blob);
-        await fetch(`/products`, {
-          method: "POST",
-          body: data,
-        });
+        
+        // await fetch(`/products`, {
+        //   method: "POST",
+        //   body: data,
+        // });
+        await axios({
+  method: 'post',
+  url: '/products',
+  data: data,
+})
       } catch (error) {
         console.log(`Failed to add product! + ${error}`);
       }
