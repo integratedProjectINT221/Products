@@ -1,23 +1,13 @@
 <template>
   <p
     id="header"
-    class="text-2xl font-semibold text-center p-10 bg-pink-500"
+    class="text-2xl font-semibold text-center p-10"
     v-if="this.brand !== null"
   >
     {{ brand.brandName }}
   </p>
-  <!-- <div class="w-screen h-auto flex justify-center">
-    <div class="inline-flex space-x-2">
-      <router-link to="/all_product_brands">All Brands</router-link
-      ><span>></span>
-      <router-link :to="{ path: `/product_collections/${brand.brandId}` }">{{
-        this.brand.brandName
-      }}</router-link>
-    </div>
-  </div> -->
-  <div id="brands-page" class="md:w-screen h-auto flex flex-row md:space-x-12 justify-center bg-green-200 w-160">
-    <!-- <div class="flex flex-row bg-blue-700">  -->
-    <div id="contrainer-brands" class=" space-y-2 bg-blue-200">
+  <div id="brands-page" class="md:w-screen md:h-screen flex flex-row w-160 justify-center">
+    <div id="contrainer-brands" class="space-y-2 h-full md:w-60">
       <p class="text-lg font-semibold pb-1">Brands</p>
       <div v-for="brand in brands" :key="brand.brandId" id="loopbrands">
         <router-link
@@ -30,16 +20,16 @@
         </router-link>
       </div>
     </div> 
-    
-    <div class="flex flex-col bg-pink-200 md:ml-0 ml-14">
-    <div class="inline-flex space-x-2 bg-yellow-200 md:p-2">
+  <div class="md:flex md:justify-start">
+    <div class="flex flex-col md:ml-0 px-5">
+    <div class="inline-flex space-x-2 md:py-2">
       <router-link to="/all_product_brands">All Brands</router-link
       ><span>></span>
       <router-link :to="{ path: `/product_collections/${brand.brandId}` }">{{
         this.brand.brandName
       }}</router-link>
-      </div>
-    <div id="contrainer-brands" class="grid grid-cols-1 md:grid-cols-4 md:grid md:gap-2 bg-purple-200 lg:w-170 border-red-600">
+    </div>
+    <div id="contrainer-brands" class="grid grid-cols-1 md:grid-cols-4 md:grid md:gap-2 lg:w-170">
       
       <div
         v-for="product in productsByBrand"
@@ -69,20 +59,14 @@
       </div>
     </div>
     </div>
-  <!-- </div> -->
-  
+  </div>
   </div>
 </template>
 <script>
 export default {
   name: "Product Collections",
-  // props: {
-  //   passBrandId: String,
-  //   passBrandName: String,
-  // },
   data() {
     return {
-      // url: "http://localhost:8081",
       productsByBrand: [],
       brand: {},
       brands: [],
@@ -128,16 +112,6 @@ export default {
     } catch (error) {
       console.log(error);
     }
-    // this.colors = await this.getColors();
-    // this.brands = await this.getBrands();
   },
-  // async updated(){
-  //   try {
-  //     this.productsByBrand =  await this.getProductsbyBrand();
-  //     this.brand =  await this.productsByBrand[0].brand;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
 };
 </script>

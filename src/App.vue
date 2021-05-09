@@ -1,5 +1,5 @@
 <template>
-  <div id="background" class="bg-white md:h-screen md:w-screen w-160">
+  <div id="background" class="bg-white md:h-screen md:w-screen w-160 font-poppins">
     <router-link to="/">
       <img
         src="@/assets/logo.png"

@@ -11,6 +11,9 @@ module.exports = {
         '170': '50rem',
         '180': '64rem',
         '200': '80rem'
+      },
+      fontFamily:{
+        'poppins': "'poppins'",
       }
     },
   },

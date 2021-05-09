@@ -12,15 +12,6 @@
       </div>
       <div id="preview-img">
         <img :src="`/files/${this.product.image}`" class="md:w-80 w-96 h-96 md:h-80 object-cover"/>
-          <!-- <base-card> -->
-          <!-- <img
-          v-if="!changeImage"
-          class="w-80 h-80"
-          :src="require(`@/assets/${filename}`)"
-          ref="Product Image"
-        > -->
-          <!-- </base-card> -->
-        
       </div>
       <p class="text-center mt-4">{{ this.product.image }}</p>
     </div>
@@ -48,21 +39,16 @@
       </router-link>
       <base-button @click="deleteProductsbyId" label="Delete" border="border-2" textcolor="text-red-500" hovercolor="hover:bg-red-500" bordercolor="border-red-500"></base-button>
       </div>
-      <!-- {{$route.params.id}} -->
     </div>
   </div>
 </template>
 <script>
 export default {
   name: "Show Product",
-  // props: {
-  //   passProdId: String,
-  // },
   data() {
     return {
       product: {},
       brand: {},
-      // url: 'http://localhost:8081',
       error:false
     };
   },
@@ -95,11 +81,8 @@ export default {
     },
   },
   async created() {
-    // this.colors = await this.getColors();
-    // this.brands = await this.getBrands();
     this.product = await this.getProductsbyId();
     this.brand = await this.product.brand;
-    // console.log(this.passProdId)
   },
 };
 </script>

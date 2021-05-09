@@ -6,7 +6,7 @@
         id="product-form"
         class="flex flex-row h-full justify-center space-x-16"
       >
-        <Groupinput
+        <AddEditProduct
           @pass-validate="passValidate"
           :invalidProdName="invalidProdName"
           :invalidProdBrand="invalidProdBrand"
@@ -27,31 +27,21 @@
         />
       </div>
     </form>
-    <!-- {{this.validate}}
-    {{this.checkedColor}} -->
   </div>
 </template>
 
 <script>
-// import Previewimage from "@/components/Previewimage";
-import Groupinput from "@/components/Groupinput";
+import AddEditProduct from "@/components/AddEditProduct";
 export default {
   name: "Edit",
-  components: { Groupinput },
+  components: { AddEditProduct},
   data() {
     return {
       product: {},
       label: "Save Change",
-      // url: "http://localhost:8081",
       validate: {},
-      colors: [
-        // { id: "1", name: "white", value: "#FFFFFF", checked: false },
-        // { id: "2", name: "black", value: "#000000", checked: false },
-      ],
-      brands: [
-        // { id: "1", name: "test1" },
-        // { id: "2", name: "test2" },
-      ],
+      colors: [],
+      brands: [],
       products: [],
       invalidProdName: false,
       invalidProdBrand: false,
@@ -67,28 +57,14 @@ export default {
   },
   methods: {
     submitForm() {
-      console.log(this.validate.colors);
-      // let i = 0;
       this.invalidProdName = this.validate.name === "" ? true : false;
       this.invalidProdBrand = this.validate.brand === "" ? true : false;
       this.invalidProdPrice =
-        this.validate.price <= 0
-          ? true
-          : typeof this.validate.price === "string"
-          ? true
-          : false;
+      this.validate.price === "" ? true : this.validate.price <= 0 ? true : typeof this.validate.price === "string"? true : false;
       this.invalidProdDes = this.validate.description === "" ? true : false;
       this.invalidProdDate = this.validate.date === "" ? true : false;
       this.invalidProdColors = this.validate.colors.length === 0 ? true : false;
-      // this.invalidProdImage = this.changeImage === false ? true : false;
-      // for (i = 0; i < this.products.length; i++) {
-      //   if (
-      //     this.products[i].prodName.toLowerCase() ===
-      //     this.validate.name.toLowerCase()
-      //   ) {
-      //     this.invalidProdName = true;
-      //   }
-      // }
+      this.invalidProdImage = this.validate.image === "" ? true : false;
       if (
         this.invalidProdName ||
         this.invalidProdBrand ||
@@ -101,8 +77,6 @@ export default {
         this.isSubmit = false;
         return;
       } else {
-        // this.editProduct();
-        // this.addPicture();
         this.editProductAndPic();
         this.isSubmit = true;
         this.invalidProdName = false;
@@ -119,44 +93,10 @@ export default {
     },
     passValidate(validate) {
       this.validate = validate;
-      // for(let i = 0; i < this.validate.colors.length; i++ ){
-      //   var color = this.validate.colors
-      //   delete color[i]["checked"];
-      // }
-      // console.log(this.validate.colors)
     },
-    // async addPicture() {
-    //   console.log(this.selectedFile);
-    //   let data = new FormData();
-    //   data.append("file", this.selectedFile);
-    //   console.log(data);
-    //   try {
-    //     await fetch(`${this.url}/upload`, {
-    //       method: "POST",
-    //       body: data,
-    //     });
-    //     console.log(this.onUploadProgress);
-    //   } catch (error) {
-    //     console.log(`Failed to add product! + ${error}`);
-    //   }
-    // },
     async editProductAndPic() {
       try {
         console.log(this.validate);
-        // await fetch(`${this.url}/products`, {
-        //   method: "PUT",
-
-        //   body: JSON.stringify({
-        //     prodId:100000,
-        //     prodName: this.validate.name,
-        //     description: this.validate.description,
-        //     price: this.validate.price,
-        //     date: this.validate.date,
-        //     image: this.selectedFile.name,
-        //     brand: this.validate.brand,
-        //     colors: this.validate.colors,
-        //   }),
-        // });
         const jsonProduct = JSON.stringify({
           prodId: this.$route.params.id,
           prodName: this.validate.name,
@@ -227,15 +167,6 @@ export default {
     this.brands = await this.getBrands();
     this.products = await this.getProducts();
     this.product = await this.getProductById();
-    console.log(this.products.colors);
-    // for (let index = 0; index < this.products.length; index++) {
-
-    //   for (let j = 0; j < this.products[index].colors.length; j++) {
-    //     this.products[index].colors[j]["checked"] = true;
-    //   }
-
-    // console.log(this.products)
-    // }
     for (let index = 0; index < this.product.colors.length; index++) {
       for (let i = 0; i < this.colors.length; i++) {
         if (this.product.colors[index].colorId == this.colors[i].colorId) {

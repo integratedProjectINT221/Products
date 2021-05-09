@@ -1,11 +1,11 @@
 <template>
   <p class="text-center font-bold text-4xl py-5 md:pb-20 md:pt-10 md:text-5xl">TEAM</p>
-  <div class="md:flex md:flex-row md:justify-center md:space-y-0 md:space-x-5 flex flex-col items-center space-y-4" id="Team">
+  <div class="md:flex md:flex-row md:justify-center md:space-y-0 md:space-x-5 flex flex-col md:items-baseline items-center space-y-4" id="Team">
     <div v-for="(member, index) in team" :key="index" class="loopMember">
-      <div id="container-member" class="flex flex-col text-2xl font-medium">
+      <div id="container-member" class="flex flex-col text-2xl font-medium md:text-lg">
         <img
-          :src="require(`../assets/${member.image}`)"
-          class="w-96 h-160 object-cover mb-2"
+          :src="require(`@/assets/${member.image}`)"
+          class="w-96 h-160 object-cover mb-2 md:w-72 md:h-160"
         />
         <p>{{ member.studentId }}</p>
         <p class="mb-5">{{ member.name }}</p>

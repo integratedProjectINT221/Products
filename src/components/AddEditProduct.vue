@@ -1,10 +1,9 @@
 
 <template>
-  <div id="component-preview-img" class="bg-green-200">
-    <div id="preview-img" class="bg-pink-200">
+  <div id="component-preview-img" >
+    <div id="preview-img">
       <p class="font-semibold text-xl p-1 ">Preview</p>
       <div class="md:w-80 md:h-80 md:mt-4 w-96 h-96">
-        <!-- <base-card> -->
         <img
           v-if="changeImage"
           class="md:w-80 md:h-80 w-96 h-96 object-cover border-2 bg-gray-300"
@@ -15,13 +14,12 @@
           class="md:w-80 md:h-80 w-96 h-96 object-cover border-2 bg-gray-300"
           :src="`/files/${validate.image}`"
         />
-        <!-- </base-card> -->
       </div>
       <div class="text-red-500 text-lg font-base" v-if="invalidProdImage">
         Invalid Image!
       </div>
     </div>
-    <div id="upload-file" class="w-80 h-8  mt-4 space-x-4 flex-row flex  items-center bg-indigo-500">
+    <div id="upload-file" class="w-80 h-8  mt-4 space-x-4 flex-row flex  items-center">
       <label
         for="img"
         class="select-none custom-file-upload cursor-pointer  py-1 px-4 text-xl md:text-base rounded-md text-white bg-green-400 flex-none focus:outline-none hover:bg-green-300 transition delay-75"
@@ -39,14 +37,15 @@
       <p class="text-xl md:text-base break-all text-gray-500">{{ validate.image || 'No file chosen' }}</p>
     </div>
   </div>
-   <div id="container-input" class="bg-green-200 flex flex-col w-80 h-1/6 space-y-2 mt-10 ">
+   <div id="container-input" class="flex flex-col w-80 h-1/6 space-y-2 mt-10">
     <label for="name" class="font-semibold">Name</label>
     <input
+      placeholder="Enter your product name"
       v-model="validate.prodName"
       type="text"
       name="name"
       id="name"
-      class="border-gray-400 border pl-1"
+      class="border-gray-400 border pl-1 focus:outline-none"
     />
     <div class="text-red-500 text-lg font-base" v-if="invalidProdName">
       Invalid validate name!
@@ -56,8 +55,9 @@
       v-model="validate.brand"
       name="brand"
       id="brand"
-      class="border-gray-400 border pl-1"
-    >
+      class="border-gray-400 border pl-1 focus:outline-none"
+    >  
+      <option value="" selected disabled hidden>Choose brand of your product</option>
       <option
         v-for="brand in brands"
         :key="brand.brandId"
@@ -77,31 +77,33 @@
         type="text"
         name="price"
         id="price"
-        class="w-20 border-gray-400 border pl-1"
+        placeholder="0"
+        class="w-20 border-gray-400 border pl-1 focus:outline-none"
       />
       <label class="currency p-2">THB</label>
       <div class="text-red-500 text-lg font-base" v-if="invalidProdPrice">
         Invalid product price!
       </div>
     </div>
-    <label for="date" class="font-semibold">Date</label>
+    <label for="date" class="font-semibold">Date of Manufactural</label>
     <input
       v-model="validate.date"
       type="date"
       name="date"
       id="date"
-      class="border-gray-400 border pl-1"
+      class="border-gray-400 border pl-1 focus:outline-none" 
     />
     <div class="text-red-500 text-lg font-base" v-if="invalidProdDate">
       Invalid product date!
     </div>
     <label for="Description" class="font-semibold">Description</label>
     <textarea
+      placeholder="Describe your product"
       name="Description"
       id="Description"
       cols="50"
       rows="4"
-      class="border-gray-400 border pl-1"
+      class="border-gray-400 border pl-1 focus:outline-none"
       v-model="validate.description"
     >
     </textarea>
@@ -229,7 +231,7 @@ export default {
       previewImage: null,
       validate: {
         prodName: "",
-        price: 0.0,
+        price: "",
         description: "",
         date: "",
         brand: "",
