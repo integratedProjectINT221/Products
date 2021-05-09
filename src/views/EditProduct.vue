@@ -125,7 +125,7 @@ export default {
 
     async getColors() {
       try {
-        const res = await fetch(`/colors`);
+        const res = await fetch(`/api/colors`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -134,7 +134,7 @@ export default {
     },
     async getProducts() {
       try {
-        const res = await fetch(`/products`);
+        const res = await fetch(`/api/products`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -143,7 +143,7 @@ export default {
     },
     async getBrands() {
       try {
-        const res = await fetch(`/brands`);
+        const res = await fetch(`/api/brands`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -153,7 +153,7 @@ export default {
     async getProductById() {
       try {
         const res = await fetch(
-          `/products/${this.$route.params.id}`
+          `/api/products/${this.$route.params.id}`
         );
         const data = await res.json();
         return data;

@@ -12,7 +12,7 @@
         <img
           v-else
           class="md:w-80 md:h-80 w-96 h-96 object-cover border-2 bg-gray-300"
-          :src="`/files/${validate.image}`"
+          :src="`/api/files/${validate.image}`"
         />
       </div>
       <div class="text-red-500 text-lg font-base" v-if="invalidProdImage">

@@ -11,7 +11,7 @@
       <span>></span><router-link :to="{path: `/show/${this.product.prodId}`}">{{ this.product.prodName }}</router-link>
       </div>
       <div id="preview-img">
-        <img :src="`/files/${this.product.image}`" class="md:w-80 w-96 h-96 md:h-80 object-cover"/>
+        <img :src="`/api/files/${this.product.image}`" class="md:w-80 w-96 h-96 md:h-80 object-cover"/>
       </div>
       <p class="text-center mt-4">{{ this.product.image }}</p>
     </div>
@@ -60,7 +60,7 @@ export default {
     },
     async getProductsbyId() {
       try {
-        const res = await fetch(`/products/${this.$route.params.id}`, {
+        const res = await fetch(`/api/products/${this.$route.params.id}`, {
         });
         console.log(res)
         const data = await res.json();
@@ -74,7 +74,7 @@ export default {
       if(confirm("Do you want to delete this photo?") === false){
         return;
       }
-        await fetch(`/products/${this.$route.params.id}`, 
+        await fetch(`/api/products/${this.$route.params.id}`, 
         {method: "DELETE"},
         alert("Delete Complete"),
         location.assign(`/product_collections/${this.brand.brandId}`,));

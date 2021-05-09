@@ -5,7 +5,7 @@
       Add new product
     </p>
     <form id="form" method="post" @submit.prevent="submitForm">
-      <div id="product-form" class="flex lg:flex-row h-full justify-center lg:space-x-16 flex-col items-cente">
+      <div id="product-form" class="flex lg:flex-row h-full justify-center lg:space-x-16 flex-col items-center">
         <AddEditProduct
           @pass-validate="passValidate"
           :invalidProdName="invalidProdName"
@@ -115,7 +115,7 @@ export default {
     },
     async getColors() {
       try {
-        const res = await fetch(`/colors`);
+        const res = await fetch(`/api/colors`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -124,7 +124,7 @@ export default {
     },
     async getProducts() {
       try {
-        const res = await fetch(`/products`);
+        const res = await fetch(`/api/products`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -133,7 +133,7 @@ export default {
     },
     async getBrands() {
       try {
-        const res = await fetch(`/brands`);
+        const res = await fetch(`/api/brands`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -159,7 +159,7 @@ export default {
         data.append("file", this.selectedFile);
         data.append("product", blob);
         
-        await fetch(`/products`, {
+        await fetch(`/api/products`, {
           method: "POST",
           body: data,
         });
