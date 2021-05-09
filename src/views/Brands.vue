@@ -34,7 +34,7 @@ export default {
   methods: {
     async getBrands() {
       try {
-        const res = await fetch(`/api/brands`);
+        const res = await fetch(`/api/show/brands`);
         const data = await res.json();
         return data;
       } catch (error) {

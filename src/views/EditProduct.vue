@@ -114,7 +114,7 @@ export default {
         console.log(this.selectedFile)
         data.append("file", this.selectedFile);
         data.append("product", blob);
-        await fetch(`/api/products`, {
+        await fetch(`/api/edit/product`, {
           method: "PUT",
           body: data,
         });
@@ -125,7 +125,7 @@ export default {
 
     async getColors() {
       try {
-        const res = await fetch(`/api/colors`);
+        const res = await fetch(`/api/show/colors`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -134,7 +134,7 @@ export default {
     },
     async getProducts() {
       try {
-        const res = await fetch(`/api/products`);
+        const res = await fetch(`/api/show/products`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -143,7 +143,7 @@ export default {
     },
     async getBrands() {
       try {
-        const res = await fetch(`/api/brands`);
+        const res = await fetch(`/api/show/brands`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -153,7 +153,7 @@ export default {
     async getProductById() {
       try {
         const res = await fetch(
-          `/api/products/${this.$route.params.id}`
+          `/api/show/product/${this.$route.params.id}`
         );
         const data = await res.json();
         return data;

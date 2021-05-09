@@ -6,12 +6,12 @@
   >
     <div id="component-preview-img">
       <div class="space-x-2 mb-4">
-      <router-link to="/all_product_brands">All Brands</router-link><span>></span>
-      <router-link :to="{path: `/product_collections/${brand.brandId}`}">{{this.brand.brandName}}</router-link>
+      <router-link to="/Brands">All Brands</router-link><span>></span>
+      <router-link :to="{path: `/ProductsbyBrand/${brand.brandId}`}">{{this.brand.brandName}}</router-link>
       <span>></span><router-link :to="{path: `/show/${this.product.prodId}`}">{{ this.product.prodName }}</router-link>
       </div>
       <div id="preview-img">
-        <img :src="`/api/files/${this.product.image}`" class="md:w-80 w-96 h-96 md:h-80 object-cover"/>
+        <img :src="`/api/show/file/${this.product.image}`" class="md:w-80 w-96 h-96 md:h-80 object-cover"/>
       </div>
       <p class="text-center mt-4">{{ this.product.image }}</p>
     </div>
@@ -37,7 +37,7 @@
        <router-link :to="`/edit/${this.product.prodId}`">
       <base-button label="Edit" border="border-2" bordercolor="border-gray-700"></base-button>
       </router-link>
-      <base-button @click="deleteProductsbyId" label="Delete" border="border-2" textcolor="text-red-500" hovercolor="hover:bg-red-500" bordercolor="border-red-500"></base-button>
+      <base-button @click="deleteProductbyId" label="Delete" border="border-2" textcolor="text-red-500" hovercolor="hover:bg-red-500" bordercolor="border-red-500"></base-button>
       </div>
     </div>
   </div>
@@ -58,9 +58,9 @@ export default {
         return 'border border-gray-400 opacity-80'
       }
     },
-    async getProductsbyId() {
+    async getProductbyId() {
       try {
-        const res = await fetch(`/api/products/${this.$route.params.id}`, {
+        const res = await fetch(`/api/show/product/${this.$route.params.id}`, {
         });
         console.log(res)
         const data = await res.json();
@@ -70,18 +70,18 @@ export default {
         this.error = true
       }
     },
-    async deleteProductsbyId() {
+    async deleteProductbyId() {
       if(confirm("Do you want to delete this photo?") === false){
         return;
       }
-        await fetch(`/api/products/${this.$route.params.id}`, 
+        await fetch(`/api/delete/product/${this.$route.params.id}`, 
         {method: "DELETE"},
         alert("Delete Complete"),
-        location.assign(`/product_collections/${this.brand.brandId}`,));
+        location.assign(`/ProductsbyBrand/${this.brand.brandId}`,));
     },
   },
   async created() {
-    this.product = await this.getProductsbyId();
+    this.product = await this.getProductbyId();
     this.brand = await this.product.brand;
   },
 };

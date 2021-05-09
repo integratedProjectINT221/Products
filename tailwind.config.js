@@ -14,6 +14,7 @@ module.exports = {
       },
       fontFamily:{
         'poppins': "'poppins'",
+        'rubik' : "'rubik'"
       }
     },
   },

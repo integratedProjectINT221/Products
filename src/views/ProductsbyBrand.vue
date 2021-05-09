@@ -38,7 +38,7 @@
       >
         <router-link :to="{ path: `/show/${product.prodId}` }">
           <img
-            :src="`/api/files/${product.image}`"
+            :src="`/api/show/file/${product.image}`"
             class="bg-gray-300 md:h-60 md:w-40 w-80 h-96 flex justify-center items-center group cursor-pointer object-cover"
           />
         </router-link>
@@ -84,7 +84,7 @@ export default {
     },
     async getBrands() {
       try {
-        const res = await fetch(`/api/brands`);
+        const res = await fetch(`/api/show/brands`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -94,7 +94,7 @@ export default {
     async getProductsbyBrand() {
       try {
         const res = await fetch(
-          `/api/products/productsByBrand/${this.$route.params.brandId}`
+          `/api/show/products/brand/${this.$route.params.brandId}`
         );
         console.log(res);
         const data = await res.json();

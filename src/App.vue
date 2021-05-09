@@ -4,7 +4,7 @@
       <img
         src="@/assets/logo.png"
         ref="shopping_logo"
-        class="absolute w-16 h-16 top-8 left-8"
+        class="absolute w-16 h-16 top-8 left-8 z-50"
       />
     </router-link>
     <div

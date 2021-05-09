@@ -12,7 +12,7 @@
         <img
           v-else
           class="md:w-80 md:h-80 w-96 h-96 object-cover border-2 bg-gray-300"
-          :src="`/api/files/${validate.image}`"
+          :src="`/api/show/file/${validate.image}`"
         />
       </div>
       <div class="text-red-500 text-lg font-base" v-if="invalidProdImage">
@@ -253,7 +253,6 @@ export default {
         let reader = new FileReader();
         reader.onload = (event) => {
           this.previewImage = event.target.result;
-          console.log(this.previewImage)
         };
         reader.readAsDataURL(selectedFile);
       }
@@ -270,7 +269,6 @@ export default {
         image: this.validate.image,
       };
       this.$emit("pass-validate", data);
-      console.log(data)
     },
   },
   beforeUpdate() {
