@@ -114,7 +114,7 @@ export default {
         console.log(this.selectedFile)
         data.append("file", this.selectedFile);
         data.append("product", blob);
-        await fetch(`/products`, {
+        await fetch(`/api/products`, {
           method: "PUT",
           body: data,
         });
