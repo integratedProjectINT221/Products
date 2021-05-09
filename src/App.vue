@@ -1,6 +1,6 @@
 <template>
   <div id="background" class="bg-white md:h-screen md:w-screen w-160 font-poppins">
-    <router-link to="/Home">
+    <router-link to="/">
       <img
         src="@/assets/logo.png"
         ref="shopping_logo"

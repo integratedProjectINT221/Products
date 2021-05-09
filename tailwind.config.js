@@ -13,8 +13,7 @@ module.exports = {
         '200': '80rem'
       },
       fontFamily:{
-        'poppins': "'poppins'",
-        'rubik' : "'rubik'"
+        'poppins' : "'poppins'",
       }
     },
   },
