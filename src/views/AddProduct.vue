@@ -115,7 +115,7 @@ export default {
     },
     async getColors() {
       try {
-        const res = await fetch(`/colors`);
+        const res = await fetch(`/api/colors`);
         const data = await res.json();
         return data;
       } catch (error) {
