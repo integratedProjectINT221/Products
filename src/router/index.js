@@ -3,6 +3,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
+    name: 'Home',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
+  },
+  {
+    path: '/add',
     name: 'AddProduct',
     component: () => import(/* webpackChunkName: "about" */ '../views/AddProduct.vue')
   },
@@ -12,21 +17,21 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/EditProduct.vue')
   },
   {
-    path: '/all_product_brands',
-    name: 'All Product Brands',
+    path: '/Brands',
+    name: '/Brands',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Brands.vue')
   },
   {
-    path: '/product_collections/:brandId',
-    name: 'Product Colletions',
+    path: '/ProductsbyBrand/:brandId',
+    name: 'ProductsbyBrand',
     // props: true,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Product_Colletions.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/ProductsbyBrand.vue')
   },
   {
     path: '/Team',

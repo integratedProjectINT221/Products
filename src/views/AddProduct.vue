@@ -1,6 +1,6 @@
 
 <template>
-  <div class="home">
+  <div class="add">
     <p id="header" class="md:text-2xl text-2xl text-center md:p-10 p-5">
       Add new product
     </p>

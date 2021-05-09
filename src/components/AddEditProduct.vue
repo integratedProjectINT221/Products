@@ -257,7 +257,6 @@ export default {
         };
         reader.readAsDataURL(selectedFile);
       }
-      // console.log("adding");
       this.$emit("preview-img", selectedFile);
     },
     dataSubmit() {

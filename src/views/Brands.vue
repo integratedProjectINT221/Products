@@ -7,7 +7,7 @@
       style="height: 30rem"
     >
       <div v-for="brand in brands" :key="brand.brandId" id="loopbrands">
-        <router-link  :to="{path: `/product_collections/${brand.brandId}`}">
+        <router-link  :to="{path: `/ProductsbyBrand/${brand.brandId}`}">
           <div 
             class="bg-gray-300 md:h-40 h-44 md:w-40 hover:bg-gray-400 flex justify-center items-center group transition duration-100 cursor-pointer"
           >

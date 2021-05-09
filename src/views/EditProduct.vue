@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="edit">
     <p id="header" class="text-2xl font-semibold text-center p-10">Home</p>
     <form id="form" method="post" @submit.prevent="submitForm">
       <div
