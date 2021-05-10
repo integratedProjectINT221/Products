@@ -10,7 +10,7 @@
           :src="previewImage ||'https://cwimports.com.au/wp-content/uploads/2020/10/no-image.png'"
         />
         <img
-          v-else-if='!changeImage || validate.image!==undefined'
+          v-else-if='!changeImage || validate.image!==undefined || this.beforeUpdate'
           class="md:w-80 md:h-80 w-96 h-96 object-cover border-2 bg-gray-300"
           :src="`/api/show/file/${validate.image}`"
         />
@@ -270,6 +270,9 @@ export default {
   beforeUpdate() {
     if (this.edit===true) {
       this.validate = this.product
+      if(this.product.image!==undefined){
+        return true
+      }
     }
   },
 };
