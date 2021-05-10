@@ -95,7 +95,6 @@ export default {
     },
     async editProductAndPic() {
       try {
-        console.log(this.validate);
         const jsonProduct = JSON.stringify({
           prodId: this.$route.params.id,
           prodName: this.validate.name,
@@ -110,7 +109,6 @@ export default {
           type: "application/json",
         });
         let data = new FormData();
-        console.log(this.selectedFile)
         data.append("file", this.selectedFile);
         data.append("product", blob);
         await fetch(`/api/edit/product`, {

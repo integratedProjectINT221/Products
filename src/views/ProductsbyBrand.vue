@@ -75,7 +75,6 @@ export default {
   methods: {
     reloadPage(brand) {
       location.assign(`/ProductsbyBrand/${brand.brandId}`);
-      console.log("reload!");
     },
     blackBorder(colorId) {
       if (colorId === "#FFFFFF") {
@@ -96,11 +95,10 @@ export default {
         const res = await fetch(
           `/api/show/products/brand/${this.$route.params.brandId}`
         );
-        console.log(res);
         const data = await res.json();
         return data;
       } catch (error) {
-        console.log(error);
+        console.log("No Product in this Brand!");
       }
     },
   },
