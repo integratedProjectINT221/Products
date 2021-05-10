@@ -1,11 +1,10 @@
 <template>
   <div class="edit">
-    <p id="header" class="text-2xl font-semibold text-center p-10">Home</p>
+    <p id="header" class="md:text-2xl text-2xl text-center md:p-10 p-5">
+      Edit product
+    </p>
     <form id="form" method="post" @submit.prevent="submitForm">
-      <div
-        id="product-form"
-        class="flex flex-row h-full justify-center space-x-16"
-      >
+      <div id="product-form" class="flex lg:flex-row h-full justify-center lg:space-x-16 flex-col items-center">
         <AddEditProduct
           @pass-validate="passValidate"
           @preview-img="previewFile"
