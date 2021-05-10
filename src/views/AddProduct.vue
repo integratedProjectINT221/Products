@@ -8,6 +8,7 @@
       <div id="product-form" class="flex lg:flex-row h-full justify-center lg:space-x-16 flex-col items-center">
         <AddEditProduct
           @pass-validate="passValidate"
+          @preview-img="previewFile"
           :invalidProdName="invalidProdName"
           :invalidProdBrand="invalidProdBrand"
           :invalidProdPrice="invalidProdPrice"
@@ -19,8 +20,6 @@
           :isSubmit="isSubmit"
           :invalidProdImage="invalidProdImage"
           :changeImage="changeImage"
-          :selectedFile="selectedFile"
-          @preview-img="previewFile"
           :label="label"
           :edit="false"
         />

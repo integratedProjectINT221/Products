@@ -8,6 +8,7 @@
       >
         <AddEditProduct
           @pass-validate="passValidate"
+          @preview-img="previewFile"
           :invalidProdName="invalidProdName"
           :invalidProdBrand="invalidProdBrand"
           :invalidProdPrice="invalidProdPrice"
@@ -19,8 +20,6 @@
           :isSubmit="isSubmit"
           :invalidProdImage="invalidProdImage"
           :changeImage="changeImage"
-          :selectedFile="selectedFile"
-          @preview-img="previewFile"
           :label="label"
           :product="product"
           :edit="true"

@@ -221,10 +221,6 @@ export default {
       type: Boolean,
       require: true,
     },
-    selectedFile: {
-      type: String,
-      require: true,
-    },
   },
   data() {
     return {
