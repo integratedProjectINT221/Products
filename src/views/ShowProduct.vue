@@ -11,7 +11,8 @@
       <span>></span><router-link :to="{path: `/show/${this.product.prodId}`}">{{ this.product.prodName }}</router-link>
       </div>
       <div id="preview-img">
-        <img :src="`/api/show/file/${this.product.image}`||'https://cwimports.com.au/wp-content/uploads/2020/10/no-image.png'" class="md:w-80 w-96 h-96 md:h-80 object-cover"/>
+        <img v-show="this.product.image!==undefined" :src="`/api/show/file/${this.product.image}`" class="md:w-80 w-96 h-96 md:h-80 object-cover"/>
+        <img v-show="this.product.image===undefined" src="https://cwimports.com.au/wp-content/uploads/2020/10/no-image.png" class="md:w-80 w-96 h-96 md:h-80 object-cover"/>
       </div>
       <p class="text-center mt-4">{{ this.product.image }}</p>
     </div>
