@@ -1,74 +1,22 @@
 {
-  "brands": [
-    {
-      "brandId": "B0002",
-      "brandName": "Snowman"
-    },
-    {
-      "brandId": "B0001",
-      "brandName": "Sunday"
-    }
-  ],
+  "prodId": 3,
+  "prodName": "Light dress",
+  "description": "Cotton long dress. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi varius quis odio vitae finibus. Vivamus et laoreet tellus. Donec sodales cursus ipsum, nec auctor urna volutpat in.",
+  "price": 490.0,
+  "date": "2021-04-28",
+  "image": "AC003.jpg",
+  "brand": {
+    "brandId": "B0001",
+    "brandName": "AmityClothes"
+  },
   "colors": [
     {
-      "colorId": "CL0001",
-      "colorName": "white",
-      "value": "#FFFFFF",
-      "checked": false
+      "colorId": "#FAEBD7",
+      "colorName": "Beige"
     },
     {
-      "colorId": "CL0002",
-      "colorName": "black",
-      "value": "#000000",
-      "checked": false
-    }
-  ],
-  "products": [
-    {
-      "prodName": "dsddddddddd",
-      "description": "gdfgdgd",
-      "price": 550,
-      "date": "2021-04-10",
-      "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
-      "brand": {
-        "brandId": "B0001",
-        "brandName": "Sunday"
-      },
-      "colors": [
-        {
-          "colorId": "CL0002",
-          "colorName": "black",
-          "value": "#000000",
-          "checked": true
-        },
-        {
-          "colorId": "CL0001",
-          "colorName": "white",
-          "value": "#FFFFFF",
-          "checked": true
-        }
-      ],
-      "id": 1
-    },
-    {
-      "prodName": "dsdadsaddada",
-      "description": "ddddd",
-      "price": 4444,
-      "date": "2021-04-21",
-      "image": "dsadsadadadadadadasdsadadadadadadasdasdad.jpg",
-      "brand": {
-        "brandId": "B0002",
-        "brandName": "Snowman"
-      },
-      "colors": [
-        {
-          "colorId": "CL0002",
-          "colorName": "black",
-          "value": "#000000",
-          "checked": true
-        }
-      ],
-      "id": 2
+      "colorId": "#FFFFFF",
+      "colorName": "white"
     }
   ]
 }
