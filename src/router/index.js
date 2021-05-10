@@ -18,7 +18,7 @@ const routes = [
   },
   {
     path: '/Brands',
-    name: '/Brands',
+    name: 'Brands',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -43,7 +43,7 @@ const routes = [
   },
   {
     path: '/show/:id',
-    name: 'Show Product',
+    name: 'ShowProduct',
     // props: true,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
